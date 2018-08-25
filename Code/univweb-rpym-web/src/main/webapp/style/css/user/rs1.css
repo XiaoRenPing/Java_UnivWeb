@@ -1,0 +1,519 @@
+@charset "UTF-8";
+/*reset*/
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td{padding:0;margin:0;}
+table{border-collapse:collapse;border-spacing:0;}
+fieldset,img{border:0;}
+address,caption,cite,code,dfn,em,th,var{font-weight:400;font-style:normal;}
+ol,ul{list-style:none;}
+caption,th{text-align:left;}
+h1,h2,h3,h4,h5,h6{font-weight:400;font-size:100%;}
+q:before,q:after{content:'';}
+abbr,acronym{border:0;}
+body{font-family:Tahoma,\5B8B\4F53,Arial,Verdana,sans-serif;font-size:12px;color:#666666;background:#FFFFFF;}
+a{text-decoration:none;color:#333333;font-family:tahoma;}
+a:hover{text-decoration:underline;}
+.hidden{display:none;}
+.clear{clear:both;font-size:1px;width:1px;height:0;overflow:hidden;visibility:hidden;}
+/*clear float*/
+.wrapfix:after {content: "."; display: block;height: 0; clear: both; visibility: hidden;}
+.wrapfix{display: inline-table;}/* Hides from IE-mac \*/* html .wrapfix {height: 1%;}.wrapfix {display: block;}/* End hide from IE-mac */
+*+html .wrapfix{ min-height: 1px; }/*ie7*/
+/*blank*/
+.blank2,.blank6,.blank8,.blank9,.blank10,.blank12,.blank14,.blank15,.blank18{font-size:1px;clear:both;overflow:hidden;width:100%;}
+.blank2{height:2px;}
+.blank6{height:6px;}
+.blank8{height:8px;}
+.blank9{height:9px;}
+.blank10{height:10px;}
+.blank12{height:12px;}
+.blank14{height:14px;}
+.blank15{height:15px;}
+.blank18{height:18px;}
+
+/*gb_foot*/
+.gb_foot{width:960px; margin:0 auto; padding:13px 0 20px 0;font-family: Tahoma,宋体,Arial,Verdana,sans-serif;font-size: 12px;}
+.gbf_menu{ line-height:24px; text-align:center; color:#D8D8D8;}
+.gbf_menu .gbf_nav, .gbf_menu .gbf_site{text-align:center;}
+.gbf_menu span{ color:#666666;}
+.gbf_menu .c_tx{ color:#E40000;}
+.gbf_menu a{ color:#666666;}
+.gbf_menu a:hover{ color:#333333;}
+
+.gb_foot2{width:960px; color:#868686; margin:0 auto; padding:13px 0 20px 0;font-size:12px;font-family:宋体,Tahoma,Arial,Verdana,sans-serif;}
+.gb_foot2 .gbf_menu{ line-height:24px; text-align:center; }
+.gb_foot2 .gbf_menu .gbf_nav, .gb_foot2 .gbf_menu .gbf_site{text-align:center;}
+.gb_foot2 .gbf_menu .gbf_nav{color:#E4DEE3;font-family:宋体,Tahoma,Arial,Verdana,sans-serif;}
+.gb_foot2 .gbf_menu .c_tx{ color:#868686;}
+.gb_foot2 .gbf_menu span{ color:#868686;}
+.gb_foot2 .gbf_menu a{ color:#868686;}
+.gb_foot2 .gbf_menu a:hover{ color:#868686;}
+
+/* add_mobile_tip_for_global */
+.mod_ipad_fav{background:#fdfaf0;display:none;position:fixed;top:0;left:0;z-index:999;width:100%;min-width:740px;font-size:50px;height:120px;overflow:hidden;z-index:9999999;border-bottom: 1px solid #fdfaf0;}
+/*.mod_ipad_fav.ipad_only{background:#feffe5}
+.mod_ipad_fav.ipad_only .ipad_cls{margin:10px;}*/
+.mod_ipad_fav .ipad_cls{display:block;background:url(mobile/itip_cls.png) no-repeat 50%;width:9%;height:100px;float:right;margin:10px 0 0 0;vertical-align:middle;border-left: 1px solid #f0a39e;}
+
+/*IOS*/
+.mod_ipad_fav .apple_con{float:left;padding-left:6px;background-size:0 80%;display:none;width: 89%;}
+.mod_ipad_fav .apple_con .icon{float:left;width:100px;height:120px;background:url('http://www.aipai.com/app/www/templates/mobile/common/css/img/ico_app.png') center center no-repeat;background-size:contain;margin:0 .2em;}
+.mod_ipad_fav .apple_con .title_app{width:280px;height:80px;background:url('http://www.aipai.com/app/www/templates/mobile/common/css/img/title_app02.png') no-repeat;background-size:contain;float:left;margin:30px 0 0 5px}
+.mod_ipad_fav .apple_con a{color:#ed7331;font-weight:bold;display:block;overflow: hidden;}
+.mod_ipad_fav .apple_con .link_app{font-size:28px;font-family:\9ED1\4F53;color:#fff;float:right;line-height:15px;margin:34px 25px 0 0;padding:15px;display:block;background:#ff5400;border-radius:10px;background-size: 12px;line-height: 22px;font-weight: normal;}
+.mod_ipad_fav .apple_con a u{color:#0084ff;}
+/*.mod_ipad_fav .apple_con p{white-space:nowrap;font-size:16px}
+.mod_ipad_fav .apple_con p:first-of-type{font-weight:bold;padding:16px 0 0 93px}
+.mod_ipad_fav .apple_con p:first-of-type span{padding:0 4px}
+.mod_ipad_fav .apple_con p:first-of-type em{font-weight:bold;color:#ff6e00;}
+.mod_ipad_fav .apple_con p:nth-child(2){font-weight:bold;padding:13px 0 0 93px}
+.mod_ipad_fav .apple_con p:nth-child(2) span:nth-child(1){padding:0 12px;background:url(mobile/ipad_tip.png) 4px -93px no-repeat}
+.mod_ipad_fav .apple_con p:nth-child(2) span:nth-child(2){padding:0 12px;background:url(mobile/ipad_tip.png) 4px -134px no-repeat}
+.mod_ipad_fav .apple_con p:nth-child(2) span:nth-child(3){padding:0 10px}*/
+
+/*android-OS*/
+.mod_ipad_fav .android_con{float:left;background-size:0 80%;padding-left:6px;display:none;width: 89%;}
+.mod_ipad_fav .android_con .icon{float:left;width:100px;height:120px;background:url('http://www.aipai.com/app/www/templates/mobile/common/css/img/ico_app.png') center center no-repeat;background-size:contain;margin:0 .2em;}
+.mod_ipad_fav .android_con .title_app{width:280px;height:80px;background:url('http://www.aipai.com/app/www/templates/mobile/common/css/img/title_app02.png') no-repeat;background-size:contain;float:left;margin:30px 0 0 5px}
+.mod_ipad_fav .android_con a{color:#ed7331;font-weight:bold;display:block;overflow: hidden;}
+.mod_ipad_fav .android_con .link_app{font-size:28px;font-family:\9ED1\4F53;color:#fff;float:right;line-height:15px;margin:34px 25px 0 0;padding:15px;display:block;background:#ff5400;border-radius:10px;background-size: 12px;line-height: 22px;font-weight: normal;}
+
+/*dialog*/
+#pop_dialogs_css_loaded{width:30px;display:none;}
+.pop_dialog{position:absolute;z-index:1000;font-family:Tahoma,\5B8B\4F53,Arial,Verdana,sans-serif;font-size:12px;}
+.pd_header{_float:left;position:relative;height:31px;overflow:hidden;}
+.pd_header .pd_tl,.pd_header .pd_tr{width:6px;height:31px;position:absolute;top:0;left:0;background:url(http://www.aipai.com/app/www/templates/common/img/global/dialog/dl_tl.png) no-repeat;}
+.pd_header .pd_tr{width:10px;left:auto;right:0;background:url(http://www.aipai.com/app/www/templates/common/img/global/dialog/dl_tr.png) no-repeat;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://www.aipai.com/app/www/templates/common/img/global/dialog/dl_tr.png');}
+.pd_header .pd_tc{height:31px;margin:0 10px 0 6px;padding:0 20px 0 6px;background:url(http://www.aipai.com/app/www/templates/common/img/global/dialog/dl_tc.png) repeat-x;position:relative;}
+.pd_header h5{font-size:14px;font-weight:700;color:#FF8800;float:left;margin-top:4px;line-height:24px;}
+.pop_dialog .pd_close{display:inline-block;width:16px;height:16px;line-height:100px;overflow:hidden;background:url(http://www.aipai.com/app/www/templates/common/img/global/dialog/dl_close.png) no-repeat;position:absolute;top:8px;right:3px;cursor:pointer;}
+.pd_mainw{padding-right:4px;position:relative;}
+.pd_main{overflow:hidden;border-left:1px solid #FFB25F;border-right:1px solid #FFB25F;background:#FFFFFF;position:relative;}
+.pd_main .pd_link a{color:#0084BB;text-decoration:underline;}
+.pd_main .pd_link a:hover{text-decoration:none;}
+.pd_mainr{width:4px;position:absolute;top:0;right:0;background:url(http://www.aipai.com/app/www/templates/common/img/global/dialog/dl_cr.png) no-repeat;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://www.aipai.com/app/www/templates/common/img/global/dialog/dl_cr.png',sizingMethod='crop');}
+.pd_loading{display:block;position:absolute;top:50%;left:50%;margin:-16px 0 0 -16px;}
+.pd_footer{_float:left;position:relative;}
+.pd_footer .pd_bl,.pd_footer .pd_br{height:11px;position:absolute;top:0;}
+.pd_footer .pd_bl{width:9px;left:0;background:url(http://www.aipai.com/app/www/templates/common/img/global/dialog/dl_bl.png) no-repeat;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://www.aipai.com/app/www/templates/common/img/global/dialog/dl_bl.png');}
+.pd_footer .pd_br{width:10px;right:0;background:url(http://www.aipai.com/app/www/templates/common/img/global/dialog/dl_br.png) no-repeat;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://www.aipai.com/app/www/templates/common/img/global/dialog/dl_br.png');}
+.pd_footer .pd_bc{height:11px;margin:0 10px 0 9px;background:url(http://www.aipai.com/app/www/templates/common/img/global/dialog/dl_bc.png) repeat-x;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://www.aipai.com/app/www/templates/common/img/global/dialog/dl_bc.png',sizingMethod='crop');}
+.pd_btn,.pd_btn2{display:inline-block;width:56px;height:19px;padding-top:5px;text-align:center;color:#FF6600;background:url(http://www.aipai.com/app/www/templates/common/img/global/dialog/dl_btn1.png) no-repeat;cursor:pointer;}
+.pd_btn2{color:#333333;background:url(http://www.aipai.com/app/www/templates/common/img/global/dialog/dl_btn2.png) no-repeat;}
+#pop_overlay{width:100%;position:fixed;top:0;left:0;cursor:pointer;z-index:950;}
+.pop_btns{height:33px;padding-right:8px;}
+.pop_btns a,.pop_btns span{float:right;margin-right:5px;}
+.pop_btns a:hover{text-decoration:none;}
+.palert_conw a{color:#0084BB;text-decoration:underline;}
+.palert_conw a:hover{text-decoration:none;}
+
+/*pop_login*/
+.pop_login{width:314px;height:196px;}
+.pop_login .login_close{display:block;width:18px;height:18px;overflow:hidden;text-indent:-9999px;position:absolute;top:7px;right:9px;z-index:20;cursor:pointer;}
+.pop_login .login_con,.pop_login .login_bg{width:314px;height:199px;position:absolute;top:0;left:0;}
+.pop_login .login_bg{background:url(http://www.aipai.com/app/www/templates/common/img/common/pop_login1.png) no-repeat;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://www.aipai.com/app/www/templates/common/img/common/pop_login1.png',sizingMethod='crop');z-index:10;}
+.pop_fresh .login_bg{background:url(http://www.aipai.com/app/www/templates/common/img/common/pop_login2.png) no-repeat;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://www.aipai.com/app/www/templates/common/img/common/pop_login2.png',sizingMethod='crop');}
+.pop_login .login_con{width:308px;height:143px;z-index:15;padding:53px 0 0 6px;}
+.pop_login .login_w{height:32px;}
+.pop_login .login_w label{color:#333333;width:83px;line-height:24px;float:left;text-align:right;}
+.pop_login .login_w input{width:202px;height:18px;padding:2px 2px 2px 7px;border:1px solid #C0C0C0;float:left;font-size:12px;color: #999999;line-height: 18px;}
+.pop_login .login_action{height:40px;padding:4px 0 0 82px;}
+.pop_login .login_btn{width:56px;height:27px;float:left;overflow:hidden;text-indent:-9999px;border:0 none;background:url(http://www.aipai.com/app/www/templates/common/img/common/login_btn.png) no-repeat;cursor:pointer;}
+.pop_login .login_reg{padding:5px 0 0 4px;float:left;width:150px;position:relative;}
+.pop_login .login_reg #pop_fastreg{color:#0084BB;text-decoration:underline;font-weight:700;font-family:\5b8b\4f53;float:left;}
+.pop_login .login_reg a#pop_fastreg:hover{text-decoration:none;}
+.pop_login .login_hz{position:absolute;right:0;_top:3px;width:60px;}
+.pop_login .login_hz span{float:right;padding-right:8px;margin-right:2px;height:18px;display:block;color:#333333;background:url(http://www.aipai.com/app/www/templates/common/img/common/ico_arrow.png) no-repeat right 6px;cursor:pointer;}
+.pop_login .show_hzlist{width:auto;}
+.pop_login .show_hzlist .login_hzlist{display:block;}
+.pop_login .login_hzlist{width:94px;border:1px solid #B5B5B5;background:#FFFFFF;position:absolute;top:15px;_top:17px;right:0;display:none;}
+.pop_login .login_hzlist a{display:block;height:28px;line-height:28px;text-decoration:none;float:none;font-weight:400;padding-left:25px;}
+.pop_login .login_hzlist .hz_qq{background:url(http://www.aipai.com/app/www/templates/common/img/common/qq_login.png) no-repeat 6px 6px;}
+.pop_login .login_hz_qq{background:url(http://www.aipai.com/app/www/templates/common/img/common/qq_login.png) no-repeat 10px 0;padding-left:28px;float:left;height:16px;position:relative;top:-1px\9;*top:-2px;}
+.pop_login .login_hz_qq a{color:#0084BB;white-space:nowrap;}
+.pop_login .login_reg .login_getpass{color:#333333;}
+.pop_login .login_reg .login_qq{font-weight:400;display:inline-block;color:#333333;background:url(http://www.aipai.com/app/www/templates/common/img/common/qq_login.png) no-repeat;padding-left:19px;margin-left:12px;line-height:16px;font-family:Tahoma;}
+.pop_login .login_tips{display:block;position:absolute;background:#FFFFFF;height:16px;padding:3px 2px;width:200px;top:86px;left:90px;color:#F00;}
+/*外部登录*/
+.pop_login .oauth_w{float:left;position:relative;margin-left:21px;top:-4px;}
+.pop_login .oauth_w2 .oauth_list{display:block;}
+.pop_login .oauth_btn,.pop_login .oauth_qq a,.pop_login .oauth_rr a,.pop_login .oauth_list span{background:url(http://www.aipai.com/app/www/templates/common/img/global/dialog/oauth_bg.png) no-repeat;}
+.pop_login .oauth_btn{display:block;cursor:pointer;width:50px;height:21px;}
+.pop_login .oauth_list{position:absolute;left:0;top:19px;width:106px;display:none;}
+.pop_login .oauth_list span{height:2px;line-height:2px;display:block;overflow:hidden;width:106px;background-position:0 -48px;}
+.pop_login .oauth_list ul{background:#EDF6FC;border:1px solid #C2D3DE;border-top:none;padding:0 4px 1px;width:96px;color:#333333;}
+.pop_login .oauth_list .oauth_lt{border-bottom:1px solid #C8D6DE;margin-bottom:3px;}
+.pop_login .oauth_list ul li{height:24px;line-height:24px;overflow:hidden;}
+.pop_login .oauth_list ul li a{color:#0087C6;float:left;padding-left:20px;}
+.pop_login .oauth_qq a{background-position:-89px 4px;}
+.pop_login .oauth_rr{display:none;}
+.pop_login .oauth_rr a{background-position:-89px -20px;}
+.pop_login .oauth_suc_con{position:absolute;top:0;left:0;width:313px;height:143px;z-index:15;padding:48px 0 0 6px;color:#333333;}
+.pop_login .oauth_suc_con .osc_main{height:112px;}
+.pop_login .oauth_suc_con p{padding-left:35px;margin-bottom:13px;}
+.pop_login .oauth_suc_con .osc_btn{padding-left:35px;}
+.pop_login .oauth_suc_con .osc_btn span{width:84px;height:26px;display:block;text-indent:-9999px;overflow:hidden;cursor:pointer;background:url(http://www.aipai.com/app/www/templates/common/img/global/dialog/btn_suc_reg.png) no-repeat;}
+.pop_login .oauth_suc_con .osc_email{padding-left:35px;margin-bottom:11px;position:relative;}
+.pop_login .oauth_suc_con .osc_email input{border:1px solid #C0C0C0;width:202px;height:14px;line-height:14px;padding:4px 2px;font-size:12px;}
+.pop_login .oauth_suc_con .osc_email .osce_tips{position:absolute;top:1px;=top:2px;left:37px;-left:1px;padding:3px 2px;color:#FF0000;width:200px;height:14px;background:#FFFFFF;}
+.pop_login .oauth_suc_con .osc_email .osc_in{color:#999999;}
+.pop_login .oauth_suc_con .osc_ft{width:304px;line-height:25px;text-align:center;height:25px;background:#FFF2CD;color:#666666;}
+.pop_login .oauth_suc_con .osc_ft a{color:#0084BB;}
+.pop_login_oauth .login_close{cursor:default;background:url(http://www.aipai.com/app/www/templates/common/img/common/pop_login1.png) no-repeat -100px -7px;}
+
+/*pop_fastreg*/
+.pop_fastreg,.pop_fresh{width:336px;height:327px;position:relative;}
+.pop_fastreg .fastreg_close{display:block;width:18px;height:18px;overflow:hidden;text-indent:-9999px;position:absolute;top:9px;right:9px;z-index:20;cursor:pointer;}
+.pop_fastreg .fastreg_con,.pop_fastreg .fastreg_bg{width:336px;position:absolute;top:0;left:0;}
+.pop_fastreg .fastreg_con{z-index:15;padding:28px 0 0 0px;}
+.pop_fastreg .fastreg_bgt{height:33px;background:url(http://www.aipai.com/app/www/templates/common/img/common/pop_reg_t_test.png) no-repeat;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://www.aipai.com/app/www/templates/common/img/common/pop_reg_t_test.png',sizingMethod='crop');}
+.pop_fastreg .fastreg_bgc{height:269px;background:url(http://www.aipai.com/app/www/templates/common/img/common/pop_reg_c_test.png) repeat-y;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://www.aipai.com/app/www/templates/common/img/common/pop_reg_c_test.png',sizingMethod='scale');}
+.pop_fastreg .fastreg_bgb{height:30px;background:url(http://www.aipai.com/app/www/templates/common/img/common/pop_reg_b_test.png) no-repeat;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://www.aipai.com/app/www/templates/common/img/common/pop_reg_b_test.png',sizingMethod='crop');}
+.pop_fresh .fastreg_bgt{background:url(http://www.aipai.com/app/www/templates/common/img/common/pop_reg_t2.png) no-repeat;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://www.aipai.com/app/www/templates/common/img/common/pop_reg_t2.png',sizingMethod='crop');}
+.pop_fresh .fastreg_bgb{background:url(http://www.aipai.com/app/www/templates/common/img/common/pop_reg_b2.png) no-repeat;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://www.aipai.com/app/www/templates/common/img/common/pop_reg_b2.png',sizingMethod='crop');}
+.pop_fastreg2{height:271px;}
+.pop_fastreg2 .fastreg_bgc{height:210px;}
+
+.pop_bindphone{width:314px;height:200px;position:relative;}
+.pop_bindphone .bindphone_close{display:block;width:18px;height:18px;overflow:hidden;text-indent:-9999px;position:absolute;top:9px;right:9px;z-index:20;cursor:pointer;}
+.pop_bindphone .bindphone_con,.pop_bindphone .bindphone_bg{width:314px;position:absolute;top:0;left:0;}
+.pop_bindphone .bindphone_con{width:290px;z-index:15;padding:50px 0 0 15px;}
+.pop_bindphone .bindphone_con p{height:110px;line-height:110px;padding-left:90px;font-size:14px;color:#DA0000;font-weight:700;}
+.pop_bindphone .bindphone_con .hd{height:29px;font-size:14px;color:#DA0000;font-weight:700;font-family:\5B8B\4F53;text-align:center;}
+.pop_bindphone .bindphone_con .bd{padding-left:35px;}
+.pop_bindphone .bindphone_con .bd .gray{color:#999999;}
+.pop_bindphone .bindphone_con .bind_mobile{height:35px;position:relative;}
+.pop_bindphone .bindphone_con .bind_mobile input{float:left;width:206px;height:22px;border:#D3D4D5 1px solid;line-height:22px;padding-left:4px;}
+.pop_bindphone .bindphone_con .bind_mobile .tips{position:absolute;left:6px;top:1px;width:200px;height:22px;line-height:22px;color:#DA0000;background:#FFFFFF;display:none;}
+.pop_bindphone .bindphone_con .code{height:41px;}
+.pop_bindphone .bindphone_con .code .authcode{float:left;width:79px;height:22px;border:#D3D4D5 1px solid;line-height:22px;padding-left:4px;}
+.pop_bindphone .bindphone_con .code #btn_send{float:left;width:84px;height:24px;line-height:24px;text-align:center;margin-left:10px;background:url(http://www.aipai.com/app/www/templates/common/img/common/btn_bindphone.png) no-repeat;cursor:pointer;border:none;}
+.pop_bindphone .bindphone_con .code span{float:left;padding-left:8px;line-height:26px;color:#008A24;}
+.pop_bindphone .bindphone_con .btn{padding-left:75px;}
+.pop_bindphone .bindphone_con .btn input{float:left;width:56px;height:28px;background:url(http://www.aipai.com/app/www/templates/common/img/common/btn_bindphone.png) 0 -24px no-repeat;border:none;cursor:pointer;}
+.pop_bindphone .bindphone_bgt{height:32px;background:url(http://www.aipai.com/app/www/templates/common/img/common/pop_bindphone_t.png) no-repeat;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://www.aipai.com/app/www/templates/common/img/common/pop_bindphone_t.png',sizingMethod='crop');}
+.pop_bindphone .bindphone_bgc{height:153px;background:url(http://www.aipai.com/app/www/templates/common/img/common/pop_reg_c.png) repeat-y;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://www.aipai.com/app/www/templates/common/img/common/pop_reg_c.png',sizingMethod='scale');}
+.pop_bindphone .bindphone_bgb{height:15px;background:url(http://www.aipai.com/app/www/templates/common/img/common/pop_b.png) no-repeat;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://www.aipai.com/app/www/templates/common/img/common/pop_b.png',sizingMethod='crop');}
+
+/*mainTop*/
+.mainTop{height:33px;color:#BBB9B9;background:url(http://www.aipai.com/app/www/templates/huodong/common/img/hd_bg.png) repeat-x;font-family:Tahoma,Ariel,Verdanda;position:relative;z-index:100;}
+.mainTop .navMax{width:960px;margin:0 auto;}
+.mainTop a{color:#333;text-decoration:none;}
+.mainTop a:hover{text-decoration:underline;}
+.mainTop .logo{float:left;width:186px;height: 33px;}
+.mainTop .logo img{width:186px;height:32px;}
+.mainTop .nav{float:left;padding:8px 0 0 10px;position:relative;}
+.mainTop .nav a{position:relative;}
+.mainTop .nav a.red{color:#E30015;}
+.mainTop .nav a.reda{background:#FF0000;color:#FFFFFF;padding:0 3px 2px;*padding:2px 3px 0;_padding:0 2px;}
+.mainTop .nav a.ico_hot span{display:block;width:18px;height:11px;overflow:hidden;background:url(http://www.aipai.com/app/www/templates/common/img/global/ico_hot2.png) no-repeat;position:absolute;top:-7px;left:43px;}
+.mainTop .nav a.ico_hot2 span{display:block;width:18px;height:11px;overflow:hidden;background:url(http://www.aipai.com/app/www/templates/common/img/global/ico_hot2.png) no-repeat;position:absolute;top:-7px;left:19px;}
+.mainTop .bnt{float:right;width:154px;padding-top:5px;background:url(http://www.aipai.com/app/www/templates/huodong/common/img/hd_btn.png) no-repeat 1px 5px;}
+.mainTop .bnt a{float:left;width:76px;height:21px;margin-left:1px;display:inline-block;overflow:hidden;text-indent:-9999px;}
+.mainTop .entry{float:right;padding-top:8px;}
+.mainTop .entry #login_mailnum{font-size:11px;}
+.mainTop .entry #login_mailimg img{vertical-align:middle;margin:0 2px;position:relative;top:-1px;left:-1px;*top:1px;*left:1px;}
+.mainTop .entry a.yhu{color:#FF7700;font-weight:700;margin-right:5px;}
+.mainTop .yy_btn{position:relative;}
+.mainTop .yy_btna{background:url(http://www.aipai.com/app/www/templates/huodong/common/img/ico.png) no-repeat right 7px;*background-position:right 6px;padding-right:5px;}
+.mainTop .yy_btn .yy_list{width:67px;height:75px;position:absolute;left:-8px;top:13px;top:14px\9;*top:13px;padding:10px 0 0 8px;display:none;z-index:100;}
+.mainTop .yy_btn .yy_listbg{width:75px;position:absolute;top:23px;top:24px/9;*top:23px;left:-8px;display:none;z-index:100;background:url(http://www.aipai.com/app/www/templates/huodong/common/img/yy_down_x13.png) no-repeat;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="http://www.aipai.com/app/www/templates/huodong/common/img/yy_down_x13.png",sizingMethod='crop');height:320px;}
+.mainTop .yy_btn .yy_listbg_x2{height:53px;background:url(http://www.aipai.com/app/www/templates/huodong/common/img/yy_down_x2.png) no-repeat;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="http://www.aipai.com/app/www/templates/huodong/common/img/yy_down_x2.png",sizingMethod='crop');}
+.mainTop .yy_btn .yy_listbg_x3{height:75px;background:url(http://www.aipai.com/app/www/templates/huodong/common/img/yy_down_x3.png) no-repeat;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="http://www.aipai.com/app/www/templates/huodong/common/img/yy_down_x3.png",sizingMethod='crop');}
+.mainTop .yy_btn .yy_listbg_x4{height:97px;background:url(http://www.aipai.com/app/www/templates/huodong/common/img/yy_down_x4.png) no-repeat;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="http://www.aipai.com/app/www/templates/huodong/common/img/yy_down_x4.png",sizingMethod='crop');}
+.mainTop .yy_btn .yy_listbg_x5{height:119px;background:url(http://www.aipai.com/app/www/templates/huodong/common/img/yy_down_x5.png) no-repeat;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="http://www.aipai.com/app/www/templates/huodong/common/img/yy_down_x5.png",sizingMethod='crop');}
+.mainTop .yy_btn .yy_listbg_x6{height:141px;background:url(http://www.aipai.com/app/www/templates/huodong/common/img/yy_down_x6.png) no-repeat;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="http://www.aipai.com/app/www/templates/huodong/common/img/yy_down_x6.png",sizingMethod='crop');}
+.mainTop .yy_btn .yy_listbg_x7{height:163px;background:url(http://www.aipai.com/app/www/templates/huodong/common/img/yy_down_x7.png) no-repeat;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="http://www.aipai.com/app/www/templates/huodong/common/img/yy_down_x7.png",sizingMethod='crop');}
+.mainTop .yy_btn .yy_listbg_x8{height:185px;background:url(http://www.aipai.com/app/www/templates/huodong/common/img/yy_down_x8.png) no-repeat;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="http://www.aipai.com/app/www/templates/huodong/common/img/yy_down_x8.png",sizingMethod='crop');}
+.mainTop .yy_btn .yy_listbg_x9{height:207px;background:url(http://www.aipai.com/app/www/templates/huodong/common/img/yy_down_x9.png) no-repeat;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="http://www.aipai.com/app/www/templates/huodong/common/img/yy_down_x10.png",sizingMethod='crop');}
+.mainTop .yy_btn .yy_listbg_x10{height:229px;background:url(http://www.aipai.com/app/www/templates/huodong/common/img/yy_down_x10.png) no-repeat;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="http://www.aipai.com/app/www/templates/huodong/common/img/yy_down_x10.png",sizingMethod='crop');}
+.mainTop .yy_btn .yy_listbg_x11{height:251px;background:url(http://www.aipai.com/app/www/templates/huodong/common/img/yy_down_x11.png) no-repeat;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="http://www.aipai.com/app/www/templates/huodong/common/img/yy_down_x11.png",sizingMethod='crop');}
+.mainTop .yy_btn .yy_listbg_x12{height:273px;background:url(http://www.aipai.com/app/www/templates/huodong/common/img/yy_down_x12.png) no-repeat;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="http://www.aipai.com/app/www/templates/huodong/common/img/yy_down_x12.png",sizingMethod='crop');}
+.mainTop .yy_btn_down .yy_list,.mainTop .yy_btn_down .yy_listbg{display:block;}
+.mainTop .yy_btn .yy_list li{height:22px;line-height:22px;position:relative;_zoom:1;}
+.mainTop .yy_btn .yy_list li a{color:#333333;}
+.mainTop .tfans{padding-right:7px;color:#E6E6E6;}
+/*update 2013.1.17*/
+.mainTop .nav_right{float:right;padding:0;padding-top:8px;}
+.mainTop .bnt2{float:right;width:109px;padding-top:5px;background:url(http://www.aipai.com/app/www/templates/huodong/common/img/hd_btn2.png) no-repeat 0 5px;_display:inline;margin-right:6px;}
+.mainTop .bnt2 a{float:left;width:54px;height:21px;display:inline-block;overflow:hidden;text-indent:-9999px;}
+/*updat 2013.1.25*/
+.mainTop .icon_up{text-decoration:none;}
+.mainTop .vip_btn,
+.mainTop .more_btn,
+.mainTop .shop_btn{position:relative;}
+.mainTop .vip_btna{/*background:url(http://www.aipai.com/app/www/templates/huodong/common/img/ico.png) no-repeat right 7px;*background-position:right 6px;padding-right:5px;*/text-decoration:none;cursor:default;}
+.mainTop .more_btna,.mainTop .shop_btna{background:url(http://www.aipai.com/app/www/templates/huodong/common/img/ico.png) no-repeat right 7px;*background-position:right 6px;padding-right:5px;text-decoration:none;cursor:default;cursor:pointer;}
+.mainTop a.vip_btna:hover,
+.mainTop a.more_btna:hover{text-decoration:none;}
+.mainTop .vip_btn .vip_list,
+.mainTop .more_btn .more_list,
+.mainTop .shop_btn .shop_list{width:67px;height:75px;position:absolute;left:-8px;top:13px;top:14px\9;*top:13px;padding:10px 0 0 8px;display:none;z-index:1001;}
+.mainTop .vip_btn .vip_listbg,
+.mainTop .more_btn .more_listbg,
+.mainTop .shop_btn .shop_listbg{width:75px;position:absolute;top:23px;top:24px/9;*top:23px;left:-8px;display:none;z-index:100;background:url(http://www.aipai.com/app/www/templates/huodong/common/img/yy_down_x3.png) no-repeat;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="http://www.aipai.com/app/www/templates/huodong/common/img/yy_down_x3.png",sizingMethod='crop');height:75px;}
+.mainTop .vip_btn .vip_listbg_x2,
+.mainTop .more_btn .more_listbg_x2,
+.mainTop .shop_btn .shop_listbg_x2{height:53px;background:url(http://www.aipai.com/app/www/templates/huodong/common/img/yy_down_x2.png) no-repeat;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="http://www.aipai.com/app/www/templates/huodong/common/img/yy_down_x2.png",sizingMethod='crop');}
+.mainTop .vip_btn .vip_listbg_x3,
+.mainTop .more_btn .more_listbg_x3,
+.mainTop .shop_btn .shop_listbg_x3{height:75px;background:url(http://www.aipai.com/app/www/templates/huodong/common/img/yy_down_x3.png) no-repeat;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="http://www.aipai.com/app/www/templates/huodong/common/img/yy_down_x3.png",sizingMethod='crop');}
+.mainTop .vip_btn .vip_listbg_x4,
+.mainTop .more_btn .more_listbg_x4,
+.mainTop .shop_btn .shop_listbg_x4{height:97px;background:url(http://www.aipai.com/app/www/templates/huodong/common/img/yy_down_x4.png) no-repeat;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="http://www.aipai.com/app/www/templates/huodong/common/img/yy_down_x4.png",sizingMethod='crop');}
+.mainTop .vip_btn .vip_listbg_x5,
+.mainTop .more_btn .more_listbg_x5,
+.mainTop .shop_btn .shop_listbg_x5{height:119px;background:url(http://www.aipai.com/app/www/templates/huodong/common/img/yy_down_x5.png) no-repeat;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="http://www.aipai.com/app/www/templates/huodong/common/img/yy_down_x5.png",sizingMethod='crop');}
+.mainTop .vip_btn .vip_listbg_x6,
+.mainTop .more_btn .more_listbg_x6,
+.mainTop .shop_btn .shop_listbg_x6{height:141px;background:url(http://www.aipai.com/app/www/templates/huodong/common/img/yy_down_x6.png) no-repeat;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="http://www.aipai.com/app/www/templates/huodong/common/img/yy_down_x6.png",sizingMethod='crop');}
+.mainTop .vip_btn .vip_listbg_x7,
+.mainTop .more_btn .more_listbg_x7,
+.mainTop .shop_btn .shop_listbg_x7{height:163px;background:url(http://www.aipai.com/app/www/templates/huodong/common/img/yy_down_x7.png) no-repeat;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="http://www.aipai.com/app/www/templates/huodong/common/img/yy_down_x7.png",sizingMethod='crop');}
+.mainTop .vip_btn .vip_listbg_x8,
+.mainTop .more_btn .more_listbg_x8,
+.mainTop .shop_btn .shop_listbg_x8{height:185px;background:url(http://www.aipai.com/app/www/templates/huodong/common/img/yy_down_x8.png) no-repeat;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="http://www.aipai.com/app/www/templates/huodong/common/img/yy_down_x8.png",sizingMethod='crop');}
+.mainTop .vip_btn .vip_listbg_x9,
+.mainTop .more_btn .more_listbg_x9,
+.mainTop .shop_btn .shop_listbg_x9{height:207px;background:url(http://www.aipai.com/app/www/templates/huodong/common/img/yy_down_x9.png) no-repeat;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="http://www.aipai.com/app/www/templates/huodong/common/img/yy_down_x10.png",sizingMethod='crop');}
+.mainTop .vip_btn .vip_listbg_x10,
+.mainTop .more_btn .more_listbg_x10,
+.mainTop .shop_btn .shop_listbg_x10{height:229px;background:url(http://www.aipai.com/app/www/templates/huodong/common/img/yy_down_x10.png) no-repeat;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="http://www.aipai.com/app/www/templates/huodong/common/img/yy_down_x10.png",sizingMethod='crop');}
+.mainTop .more_btn .more_listbg_x11,
+.mainTop .shop_btn .shop_listbg_x11{height:251px;background:url(http://www.aipai.com/app/www/templates/huodong/common/img/yy_down_x11.png) no-repeat;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="http://www.aipai.com/app/www/templates/huodong/common/img/yy_down_x11.png",sizingMethod='crop');}
+.mainTop .shop_btn_down .shop_listbg,.mainTop .shop_btn_down .shop_list,.mainTop .vip_btn_down .vip_list,.mainTop .vip_btn_down .vip_listbg,.mainTop .more_btn_down .more_list,.mainTop .more_btn_down .more_listbg{display:block;}
+.mainTop .shop_btn .shop_list li,
+.mainTop .vip_btn .vip_list li,
+.mainTop .more_btn .more_list li{height:22px;line-height:22px;position:relative;_zoom:1;}
+.mainTop .shop_btn .shop_list li a,
+.mainTop .vip_btn .vip_list li a,
+.mainTop .more_btn .more_list li a{color:#333333;}
+.mainTop .shop_btna{color: #f00;cursor:pointer;}
+/*gb_page*/
+.gb_pages{width:100%;clear:both;overflow:hidden;padding:20px 0 10px;text-align:center;}
+.gb_page_con{display:inline-block;*display:inline;*zoom:1;}
+.gb_page_con a,.gb_page_con span{height:20px;display:inline-block;float:left;line-height:20px;background:#FFFFFF;border:1px solid #BBBBBB;padding:0 6px;margin:1px;color:#333333;font-family:Verdana,Helvetica,Arial,sans-serif;}
+.gb_page_con .gb_page_cur{height:22px;line-height:22px;padding:0 7px;border:none;font-weight:700;background:#3498FE;color:#FFFFFF;}
+.gb_page_con a:hover{text-decoration:none;background-color:#E5E5E5;color:#333333;}
+.gb_page_con .gb_page_prev,.gb_page_con .gb_page_next{line-height:22px;overflow:hidden;}
+.gb_page_con .gb_page_info{border:none;margin:1px 1px 1px 3px;height:22px;line-height:22px;}
+.gb_page_con .gb_page_info em{font-weight:700;color:#15B001;}
+
+.gb_page_left .gb_page{text-align:left;}
+.gb_page_right .gb_page{text-align:right;}
+.gb_page_center .gb_page{text-align:center;}
+
+
+/*元旦气氛*/
+/*.gbh_logo{background:none;}
+.gbh_con{background:url(holiday/yuandan_bg.jpg) no-repeat;}
+.gbh_wrap{background:url(holiday/yuandan_rbg.jpg) no-repeat right 0;}
+.gbh_search{width:388px;}*/
+
+/*新年气氛*/
+/*.gbh_logo{background:none;}
+.gbh_con{background:url(holiday/newyear_bg.jpg) no-repeat;}
+.gbh_wrap{background:url(holiday/newyear_rbg.jpg) no-repeat right 0;}
+.gbh_search{width:388px;}*/
+
+/** Aipai-UserLevel-Icon Add_by_Marko 2012/12/26 **/
+.user_level{display:block;width:31px;height:13px;background:url(user_level_bg.png) no-repeat;overflow:hidden;}
+/*level 1*/
+.user_level.u1_lv1{background-position:0 0;}
+.user_level.u1_lv2{background-position:-31px 0;}
+.user_level.u1_lv3{background-position:-62px 0;}
+.user_level.u1_lv4{background-position:-93px 0;}
+.user_level.u1_lv5{background-position:-124px 0;}
+.user_level.u1_lv6{background-position:-155px 0;}
+.user_level.u1_lv7{background-position:-186px 0;}
+.user_level.u1_lv8{background-position:-217px 0;}
+.user_level.u1_lv9{background-position:-248px 0;}
+.user_level.u1_lv10{background-position:-279px 0;}
+/*level 2*/
+.user_level.u2_lv1{background-position:0 -13px;}
+.user_level.u2_lv2{background-position:-31px -13px;}
+.user_level.u2_lv3{background-position:-62px -13px;}
+.user_level.u2_lv4{background-position:-93px -13px;}
+.user_level.u2_lv5{background-position:-124px -13px;}
+.user_level.u2_lv6{background-position:-155px -13px;}
+.user_level.u2_lv7{background-position:-186px -13px;}
+.user_level.u2_lv8{background-position:-217px -13px;}
+.user_level.u2_lv9{background-position:-248px -13px;}
+.user_level.u2_lv10{background-position:-279px -13px;}
+/*level 3*/
+.user_level.u3_lv1{background-position:0 -26px;}
+.user_level.u3_lv2{background-position:-31px -26px;}
+.user_level.u3_lv3{background-position:-62px -26px;}
+.user_level.u3_lv4{background-position:-93px -26px;}
+.user_level.u3_lv5{background-position:-124px -26px;}
+.user_level.u3_lv6{background-position:-155px -26px;}
+.user_level.u3_lv7{background-position:-186px -26px;}
+.user_level.u3_lv8{background-position:-217px -26px;}
+.user_level.u3_lv9{background-position:-248px -26px;}
+.user_level.u3_lv10{background-position:-279px -26px;}
+/*level 4*/
+.user_level.u4_lv1{background-position:0 -39px;}
+.user_level.u4_lv2{background-position:-31px -39px;}
+.user_level.u4_lv3{background-position:-62px -39px;}
+.user_level.u4_lv4{background-position:-93px -39px;}
+.user_level.u4_lv5{background-position:-124px -39px;}
+.user_level.u4_lv6{background-position:-155px -39px;}
+.user_level.u4_lv7{background-position:-186px -39px;}
+.user_level.u4_lv8{background-position:-217px -39px;}
+.user_level.u4_lv9{background-position:-248px -39px;}
+.user_level.u4_lv10{background-position:-279px -39px;}
+/*level 5*/
+.user_level.u5_lv1{background-position:0 -52px;}
+.user_level.u5_lv2{background-position:-31px -52px;}
+.user_level.u5_lv3{background-position:-62px -52px;}
+.user_level.u5_lv4{background-position:-93px -52px;}
+.user_level.u5_lv5{background-position:-124px -52px;}
+.user_level.u5_lv6{background-position:-155px -52px;}
+.user_level.u5_lv7{background-position:-186px -52px;}
+.user_level.u5_lv8{background-position:-217px -52px;}
+.user_level.u5_lv9{background-position:-248px -52px;}
+.user_level.u5_lv10{background-position:-279px -52px;}
+/*level 6*/
+.user_level.u6_lv1{background-position:0 -65px;}
+.user_level.u6_lv2{background-position:-31px -65px;}
+.user_level.u6_lv3{background-position:-62px -65px;}
+.user_level.u6_lv4{background-position:-93px -65px;}
+.user_level.u6_lv5{background-position:-124px -65px;}
+.user_level.u6_lv6{background-position:-155px -65px;}
+.user_level.u6_lv7{background-position:-186px -65px;}
+.user_level.u6_lv8{background-position:-217px -65px;}
+.user_level.u6_lv9{background-position:-248px -65px;}
+.user_level.u6_lv10{background-position:-279px -65px;}
+/*level 7*/
+.user_level.u7_lv1{background-position:0 -78px;}
+.user_level.u7_lv2{background-position:-31px -78px;}
+.user_level.u7_lv3{background-position:-62px -78px;}
+.user_level.u7_lv4{background-position:-93px -78px;}
+.user_level.u7_lv5{background-position:-124px -78px;}
+.user_level.u7_lv6{background-position:-155px -78px;}
+.user_level.u7_lv7{background-position:-186px -78px;}
+.user_level.u7_lv8{background-position:-217px -78px;}
+.user_level.u7_lv9{background-position:-248px -78px;}
+.user_level.u7_lv10{background-position:-279px -78px;}
+/*level 8*/
+.user_level.u8{background-position:0 -91px;width:43px;}
+
+/*mod_sitemap*/
+.mod_sitemap{width:960px;margin:10px auto 0;padding-bottom:15px;overflow:hidden;background:#ffffff url(sitemap_bg.png) repeat-y;}.mod_sitemap .sitemap_logo{float:left;width:161px;height:154px;display:inline;margin-top:15px;background:#ffffff url(sitemap_app.png) center top no-repeat;}.mod_sitemap .sitemap_logo a{display:block;width:161px;height:100%;text-indent:-9999px;overflow:hidden;}
+.mod_sitemap h5{line-height:24px;font-size:14px;font-weight:700;color:#686868;padding:27px 0 3px 0;}
+.mod_sitemap ul{width:134px;line-height:24px;}.mod_sitemap ul li{float:left;height:24px;}.mod_sitemap ul li a{color:#686868;}
+.mod_sitemap .sitemap_nav1{float:left;width:148px;padding-left:35px;overflow:hidden;}.mod_sitemap .sitemap_nav1 li{width:66px;}
+.mod_sitemap .sitemap_nav2{float:left;width:101px;padding-left:24px;overflow:hidden;}.mod_sitemap .sitemap_nav2 li{width:54px;}
+.mod_sitemap .sitemap_nav3{float:left;width:157px;padding-left:26px;overflow:hidden;}.mod_sitemap .sitemap_nav3 li{width:78px;}
+.mod_sitemap .sitemap_nav4{float:left;width:99px;padding-left:26px;overflow:hidden;}.mod_sitemap .sitemap_nav4 li{width:78px;}
+
+/*gm_header*/
+.gm_header{height:33px;background:url(http://www.aipai.com/app/www/templates/huodong/common/img/hd_bg.png) repeat-x;font-family:Tahoma,Ariel,Verdanda;position:relative;overflow:hidden;z-index:8000}.gm_header .hh_inner{width:960px;margin:0 auto}.gm_header .logo{float:left;width:186px}.gm_header .logo img{width:186px;height:32px}.gm_header a{color:#333;text-decoration:none}.gm_header a:hover{text-decoration:underline}.gm_header .nav{float:left;padding:8px 0 0 10px;position:relative;color:#bbb9b9}.gm_header .nav a{margin:0 4px}
+.gm_header .nav .ico_hot{position:relative}
+.gm_header .nav .ico_hot span{display:block;width:18px;height:11px;overflow:hidden;background:url(http://www.aipai.com/app/www/templates/common/img/global/ico_hot2.png) no-repeat;position:absolute;top:-7px;left:43px}
+.gm_header .nav .ico_hot .ico_hots{left:43px;}
+.gm_header .nav .ico_hot .ico_hots2{left:19px;}
+.gm_header .nav .ico_dd{background:url(http://www.aipai.com/app/www/templates/huodong/common/img/ico.png) no-repeat right 7px;*background-position:right 6px;padding-right:5px}.gm_header .nav .red{color:#F00}.gm_header .hh_r{float:right}.gm_header .hh_r .hh_login{padding:5px 10px 0 0}.gm_header .hh_r .hh_login_btns{width:109px;height:21px;background:url(http://www.aipai.com/app/www/templates/huodong/common/img/hd_btn2.png) no-repeat}.gm_header .hh_r .hh_login_btns a{float:left;width:54px;height:21px;display:inline-block;overflow:hidden;text-indent:-9999px}.gm_header .hh_r .hh_logged{float:right;padding-right:10px}.gm_header .hh_r .hh_logged_l{padding-top:8px;padding-top:10px\0;_padding-top:10px;float:left}.gm_header .hh_r .hh_logged_r{padding-top:6px;float:left}.gm_header .hh_r .hh_logged_r a{float:left;width:21px;height:20px;margin-left:17px;background:url(head_icos.png) no-repeat}.gm_header .hh_r .hh_logged_r a:hover{text-decoration:none}.gm_header .hh_r .hh_logged_r .hh_game{background-position:-21px 0}.gm_header .hh_r .hh_logged_r .hh_msg{background-position:-42px 0}.gm_header .hh_r .hh_logged_r .hh_msg em{display:none}.gm_header .hh_r .hh_logged_r .hh_msg_show{position:relative}.gm_header .hh_r .hh_logged_r .hh_msg_show em{display:block;float:left;position:absolute;left:13px;cursor:pointer;background:url(head_num_bg.png) no-repeat}.gm_header .hh_r .hh_logged_r .hh_msg_show em i{cursor:pointer;float:left;height:11px;line-height:11px;padding:0 2px;font-size:10px;font-family:Arial;font-style:normal;color:#FFF;white-space:nowrap;background:url(head_num_bg.png) no-repeat right -11px}.gm_header .hh_r .hh_logged_r .hh_config{background-position:-63px 0}.gm_header .hh_r .hh_logged_r .hh_vip{background-position:-84px 0}.gm_header .hh_r .hh_user{font-weight:700;color:#F70;font-weight:700}
+
+/*hh_pop*/
+#hh_pop .hh_pop_con{display:none;position:absolute;z-index:8500;line-height:22px}#hh_pop .hh_pop_con div{position:relative;background:#fff;border:1px solid #dddddb;width:75px;padding:7px 0 6px}#hh_pop .hh_pop_con span{width:77px;background:#000;position:absolute;top:2px;left:2px;opacity:.1;-moz-opacity:.1;filter:alpha(opacity=10)}#hh_pop .hh_pop_con li{padding-left:9px}#hh_pop .hh_pop_con li a{color:#666}#hh_pop .hh_pop_con li a:hover{color:#f50000}#hh_pop .hh_pop_con li .red{color:#f50000}#hh_pop .hh_pop_msg{display:none;width:181px;position:absolute;top:28px;z-index:8000}#hh_pop .hh_pop_msg .btn_close{display:block;width:15px;height:15px;cursor:pointer;position:absolute;right:3px;top:7px;background:#fefde5 url(head_icos.png) no-repeat -106px 4px}#hh_pop .hh_pop_msg .hhpm_t{height:6px;overflow:hidden;line-height:1px;background:url(head_icos.png) no-repeat 0 -20px}#hh_pop .hh_pop_msg .hhpm_con{background:#fefde5;border:1px solid #ebd482;border-top:0;line-height:18px;padding:12px 15px}#hh_pop .hh_pop_msg .hhpm_con p{margin-bottom:1px}#hh_pop .hh_pop_msg .hhpm_con p a{color:#333;text-decoration:underline}#hh_pop .hh_pop_msg .hhpm_con p a:hover{text-decoration:none}#hh_pop .hh_pop_msg .hhpm_con p .user{color:#3887c6}#hh_pop .hh_pop_msg .hhpm_con .hhpm_nums{color:#999}#hh_pop .hh_pop_msg .hhpm_con .hhpm_nums a{text-decoration:underline;color:#999}#hh_pop .hh_pop_msg .hhpm_con .hhpm_nums a span{font-weight:700;color:#e93f37}#hh_pop .hh_pop_msg .hhpm_con .hhpm_nums a:hover{text-decoration:none}#hh_pop .hh_pop_msg .hhpm_con_nodata p{display:none}#hh_pop .hh_pop_msg .hhpm_con_nodata .hhpm_nums{color:#333}#hh_pop .hh_pop_msg .hhpm_con_nodata .hhpm_nums a{color:#333;text-decoration:underline}#hh_pop .hh_pop_msg .hhpm_con_nodata .hhpm_nums a span{color:#e93f37}#hh_pop .hh_pop_msg .hhpm_con_nodata .hhpm_nums:hover{text-decoration:none}#hh_pop .col_layout div{width:146px}#hh_pop .col_layout span{width:148px}#hh_pop .col_layout li{float:left;width:65px;padding-left:8px}
+#hh_pop .hh_pop_pds div{width: 103px;padding: 5px 0 5px;line-height: 22px;}
+#hh_pop .hh_pop_pds li{padding-left: 9px;}#hh_pop .hh_pop_pds span{width:105px;}
+
+/*pop_yz*/
+.pop_yz{}
+/*su_form*/
+.pop_yz .su_form{width:520px;float:left;}
+.pop_yz .suf_w{height:38px;color:#333333;}
+.pop_yz .suf_wl{width:90px;float:left;font-size:14px;text-align:right;font-family:\5B8B\4F53;padding-top:7px;padding:7px 5px 0 0;}
+.pop_yz .suf_nol{padding-left:95px;}
+.pop_yz .suf_w .si1,.suf_w .si2{border:1px solid #D3D4D5;width:212px;height:18px;line-height:18px;padding:4px 2px;font-size:14px;background:#FFFFFF url(http://www.aipai.com/app/www/templates/signup/img_2011/input_bg.png) repeat-x;}
+.pop_yz .suf_w .si2{width:65px;}
+.pop_yz .suf_w .si_cur{border:1px solid #FFE659;}
+.pop_yz .suf_wl span{color:#FF0000;}
+.pop_yz .suf_wl em{font-size:12px;}
+.pop_yz .suf_wr{width:230px;float:left;position:relative;}
+.pop_yz .msg_viladate{
+    display:block;
+    border:0 none;
+    /*border:1px solid #dddddd;*/
+    width:121px;
+    height:24px;
+    line-height: 24px;
+    text-align: center;
+    cursor:pointer;
+    color: #555;
+    background:url(http://www.aipai.com/app/www/templates/signup/img_2011/msg_v_3.png) no-repeat;
+ }
+ .pop_yz .msg_sended{
+        position: absolute;
+        height: 24px;
+        line-height: 24px;
+        top: 0px;
+        left: 200px;
+        color: #ff7800;
+ }
+.pop_yz .msg_viladate:hover{
+    text-decoration: underline;
+}
+.pop_yz .msg_disabled{
+    color: #999999;
+    cursor: default;
+    background: url(http://www.aipai.com/app/www/templates/signup/img_2011/msg_v_4.png) no-repeat;  
+}
+.pop_yz .msg_disabled:hover{
+    text-decoration:none;
+}
+.pop_yz #suf_msg{position: relative;}
+.pop_yz #auth_code{float:left;}
+.pop_yz .code_img{float:left;padding-left:1px;position:relative;}
+.pop_yz .code_img img{display:block;position:absolute;top:-3px;}
+/*.pop_sumore{height:197px;}*/
+.pop_yz_loading{padding-top:63px;}
+.pop_yz_loading img{width:32px;margin:0 auto;display:block;}
+.pop_yz .pop_yz_hd{height: 33px;line-height: 25px;padding: 0 0px 12px 0px;}
+.pop_yz .pop_yz_hd span{border-bottom: 1px solid  #e1e1e1; display:block;width:153px;float: left;text-align:center;color: #555555;font-weight: bold;background: #f8f8f8;cursor: pointer;line-height: 33px;}
+.pop_yz .pop_yz_hd .it1{width: 152px;border-right: 1px solid  #e1e1e1;position: relative;}
+.pop_yz .pop_yz_hd .it1:after{
+    content: '';
+    display: block;
+    width: 18px;
+    height: 19px;
+    background: url(http://res.weplay.cn/app/www/templates/signup/v3_img/recommend_ico.png) no-repeat;
+    position: absolute;
+    top: -6px;
+    right: 32px;
+}
+.pop_yz .pop_yz_hd span.cur{background: #ffffff;color: #666666 ;border-bottom: none;}
+.pop_yz .su_form{padding-left: 8px;}
+.pop_yz .su_form_phone{padding: 10px 8px;}
+.su_form.su_form_phone .suf_w{margin-bottom: 2px;}
+.su_form.su_form_phone .sf_ttip{position: relative;top: -13px;}
+.pop_yz .suf_w{height:32px;}
+.pop_yz .suf_wr{width:194px;}
+.pop_yz .suf_wl{padding-top:6px;font-size:12px;width:74px;font-weight: normal;padding: 7px 0px 0 0;}
+.pop_yz .suf_w .si1,.pop_yz .suf_w .si2{border:1px solid #C0C0C0;width:202px;height:14px;line-height:14px;padding:4px 2px;font-size:12px;}
+.pop_yz .suf_w .si2{width:72px;}
+.pop_yz .suf_w .sie{color:#999999;}
+.pop_yz #suf_sex .suf_wr {font-size:12px;padding-top:4px;margin-top:-1px;*margin-top:0;*padding-top:0px;}
+.pop_yz #suf_sex .suf_wr input{margin-right:2px;position:relative;top:1px;*position:static;*margin-right:0;}
+.pop_yz .suf_submitw{padding:5px 0 0 65px;height:27px;overflow:hidden;}
+.pop_yz .suf_submit{border: 0;width:56px;height:27px;float:left;background:url(http://www.aipai.com/app/www/templates/common/img/common/pop_yz_submit.png) no-repeat;cursor: pointer;}
+.pop_yz .suf_submitw span{line-height: 24px;padding-left: 5px;color: #999999;}
+.pop_yz .suf_swr{float:left;width:150px;padding:5px 0 0 5px;}
+.pop_yz .suf_swr a{margin-right: 10px;color:#0084BB;text-decoration:underline;float:left;line-height:16px;font-family:\5B8B\4F53;}
+.pop_yz .suf_swr a:hover{text-decoration:none;}
+.pop_yz .suf_tips{position:absolute;top:0px;left:0px;*top:1px;background:#FFFFFF;width:206px;height:22px;overflow:hidden;border:1px solid #C0C0C0;}
+.pop_yz .suf_tipsc{height:14px;padding:4px 2px;line-height:14px;border:0 none;color:#E40000;}
+.pop_yz .suf_tips em{display:none;}
+.pop_yz #suf_auth_code .suf_tips{width:76px;padding-right:0;top:0;}
+.pop_yz .su_form_email input{vertical-align: middle;margin-right: 4px;}
+.pop_yz #suf_oldEmail{padding-left: 57px;}
+.pop_yz #suf_newEmail{padding-left: 57px;}
+.pop_yz #suf_newEmail em{color: #999;}
+.pop_yz .pop_signup_suc{height: 120px;line-height: 120px;text-align: center;}
+/*pop_fastreg*/
+.pop_yz_d,.pop_fresh{width:314px;height:278px;position:relative;}
+.pop_yz_d .fastreg_close{display:block;width:18px;height:18px;overflow:hidden;text-indent:-9999px;position:absolute;top:9px;right:9px;z-index:20;cursor:pointer;}
+.pop_yz_d .fastreg_con{width:306px;position:absolute;top:0;left:0;}
+.pop_yz_d .fastreg_con{z-index:15;padding:28px 4px 0 4px;}
+.pop_yz_d .fastreg_bg{height:278px;background:url(http://www.aipai.com/app/www/templates/common/img/common/pop_yz.png) no-repeat;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://www.aipai.com/app/www/templates/common/img/common/pop_yz.png',sizingMethod='crop');}
