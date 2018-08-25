@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rpym.univweb.dao.SysUserNotificationsMapper" >
+  <resultMap id="BaseResultMap" type="com.rpym.univweb.entity.SysUserNotifications" >
+    <id column="Id" property="id" jdbcType="BIGINT" />
+    <result column="UserId" property="userid" jdbcType="BIGINT" />
+    <result column="Message" property="message" jdbcType="VARCHAR" />
+    <result column="State" property="state" jdbcType="INTEGER" />
+    <result column="CreationTime" property="creationtime" jdbcType="TIMESTAMP" />
+    <result column="CreatorUserId" property="creatoruserid" jdbcType="BIGINT" />
+    <result column="LastModifierUserId" property="lastmodifieruserid" jdbcType="BIGINT" />
+    <result column="LastModificationTime" property="lastmodificationtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Id, UserId, Message, State, CreationTime, CreatorUserId, LastModifierUserId, LastModificationTime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.rpym.univweb.entity.SysUserNotificationsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from sys_user_notifications
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_user_notifications
+    where Id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from sys_user_notifications
+    where Id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.rpym.univweb.entity.SysUserNotificationsExample" >
+    delete from sys_user_notifications
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.rpym.univweb.entity.SysUserNotifications" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into sys_user_notifications (UserId, Message, State, 
+      CreationTime, CreatorUserId, LastModifierUserId, 
+      LastModificationTime)
+    values (#{userid,jdbcType=BIGINT}, #{message,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, 
+      #{creationtime,jdbcType=TIMESTAMP}, #{creatoruserid,jdbcType=BIGINT}, #{lastmodifieruserid,jdbcType=BIGINT}, 
+      #{lastmodificationtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.rpym.univweb.entity.SysUserNotifications" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into sys_user_notifications
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        UserId,
+      </if>
+      <if test="message != null" >
+        Message,
+      </if>
+      <if test="state != null" >
+        State,
+      </if>
+      <if test="creationtime != null" >
+        CreationTime,
+      </if>
+      <if test="creatoruserid != null" >
+        CreatorUserId,
+      </if>
+      <if test="lastmodifieruserid != null" >
+        LastModifierUserId,
+      </if>
+      <if test="lastmodificationtime != null" >
+        LastModificationTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        #{userid,jdbcType=BIGINT},
+      </if>
+      <if test="message != null" >
+        #{message,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="creationtime != null" >
+        #{creationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatoruserid != null" >
+        #{creatoruserid,jdbcType=BIGINT},
+      </if>
+      <if test="lastmodifieruserid != null" >
+        #{lastmodifieruserid,jdbcType=BIGINT},
+      </if>
+      <if test="lastmodificationtime != null" >
+        #{lastmodificationtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.rpym.univweb.entity.SysUserNotificationsExample" resultType="java.lang.Integer" >
+    select count(*) from sys_user_notifications
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sys_user_notifications
+    <set >
+      <if test="record.id != null" >
+        Id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.userid != null" >
+        UserId = #{record.userid,jdbcType=BIGINT},
+      </if>
+      <if test="record.message != null" >
+        Message = #{record.message,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null" >
+        State = #{record.state,jdbcType=INTEGER},
+      </if>
+      <if test="record.creationtime != null" >
+        CreationTime = #{record.creationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.creatoruserid != null" >
+        CreatorUserId = #{record.creatoruserid,jdbcType=BIGINT},
+      </if>
+      <if test="record.lastmodifieruserid != null" >
+        LastModifierUserId = #{record.lastmodifieruserid,jdbcType=BIGINT},
+      </if>
+      <if test="record.lastmodificationtime != null" >
+        LastModificationTime = #{record.lastmodificationtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sys_user_notifications
+    set Id = #{record.id,jdbcType=BIGINT},
+      UserId = #{record.userid,jdbcType=BIGINT},
+      Message = #{record.message,jdbcType=VARCHAR},
+      State = #{record.state,jdbcType=INTEGER},
+      CreationTime = #{record.creationtime,jdbcType=TIMESTAMP},
+      CreatorUserId = #{record.creatoruserid,jdbcType=BIGINT},
+      LastModifierUserId = #{record.lastmodifieruserid,jdbcType=BIGINT},
+      LastModificationTime = #{record.lastmodificationtime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rpym.univweb.entity.SysUserNotifications" >
+    update sys_user_notifications
+    <set >
+      <if test="userid != null" >
+        UserId = #{userid,jdbcType=BIGINT},
+      </if>
+      <if test="message != null" >
+        Message = #{message,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        State = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="creationtime != null" >
+        CreationTime = #{creationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatoruserid != null" >
+        CreatorUserId = #{creatoruserid,jdbcType=BIGINT},
+      </if>
+      <if test="lastmodifieruserid != null" >
+        LastModifierUserId = #{lastmodifieruserid,jdbcType=BIGINT},
+      </if>
+      <if test="lastmodificationtime != null" >
+        LastModificationTime = #{lastmodificationtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rpym.univweb.entity.SysUserNotifications" >
+    update sys_user_notifications
+    set UserId = #{userid,jdbcType=BIGINT},
+      Message = #{message,jdbcType=VARCHAR},
+      State = #{state,jdbcType=INTEGER},
+      CreationTime = #{creationtime,jdbcType=TIMESTAMP},
+      CreatorUserId = #{creatoruserid,jdbcType=BIGINT},
+      LastModifierUserId = #{lastmodifieruserid,jdbcType=BIGINT},
+      LastModificationTime = #{lastmodificationtime,jdbcType=TIMESTAMP}
+    where Id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

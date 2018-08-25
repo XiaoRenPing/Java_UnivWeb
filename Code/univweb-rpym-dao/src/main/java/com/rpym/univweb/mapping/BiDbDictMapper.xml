@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rpym.univweb.dao.BiDbDictMapper" >
+  <resultMap id="BaseResultMap" type="com.rpym.univweb.entity.BiDbDict" >
+    <id column="Id" property="id" jdbcType="BIGINT" />
+    <result column="Name" property="name" jdbcType="VARCHAR" />
+    <result column="Remark" property="remark" jdbcType="VARCHAR" />
+    <result column="IsSystem" property="issystem" jdbcType="BIT" />
+    <result column="CreatorUserId" property="creatoruserid" jdbcType="BIGINT" />
+    <result column="CreationTime" property="creationtime" jdbcType="TIMESTAMP" />
+    <result column="LastModifierUserId" property="lastmodifieruserid" jdbcType="BIGINT" />
+    <result column="LastModificationTime" property="lastmodificationtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Id, Name, Remark, IsSystem, CreatorUserId, CreationTime, LastModifierUserId, LastModificationTime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.rpym.univweb.entity.BiDbDictExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from bi_db_dict
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from bi_db_dict
+    where Id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from bi_db_dict
+    where Id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.rpym.univweb.entity.BiDbDictExample" >
+    delete from bi_db_dict
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.rpym.univweb.entity.BiDbDict" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into bi_db_dict (Name, Remark, IsSystem, 
+      CreatorUserId, CreationTime, LastModifierUserId, 
+      LastModificationTime)
+    values (#{name,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{issystem,jdbcType=BIT}, 
+      #{creatoruserid,jdbcType=BIGINT}, #{creationtime,jdbcType=TIMESTAMP}, #{lastmodifieruserid,jdbcType=BIGINT}, 
+      #{lastmodificationtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.rpym.univweb.entity.BiDbDict" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into bi_db_dict
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="name != null" >
+        Name,
+      </if>
+      <if test="remark != null" >
+        Remark,
+      </if>
+      <if test="issystem != null" >
+        IsSystem,
+      </if>
+      <if test="creatoruserid != null" >
+        CreatorUserId,
+      </if>
+      <if test="creationtime != null" >
+        CreationTime,
+      </if>
+      <if test="lastmodifieruserid != null" >
+        LastModifierUserId,
+      </if>
+      <if test="lastmodificationtime != null" >
+        LastModificationTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="issystem != null" >
+        #{issystem,jdbcType=BIT},
+      </if>
+      <if test="creatoruserid != null" >
+        #{creatoruserid,jdbcType=BIGINT},
+      </if>
+      <if test="creationtime != null" >
+        #{creationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastmodifieruserid != null" >
+        #{lastmodifieruserid,jdbcType=BIGINT},
+      </if>
+      <if test="lastmodificationtime != null" >
+        #{lastmodificationtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.rpym.univweb.entity.BiDbDictExample" resultType="java.lang.Integer" >
+    select count(*) from bi_db_dict
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update bi_db_dict
+    <set >
+      <if test="record.id != null" >
+        Id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.name != null" >
+        Name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        Remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.issystem != null" >
+        IsSystem = #{record.issystem,jdbcType=BIT},
+      </if>
+      <if test="record.creatoruserid != null" >
+        CreatorUserId = #{record.creatoruserid,jdbcType=BIGINT},
+      </if>
+      <if test="record.creationtime != null" >
+        CreationTime = #{record.creationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastmodifieruserid != null" >
+        LastModifierUserId = #{record.lastmodifieruserid,jdbcType=BIGINT},
+      </if>
+      <if test="record.lastmodificationtime != null" >
+        LastModificationTime = #{record.lastmodificationtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update bi_db_dict
+    set Id = #{record.id,jdbcType=BIGINT},
+      Name = #{record.name,jdbcType=VARCHAR},
+      Remark = #{record.remark,jdbcType=VARCHAR},
+      IsSystem = #{record.issystem,jdbcType=BIT},
+      CreatorUserId = #{record.creatoruserid,jdbcType=BIGINT},
+      CreationTime = #{record.creationtime,jdbcType=TIMESTAMP},
+      LastModifierUserId = #{record.lastmodifieruserid,jdbcType=BIGINT},
+      LastModificationTime = #{record.lastmodificationtime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rpym.univweb.entity.BiDbDict" >
+    update bi_db_dict
+    <set >
+      <if test="name != null" >
+        Name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        Remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="issystem != null" >
+        IsSystem = #{issystem,jdbcType=BIT},
+      </if>
+      <if test="creatoruserid != null" >
+        CreatorUserId = #{creatoruserid,jdbcType=BIGINT},
+      </if>
+      <if test="creationtime != null" >
+        CreationTime = #{creationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastmodifieruserid != null" >
+        LastModifierUserId = #{lastmodifieruserid,jdbcType=BIGINT},
+      </if>
+      <if test="lastmodificationtime != null" >
+        LastModificationTime = #{lastmodificationtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rpym.univweb.entity.BiDbDict" >
+    update bi_db_dict
+    set Name = #{name,jdbcType=VARCHAR},
+      Remark = #{remark,jdbcType=VARCHAR},
+      IsSystem = #{issystem,jdbcType=BIT},
+      CreatorUserId = #{creatoruserid,jdbcType=BIGINT},
+      CreationTime = #{creationtime,jdbcType=TIMESTAMP},
+      LastModifierUserId = #{lastmodifieruserid,jdbcType=BIGINT},
+      LastModificationTime = #{lastmodificationtime,jdbcType=TIMESTAMP}
+    where Id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

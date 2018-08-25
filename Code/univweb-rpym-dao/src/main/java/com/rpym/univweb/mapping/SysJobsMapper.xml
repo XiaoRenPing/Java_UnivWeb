@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rpym.univweb.dao.SysJobsMapper" >
+  <resultMap id="BaseResultMap" type="com.rpym.univweb.entity.SysJobs" >
+    <id column="Id" property="id" jdbcType="BIGINT" />
+    <result column="JobName" property="jobname" jdbcType="VARCHAR" />
+    <result column="JobClass" property="jobclass" jdbcType="VARCHAR" />
+    <result column="JobDesc" property="jobdesc" jdbcType="VARCHAR" />
+    <result column="JobArgs" property="jobargs" jdbcType="VARCHAR" />
+    <result column="JobStatus" property="jobstatus" jdbcType="CHAR" />
+    <result column="JobCron" property="jobcron" jdbcType="VARCHAR" />
+    <result column="NodeStatus" property="nodestatus" jdbcType="CHAR" />
+    <result column="NodeIp" property="nodeip" jdbcType="VARCHAR" />
+    <result column="TryCount" property="trycount" jdbcType="SMALLINT" />
+    <result column="NextTryTime" property="nexttrytime" jdbcType="TIMESTAMP" />
+    <result column="LastTryTime" property="lasttrytime" jdbcType="TIMESTAMP" />
+    <result column="IsAbandoned" property="isabandoned" jdbcType="BIT" />
+    <result column="CreationTime" property="creationtime" jdbcType="TIMESTAMP" />
+    <result column="CreatorUserId" property="creatoruserid" jdbcType="BIGINT" />
+    <result column="ExceptionMessage" property="exceptionmessage" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Id, JobName, JobClass, JobDesc, JobArgs, JobStatus, JobCron, NodeStatus, NodeIp, 
+    TryCount, NextTryTime, LastTryTime, IsAbandoned, CreationTime, CreatorUserId, ExceptionMessage
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.rpym.univweb.entity.SysJobsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from sys_jobs
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_jobs
+    where Id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from sys_jobs
+    where Id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.rpym.univweb.entity.SysJobsExample" >
+    delete from sys_jobs
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.rpym.univweb.entity.SysJobs" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into sys_jobs (JobName, JobClass, JobDesc, 
+      JobArgs, JobStatus, JobCron, 
+      NodeStatus, NodeIp, TryCount, 
+      NextTryTime, LastTryTime, IsAbandoned, 
+      CreationTime, CreatorUserId, ExceptionMessage
+      )
+    values (#{jobname,jdbcType=VARCHAR}, #{jobclass,jdbcType=VARCHAR}, #{jobdesc,jdbcType=VARCHAR}, 
+      #{jobargs,jdbcType=VARCHAR}, #{jobstatus,jdbcType=CHAR}, #{jobcron,jdbcType=VARCHAR}, 
+      #{nodestatus,jdbcType=CHAR}, #{nodeip,jdbcType=VARCHAR}, #{trycount,jdbcType=SMALLINT}, 
+      #{nexttrytime,jdbcType=TIMESTAMP}, #{lasttrytime,jdbcType=TIMESTAMP}, #{isabandoned,jdbcType=BIT}, 
+      #{creationtime,jdbcType=TIMESTAMP}, #{creatoruserid,jdbcType=BIGINT}, #{exceptionmessage,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.rpym.univweb.entity.SysJobs" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into sys_jobs
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="jobname != null" >
+        JobName,
+      </if>
+      <if test="jobclass != null" >
+        JobClass,
+      </if>
+      <if test="jobdesc != null" >
+        JobDesc,
+      </if>
+      <if test="jobargs != null" >
+        JobArgs,
+      </if>
+      <if test="jobstatus != null" >
+        JobStatus,
+      </if>
+      <if test="jobcron != null" >
+        JobCron,
+      </if>
+      <if test="nodestatus != null" >
+        NodeStatus,
+      </if>
+      <if test="nodeip != null" >
+        NodeIp,
+      </if>
+      <if test="trycount != null" >
+        TryCount,
+      </if>
+      <if test="nexttrytime != null" >
+        NextTryTime,
+      </if>
+      <if test="lasttrytime != null" >
+        LastTryTime,
+      </if>
+      <if test="isabandoned != null" >
+        IsAbandoned,
+      </if>
+      <if test="creationtime != null" >
+        CreationTime,
+      </if>
+      <if test="creatoruserid != null" >
+        CreatorUserId,
+      </if>
+      <if test="exceptionmessage != null" >
+        ExceptionMessage,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="jobname != null" >
+        #{jobname,jdbcType=VARCHAR},
+      </if>
+      <if test="jobclass != null" >
+        #{jobclass,jdbcType=VARCHAR},
+      </if>
+      <if test="jobdesc != null" >
+        #{jobdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="jobargs != null" >
+        #{jobargs,jdbcType=VARCHAR},
+      </if>
+      <if test="jobstatus != null" >
+        #{jobstatus,jdbcType=CHAR},
+      </if>
+      <if test="jobcron != null" >
+        #{jobcron,jdbcType=VARCHAR},
+      </if>
+      <if test="nodestatus != null" >
+        #{nodestatus,jdbcType=CHAR},
+      </if>
+      <if test="nodeip != null" >
+        #{nodeip,jdbcType=VARCHAR},
+      </if>
+      <if test="trycount != null" >
+        #{trycount,jdbcType=SMALLINT},
+      </if>
+      <if test="nexttrytime != null" >
+        #{nexttrytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lasttrytime != null" >
+        #{lasttrytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isabandoned != null" >
+        #{isabandoned,jdbcType=BIT},
+      </if>
+      <if test="creationtime != null" >
+        #{creationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatoruserid != null" >
+        #{creatoruserid,jdbcType=BIGINT},
+      </if>
+      <if test="exceptionmessage != null" >
+        #{exceptionmessage,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.rpym.univweb.entity.SysJobsExample" resultType="java.lang.Integer" >
+    select count(*) from sys_jobs
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sys_jobs
+    <set >
+      <if test="record.id != null" >
+        Id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.jobname != null" >
+        JobName = #{record.jobname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jobclass != null" >
+        JobClass = #{record.jobclass,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jobdesc != null" >
+        JobDesc = #{record.jobdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jobargs != null" >
+        JobArgs = #{record.jobargs,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jobstatus != null" >
+        JobStatus = #{record.jobstatus,jdbcType=CHAR},
+      </if>
+      <if test="record.jobcron != null" >
+        JobCron = #{record.jobcron,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nodestatus != null" >
+        NodeStatus = #{record.nodestatus,jdbcType=CHAR},
+      </if>
+      <if test="record.nodeip != null" >
+        NodeIp = #{record.nodeip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.trycount != null" >
+        TryCount = #{record.trycount,jdbcType=SMALLINT},
+      </if>
+      <if test="record.nexttrytime != null" >
+        NextTryTime = #{record.nexttrytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lasttrytime != null" >
+        LastTryTime = #{record.lasttrytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isabandoned != null" >
+        IsAbandoned = #{record.isabandoned,jdbcType=BIT},
+      </if>
+      <if test="record.creationtime != null" >
+        CreationTime = #{record.creationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.creatoruserid != null" >
+        CreatorUserId = #{record.creatoruserid,jdbcType=BIGINT},
+      </if>
+      <if test="record.exceptionmessage != null" >
+        ExceptionMessage = #{record.exceptionmessage,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sys_jobs
+    set Id = #{record.id,jdbcType=BIGINT},
+      JobName = #{record.jobname,jdbcType=VARCHAR},
+      JobClass = #{record.jobclass,jdbcType=VARCHAR},
+      JobDesc = #{record.jobdesc,jdbcType=VARCHAR},
+      JobArgs = #{record.jobargs,jdbcType=VARCHAR},
+      JobStatus = #{record.jobstatus,jdbcType=CHAR},
+      JobCron = #{record.jobcron,jdbcType=VARCHAR},
+      NodeStatus = #{record.nodestatus,jdbcType=CHAR},
+      NodeIp = #{record.nodeip,jdbcType=VARCHAR},
+      TryCount = #{record.trycount,jdbcType=SMALLINT},
+      NextTryTime = #{record.nexttrytime,jdbcType=TIMESTAMP},
+      LastTryTime = #{record.lasttrytime,jdbcType=TIMESTAMP},
+      IsAbandoned = #{record.isabandoned,jdbcType=BIT},
+      CreationTime = #{record.creationtime,jdbcType=TIMESTAMP},
+      CreatorUserId = #{record.creatoruserid,jdbcType=BIGINT},
+      ExceptionMessage = #{record.exceptionmessage,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rpym.univweb.entity.SysJobs" >
+    update sys_jobs
+    <set >
+      <if test="jobname != null" >
+        JobName = #{jobname,jdbcType=VARCHAR},
+      </if>
+      <if test="jobclass != null" >
+        JobClass = #{jobclass,jdbcType=VARCHAR},
+      </if>
+      <if test="jobdesc != null" >
+        JobDesc = #{jobdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="jobargs != null" >
+        JobArgs = #{jobargs,jdbcType=VARCHAR},
+      </if>
+      <if test="jobstatus != null" >
+        JobStatus = #{jobstatus,jdbcType=CHAR},
+      </if>
+      <if test="jobcron != null" >
+        JobCron = #{jobcron,jdbcType=VARCHAR},
+      </if>
+      <if test="nodestatus != null" >
+        NodeStatus = #{nodestatus,jdbcType=CHAR},
+      </if>
+      <if test="nodeip != null" >
+        NodeIp = #{nodeip,jdbcType=VARCHAR},
+      </if>
+      <if test="trycount != null" >
+        TryCount = #{trycount,jdbcType=SMALLINT},
+      </if>
+      <if test="nexttrytime != null" >
+        NextTryTime = #{nexttrytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lasttrytime != null" >
+        LastTryTime = #{lasttrytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isabandoned != null" >
+        IsAbandoned = #{isabandoned,jdbcType=BIT},
+      </if>
+      <if test="creationtime != null" >
+        CreationTime = #{creationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatoruserid != null" >
+        CreatorUserId = #{creatoruserid,jdbcType=BIGINT},
+      </if>
+      <if test="exceptionmessage != null" >
+        ExceptionMessage = #{exceptionmessage,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rpym.univweb.entity.SysJobs" >
+    update sys_jobs
+    set JobName = #{jobname,jdbcType=VARCHAR},
+      JobClass = #{jobclass,jdbcType=VARCHAR},
+      JobDesc = #{jobdesc,jdbcType=VARCHAR},
+      JobArgs = #{jobargs,jdbcType=VARCHAR},
+      JobStatus = #{jobstatus,jdbcType=CHAR},
+      JobCron = #{jobcron,jdbcType=VARCHAR},
+      NodeStatus = #{nodestatus,jdbcType=CHAR},
+      NodeIp = #{nodeip,jdbcType=VARCHAR},
+      TryCount = #{trycount,jdbcType=SMALLINT},
+      NextTryTime = #{nexttrytime,jdbcType=TIMESTAMP},
+      LastTryTime = #{lasttrytime,jdbcType=TIMESTAMP},
+      IsAbandoned = #{isabandoned,jdbcType=BIT},
+      CreationTime = #{creationtime,jdbcType=TIMESTAMP},
+      CreatorUserId = #{creatoruserid,jdbcType=BIGINT},
+      ExceptionMessage = #{exceptionmessage,jdbcType=VARCHAR}
+    where Id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

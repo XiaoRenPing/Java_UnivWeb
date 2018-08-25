@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rpym.univweb.dao.BiLeaveMapper" >
+  <resultMap id="BaseResultMap" type="com.rpym.univweb.entity.BiLeave" >
+    <id column="Id" property="id" jdbcType="BIGINT" />
+    <result column="Name" property="name" jdbcType="VARCHAR" />
+    <result column="Content" property="content" jdbcType="VARCHAR" />
+    <result column="Description" property="description" jdbcType="VARCHAR" />
+    <result column="ApplyUserId" property="applyuserid" jdbcType="BIGINT" />
+    <result column="ApplyUserName" property="applyusername" jdbcType="VARCHAR" />
+    <result column="ReceiveUserId" property="receiveuserid" jdbcType="BIGINT" />
+    <result column="ReceiveUserName" property="receiveusername" jdbcType="VARCHAR" />
+    <result column="CreationTime" property="creationtime" jdbcType="TIMESTAMP" />
+    <result column="Status" property="status" jdbcType="INTEGER" />
+    <result column="ApproveTime" property="approvetime" jdbcType="TIMESTAMP" />
+    <result column="TaskId" property="taskid" jdbcType="VARCHAR" />
+    <result column="ProcessInstanceId" property="processinstanceid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Id, Name, Content, Description, ApplyUserId, ApplyUserName, ReceiveUserId, ReceiveUserName, 
+    CreationTime, Status, ApproveTime, TaskId, ProcessInstanceId
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.rpym.univweb.entity.BiLeaveExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from bi_leave
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from bi_leave
+    where Id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from bi_leave
+    where Id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.rpym.univweb.entity.BiLeaveExample" >
+    delete from bi_leave
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.rpym.univweb.entity.BiLeave" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into bi_leave (Name, Content, Description, 
+      ApplyUserId, ApplyUserName, ReceiveUserId, 
+      ReceiveUserName, CreationTime, Status, 
+      ApproveTime, TaskId, ProcessInstanceId
+      )
+    values (#{name,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{applyuserid,jdbcType=BIGINT}, #{applyusername,jdbcType=VARCHAR}, #{receiveuserid,jdbcType=BIGINT}, 
+      #{receiveusername,jdbcType=VARCHAR}, #{creationtime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, 
+      #{approvetime,jdbcType=TIMESTAMP}, #{taskid,jdbcType=VARCHAR}, #{processinstanceid,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.rpym.univweb.entity.BiLeave" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into bi_leave
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="name != null" >
+        Name,
+      </if>
+      <if test="content != null" >
+        Content,
+      </if>
+      <if test="description != null" >
+        Description,
+      </if>
+      <if test="applyuserid != null" >
+        ApplyUserId,
+      </if>
+      <if test="applyusername != null" >
+        ApplyUserName,
+      </if>
+      <if test="receiveuserid != null" >
+        ReceiveUserId,
+      </if>
+      <if test="receiveusername != null" >
+        ReceiveUserName,
+      </if>
+      <if test="creationtime != null" >
+        CreationTime,
+      </if>
+      <if test="status != null" >
+        Status,
+      </if>
+      <if test="approvetime != null" >
+        ApproveTime,
+      </if>
+      <if test="taskid != null" >
+        TaskId,
+      </if>
+      <if test="processinstanceid != null" >
+        ProcessInstanceId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="applyuserid != null" >
+        #{applyuserid,jdbcType=BIGINT},
+      </if>
+      <if test="applyusername != null" >
+        #{applyusername,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveuserid != null" >
+        #{receiveuserid,jdbcType=BIGINT},
+      </if>
+      <if test="receiveusername != null" >
+        #{receiveusername,jdbcType=VARCHAR},
+      </if>
+      <if test="creationtime != null" >
+        #{creationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="approvetime != null" >
+        #{approvetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="taskid != null" >
+        #{taskid,jdbcType=VARCHAR},
+      </if>
+      <if test="processinstanceid != null" >
+        #{processinstanceid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.rpym.univweb.entity.BiLeaveExample" resultType="java.lang.Integer" >
+    select count(*) from bi_leave
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update bi_leave
+    <set >
+      <if test="record.id != null" >
+        Id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.name != null" >
+        Name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.content != null" >
+        Content = #{record.content,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null" >
+        Description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applyuserid != null" >
+        ApplyUserId = #{record.applyuserid,jdbcType=BIGINT},
+      </if>
+      <if test="record.applyusername != null" >
+        ApplyUserName = #{record.applyusername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.receiveuserid != null" >
+        ReceiveUserId = #{record.receiveuserid,jdbcType=BIGINT},
+      </if>
+      <if test="record.receiveusername != null" >
+        ReceiveUserName = #{record.receiveusername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creationtime != null" >
+        CreationTime = #{record.creationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.status != null" >
+        Status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.approvetime != null" >
+        ApproveTime = #{record.approvetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.taskid != null" >
+        TaskId = #{record.taskid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.processinstanceid != null" >
+        ProcessInstanceId = #{record.processinstanceid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update bi_leave
+    set Id = #{record.id,jdbcType=BIGINT},
+      Name = #{record.name,jdbcType=VARCHAR},
+      Content = #{record.content,jdbcType=VARCHAR},
+      Description = #{record.description,jdbcType=VARCHAR},
+      ApplyUserId = #{record.applyuserid,jdbcType=BIGINT},
+      ApplyUserName = #{record.applyusername,jdbcType=VARCHAR},
+      ReceiveUserId = #{record.receiveuserid,jdbcType=BIGINT},
+      ReceiveUserName = #{record.receiveusername,jdbcType=VARCHAR},
+      CreationTime = #{record.creationtime,jdbcType=TIMESTAMP},
+      Status = #{record.status,jdbcType=INTEGER},
+      ApproveTime = #{record.approvetime,jdbcType=TIMESTAMP},
+      TaskId = #{record.taskid,jdbcType=VARCHAR},
+      ProcessInstanceId = #{record.processinstanceid,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rpym.univweb.entity.BiLeave" >
+    update bi_leave
+    <set >
+      <if test="name != null" >
+        Name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        Content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        Description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="applyuserid != null" >
+        ApplyUserId = #{applyuserid,jdbcType=BIGINT},
+      </if>
+      <if test="applyusername != null" >
+        ApplyUserName = #{applyusername,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveuserid != null" >
+        ReceiveUserId = #{receiveuserid,jdbcType=BIGINT},
+      </if>
+      <if test="receiveusername != null" >
+        ReceiveUserName = #{receiveusername,jdbcType=VARCHAR},
+      </if>
+      <if test="creationtime != null" >
+        CreationTime = #{creationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        Status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="approvetime != null" >
+        ApproveTime = #{approvetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="taskid != null" >
+        TaskId = #{taskid,jdbcType=VARCHAR},
+      </if>
+      <if test="processinstanceid != null" >
+        ProcessInstanceId = #{processinstanceid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rpym.univweb.entity.BiLeave" >
+    update bi_leave
+    set Name = #{name,jdbcType=VARCHAR},
+      Content = #{content,jdbcType=VARCHAR},
+      Description = #{description,jdbcType=VARCHAR},
+      ApplyUserId = #{applyuserid,jdbcType=BIGINT},
+      ApplyUserName = #{applyusername,jdbcType=VARCHAR},
+      ReceiveUserId = #{receiveuserid,jdbcType=BIGINT},
+      ReceiveUserName = #{receiveusername,jdbcType=VARCHAR},
+      CreationTime = #{creationtime,jdbcType=TIMESTAMP},
+      Status = #{status,jdbcType=INTEGER},
+      ApproveTime = #{approvetime,jdbcType=TIMESTAMP},
+      TaskId = #{taskid,jdbcType=VARCHAR},
+      ProcessInstanceId = #{processinstanceid,jdbcType=VARCHAR}
+    where Id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

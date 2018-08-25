@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rpym.univweb.dao.SysPermissionsMapper" >
+  <resultMap id="BaseResultMap" type="com.rpym.univweb.entity.SysPermissions" >
+    <id column="Id" property="id" jdbcType="BIGINT" />
+    <result column="Name" property="name" jdbcType="VARCHAR" />
+    <result column="IsGranted" property="isgranted" jdbcType="BIT" />
+    <result column="CreationTime" property="creationtime" jdbcType="TIMESTAMP" />
+    <result column="CreatorUserId" property="creatoruserid" jdbcType="BIGINT" />
+    <result column="RoleId" property="roleid" jdbcType="BIGINT" />
+    <result column="UserId" property="userid" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Id, Name, IsGranted, CreationTime, CreatorUserId, RoleId, UserId
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.rpym.univweb.entity.SysPermissionsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from sys_permissions
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_permissions
+    where Id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from sys_permissions
+    where Id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.rpym.univweb.entity.SysPermissionsExample" >
+    delete from sys_permissions
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.rpym.univweb.entity.SysPermissions" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into sys_permissions (Name, IsGranted, CreationTime, 
+      CreatorUserId, RoleId, UserId
+      )
+    values (#{name,jdbcType=VARCHAR}, #{isgranted,jdbcType=BIT}, #{creationtime,jdbcType=TIMESTAMP}, 
+      #{creatoruserid,jdbcType=BIGINT}, #{roleid,jdbcType=BIGINT}, #{userid,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.rpym.univweb.entity.SysPermissions" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into sys_permissions
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="name != null" >
+        Name,
+      </if>
+      <if test="isgranted != null" >
+        IsGranted,
+      </if>
+      <if test="creationtime != null" >
+        CreationTime,
+      </if>
+      <if test="creatoruserid != null" >
+        CreatorUserId,
+      </if>
+      <if test="roleid != null" >
+        RoleId,
+      </if>
+      <if test="userid != null" >
+        UserId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="isgranted != null" >
+        #{isgranted,jdbcType=BIT},
+      </if>
+      <if test="creationtime != null" >
+        #{creationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatoruserid != null" >
+        #{creatoruserid,jdbcType=BIGINT},
+      </if>
+      <if test="roleid != null" >
+        #{roleid,jdbcType=BIGINT},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.rpym.univweb.entity.SysPermissionsExample" resultType="java.lang.Integer" >
+    select count(*) from sys_permissions
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sys_permissions
+    <set >
+      <if test="record.id != null" >
+        Id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.name != null" >
+        Name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isgranted != null" >
+        IsGranted = #{record.isgranted,jdbcType=BIT},
+      </if>
+      <if test="record.creationtime != null" >
+        CreationTime = #{record.creationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.creatoruserid != null" >
+        CreatorUserId = #{record.creatoruserid,jdbcType=BIGINT},
+      </if>
+      <if test="record.roleid != null" >
+        RoleId = #{record.roleid,jdbcType=BIGINT},
+      </if>
+      <if test="record.userid != null" >
+        UserId = #{record.userid,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sys_permissions
+    set Id = #{record.id,jdbcType=BIGINT},
+      Name = #{record.name,jdbcType=VARCHAR},
+      IsGranted = #{record.isgranted,jdbcType=BIT},
+      CreationTime = #{record.creationtime,jdbcType=TIMESTAMP},
+      CreatorUserId = #{record.creatoruserid,jdbcType=BIGINT},
+      RoleId = #{record.roleid,jdbcType=BIGINT},
+      UserId = #{record.userid,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rpym.univweb.entity.SysPermissions" >
+    update sys_permissions
+    <set >
+      <if test="name != null" >
+        Name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="isgranted != null" >
+        IsGranted = #{isgranted,jdbcType=BIT},
+      </if>
+      <if test="creationtime != null" >
+        CreationTime = #{creationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatoruserid != null" >
+        CreatorUserId = #{creatoruserid,jdbcType=BIGINT},
+      </if>
+      <if test="roleid != null" >
+        RoleId = #{roleid,jdbcType=BIGINT},
+      </if>
+      <if test="userid != null" >
+        UserId = #{userid,jdbcType=BIGINT},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rpym.univweb.entity.SysPermissions" >
+    update sys_permissions
+    set Name = #{name,jdbcType=VARCHAR},
+      IsGranted = #{isgranted,jdbcType=BIT},
+      CreationTime = #{creationtime,jdbcType=TIMESTAMP},
+      CreatorUserId = #{creatoruserid,jdbcType=BIGINT},
+      RoleId = #{roleid,jdbcType=BIGINT},
+      UserId = #{userid,jdbcType=BIGINT}
+    where Id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

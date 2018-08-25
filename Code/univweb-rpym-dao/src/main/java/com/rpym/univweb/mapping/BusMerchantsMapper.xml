@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rpym.univweb.dao.BusMerchantsMapper" >
+  <resultMap id="BaseResultMap" type="com.rpym.univweb.entity.BusMerchants" >
+    <id column="Id" property="id" jdbcType="BIGINT" />
+    <result column="UserName" property="username" jdbcType="VARCHAR" />
+    <result column="RealName" property="realname" jdbcType="VARCHAR" />
+    <result column="Password" property="password" jdbcType="VARCHAR" />
+    <result column="Email" property="email" jdbcType="VARCHAR" />
+    <result column="Phone" property="phone" jdbcType="VARCHAR" />
+    <result column="ActivationCode" property="activationcode" jdbcType="VARCHAR" />
+    <result column="Level" property="level" jdbcType="INTEGER" />
+    <result column="LevelId" property="levelid" jdbcType="BIGINT" />
+    <result column="LastLoginTime" property="lastlogintime" jdbcType="TIMESTAMP" />
+    <result column="CreationTime" property="creationtime" jdbcType="TIMESTAMP" />
+    <result column="IsLocked" property="islocked" jdbcType="TINYINT" />
+    <result column="IsDeleted" property="isdeleted" jdbcType="TINYINT" />
+    <result column="IdCard" property="idcard" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Id, UserName, RealName, Password, Email, Phone, ActivationCode, Level, LevelId, LastLoginTime, 
+    CreationTime, IsLocked, IsDeleted, IdCard
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.rpym.univweb.entity.BusMerchantsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from bus_merchants
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from bus_merchants
+    where Id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from bus_merchants
+    where Id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.rpym.univweb.entity.BusMerchantsExample" >
+    delete from bus_merchants
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.rpym.univweb.entity.BusMerchants" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into bus_merchants (UserName, RealName, Password, 
+      Email, Phone, ActivationCode, 
+      Level, LevelId, LastLoginTime, 
+      CreationTime, IsLocked, IsDeleted, 
+      IdCard)
+    values (#{username,jdbcType=VARCHAR}, #{realname,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{activationcode,jdbcType=VARCHAR}, 
+      #{level,jdbcType=INTEGER}, #{levelid,jdbcType=BIGINT}, #{lastlogintime,jdbcType=TIMESTAMP}, 
+      #{creationtime,jdbcType=TIMESTAMP}, #{islocked,jdbcType=TINYINT}, #{isdeleted,jdbcType=TINYINT}, 
+      #{idcard,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.rpym.univweb.entity.BusMerchants" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into bus_merchants
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="username != null" >
+        UserName,
+      </if>
+      <if test="realname != null" >
+        RealName,
+      </if>
+      <if test="password != null" >
+        Password,
+      </if>
+      <if test="email != null" >
+        Email,
+      </if>
+      <if test="phone != null" >
+        Phone,
+      </if>
+      <if test="activationcode != null" >
+        ActivationCode,
+      </if>
+      <if test="level != null" >
+        Level,
+      </if>
+      <if test="levelid != null" >
+        LevelId,
+      </if>
+      <if test="lastlogintime != null" >
+        LastLoginTime,
+      </if>
+      <if test="creationtime != null" >
+        CreationTime,
+      </if>
+      <if test="islocked != null" >
+        IsLocked,
+      </if>
+      <if test="isdeleted != null" >
+        IsDeleted,
+      </if>
+      <if test="idcard != null" >
+        IdCard,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="realname != null" >
+        #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="activationcode != null" >
+        #{activationcode,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=INTEGER},
+      </if>
+      <if test="levelid != null" >
+        #{levelid,jdbcType=BIGINT},
+      </if>
+      <if test="lastlogintime != null" >
+        #{lastlogintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creationtime != null" >
+        #{creationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="islocked != null" >
+        #{islocked,jdbcType=TINYINT},
+      </if>
+      <if test="isdeleted != null" >
+        #{isdeleted,jdbcType=TINYINT},
+      </if>
+      <if test="idcard != null" >
+        #{idcard,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.rpym.univweb.entity.BusMerchantsExample" resultType="java.lang.Integer" >
+    select count(*) from bus_merchants
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update bus_merchants
+    <set >
+      <if test="record.id != null" >
+        Id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.username != null" >
+        UserName = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.realname != null" >
+        RealName = #{record.realname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null" >
+        Password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null" >
+        Email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null" >
+        Phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.activationcode != null" >
+        ActivationCode = #{record.activationcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.level != null" >
+        Level = #{record.level,jdbcType=INTEGER},
+      </if>
+      <if test="record.levelid != null" >
+        LevelId = #{record.levelid,jdbcType=BIGINT},
+      </if>
+      <if test="record.lastlogintime != null" >
+        LastLoginTime = #{record.lastlogintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.creationtime != null" >
+        CreationTime = #{record.creationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.islocked != null" >
+        IsLocked = #{record.islocked,jdbcType=TINYINT},
+      </if>
+      <if test="record.isdeleted != null" >
+        IsDeleted = #{record.isdeleted,jdbcType=TINYINT},
+      </if>
+      <if test="record.idcard != null" >
+        IdCard = #{record.idcard,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update bus_merchants
+    set Id = #{record.id,jdbcType=BIGINT},
+      UserName = #{record.username,jdbcType=VARCHAR},
+      RealName = #{record.realname,jdbcType=VARCHAR},
+      Password = #{record.password,jdbcType=VARCHAR},
+      Email = #{record.email,jdbcType=VARCHAR},
+      Phone = #{record.phone,jdbcType=VARCHAR},
+      ActivationCode = #{record.activationcode,jdbcType=VARCHAR},
+      Level = #{record.level,jdbcType=INTEGER},
+      LevelId = #{record.levelid,jdbcType=BIGINT},
+      LastLoginTime = #{record.lastlogintime,jdbcType=TIMESTAMP},
+      CreationTime = #{record.creationtime,jdbcType=TIMESTAMP},
+      IsLocked = #{record.islocked,jdbcType=TINYINT},
+      IsDeleted = #{record.isdeleted,jdbcType=TINYINT},
+      IdCard = #{record.idcard,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rpym.univweb.entity.BusMerchants" >
+    update bus_merchants
+    <set >
+      <if test="username != null" >
+        UserName = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="realname != null" >
+        RealName = #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        Password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        Email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        Phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="activationcode != null" >
+        ActivationCode = #{activationcode,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        Level = #{level,jdbcType=INTEGER},
+      </if>
+      <if test="levelid != null" >
+        LevelId = #{levelid,jdbcType=BIGINT},
+      </if>
+      <if test="lastlogintime != null" >
+        LastLoginTime = #{lastlogintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creationtime != null" >
+        CreationTime = #{creationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="islocked != null" >
+        IsLocked = #{islocked,jdbcType=TINYINT},
+      </if>
+      <if test="isdeleted != null" >
+        IsDeleted = #{isdeleted,jdbcType=TINYINT},
+      </if>
+      <if test="idcard != null" >
+        IdCard = #{idcard,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rpym.univweb.entity.BusMerchants" >
+    update bus_merchants
+    set UserName = #{username,jdbcType=VARCHAR},
+      RealName = #{realname,jdbcType=VARCHAR},
+      Password = #{password,jdbcType=VARCHAR},
+      Email = #{email,jdbcType=VARCHAR},
+      Phone = #{phone,jdbcType=VARCHAR},
+      ActivationCode = #{activationcode,jdbcType=VARCHAR},
+      Level = #{level,jdbcType=INTEGER},
+      LevelId = #{levelid,jdbcType=BIGINT},
+      LastLoginTime = #{lastlogintime,jdbcType=TIMESTAMP},
+      CreationTime = #{creationtime,jdbcType=TIMESTAMP},
+      IsLocked = #{islocked,jdbcType=TINYINT},
+      IsDeleted = #{isdeleted,jdbcType=TINYINT},
+      IdCard = #{idcard,jdbcType=VARCHAR}
+    where Id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

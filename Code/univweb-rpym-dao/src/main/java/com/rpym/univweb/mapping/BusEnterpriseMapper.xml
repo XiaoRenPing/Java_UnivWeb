@@ -1,0 +1,562 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rpym.univweb.dao.BusEnterpriseMapper" >
+  <resultMap id="BaseResultMap" type="com.rpym.univweb.entity.BusEnterprise" >
+    <id column="Id" property="id" jdbcType="BIGINT" />
+    <result column="Name" property="name" jdbcType="VARCHAR" />
+    <result column="BusinessLicense" property="businesslicense" jdbcType="VARCHAR" />
+    <result column="OrganizationCode" property="organizationcode" jdbcType="VARCHAR" />
+    <result column="BankOpenAccountProvince" property="bankopenaccountprovince" jdbcType="VARCHAR" />
+    <result column="BankOpenAccountCity" property="bankopenaccountcity" jdbcType="VARCHAR" />
+    <result column="Regtime" property="regtime" jdbcType="VARCHAR" />
+    <result column="RegisteredCapital" property="registeredcapital" jdbcType="DECIMAL" />
+    <result column="LNSIZE" property="lnsize" jdbcType="VARCHAR" />
+    <result column="BusinessScope" property="businessscope" jdbcType="VARCHAR" />
+    <result column="BankName" property="bankname" jdbcType="VARCHAR" />
+    <result column="BankUserName" property="bankusername" jdbcType="VARCHAR" />
+    <result column="BankAccount" property="bankaccount" jdbcType="VARCHAR" />
+    <result column="CompanyProvince" property="companyprovince" jdbcType="VARCHAR" />
+    <result column="CompanyCity" property="companycity" jdbcType="VARCHAR" />
+    <result column="CompanyAddress" property="companyaddress" jdbcType="VARCHAR" />
+    <result column="CompanyPostcode" property="companypostcode" jdbcType="VARCHAR" />
+    <result column="JuridicalPersonName" property="juridicalpersonname" jdbcType="VARCHAR" />
+    <result column="JuridicalPersonIDCode" property="juridicalpersonidcode" jdbcType="VARCHAR" />
+    <result column="Status" property="status" jdbcType="INTEGER" />
+    <result column="CreatorUserId" property="creatoruserid" jdbcType="BIGINT" />
+    <result column="CreationTime" property="creationtime" jdbcType="TIMESTAMP" />
+    <result column="LastModifierUserId" property="lastmodifieruserid" jdbcType="BIGINT" />
+    <result column="LastModificationTime" property="lastmodificationtime" jdbcType="TIMESTAMP" />
+    <result column="DeleterUserId" property="deleteruserid" jdbcType="BIGINT" />
+    <result column="DeletionTime" property="deletiontime" jdbcType="TIMESTAMP" />
+    <result column="IsDeleted" property="isdeleted" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Id, Name, BusinessLicense, OrganizationCode, BankOpenAccountProvince, BankOpenAccountCity, 
+    Regtime, RegisteredCapital, LNSIZE, BusinessScope, BankName, BankUserName, BankAccount, 
+    CompanyProvince, CompanyCity, CompanyAddress, CompanyPostcode, JuridicalPersonName, 
+    JuridicalPersonIDCode, Status, CreatorUserId, CreationTime, LastModifierUserId, LastModificationTime, 
+    DeleterUserId, DeletionTime, IsDeleted
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.rpym.univweb.entity.BusEnterpriseExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from bus_enterprise
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from bus_enterprise
+    where Id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from bus_enterprise
+    where Id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.rpym.univweb.entity.BusEnterpriseExample" >
+    delete from bus_enterprise
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.rpym.univweb.entity.BusEnterprise" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into bus_enterprise (Name, BusinessLicense, OrganizationCode, 
+      BankOpenAccountProvince, BankOpenAccountCity, 
+      Regtime, RegisteredCapital, LNSIZE, 
+      BusinessScope, BankName, BankUserName, 
+      BankAccount, CompanyProvince, CompanyCity, 
+      CompanyAddress, CompanyPostcode, JuridicalPersonName, 
+      JuridicalPersonIDCode, Status, CreatorUserId, 
+      CreationTime, LastModifierUserId, LastModificationTime, 
+      DeleterUserId, DeletionTime, IsDeleted
+      )
+    values (#{name,jdbcType=VARCHAR}, #{businesslicense,jdbcType=VARCHAR}, #{organizationcode,jdbcType=VARCHAR}, 
+      #{bankopenaccountprovince,jdbcType=VARCHAR}, #{bankopenaccountcity,jdbcType=VARCHAR}, 
+      #{regtime,jdbcType=VARCHAR}, #{registeredcapital,jdbcType=DECIMAL}, #{lnsize,jdbcType=VARCHAR}, 
+      #{businessscope,jdbcType=VARCHAR}, #{bankname,jdbcType=VARCHAR}, #{bankusername,jdbcType=VARCHAR}, 
+      #{bankaccount,jdbcType=VARCHAR}, #{companyprovince,jdbcType=VARCHAR}, #{companycity,jdbcType=VARCHAR}, 
+      #{companyaddress,jdbcType=VARCHAR}, #{companypostcode,jdbcType=VARCHAR}, #{juridicalpersonname,jdbcType=VARCHAR}, 
+      #{juridicalpersonidcode,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{creatoruserid,jdbcType=BIGINT}, 
+      #{creationtime,jdbcType=TIMESTAMP}, #{lastmodifieruserid,jdbcType=BIGINT}, #{lastmodificationtime,jdbcType=TIMESTAMP}, 
+      #{deleteruserid,jdbcType=BIGINT}, #{deletiontime,jdbcType=TIMESTAMP}, #{isdeleted,jdbcType=BIT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.rpym.univweb.entity.BusEnterprise" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into bus_enterprise
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="name != null" >
+        Name,
+      </if>
+      <if test="businesslicense != null" >
+        BusinessLicense,
+      </if>
+      <if test="organizationcode != null" >
+        OrganizationCode,
+      </if>
+      <if test="bankopenaccountprovince != null" >
+        BankOpenAccountProvince,
+      </if>
+      <if test="bankopenaccountcity != null" >
+        BankOpenAccountCity,
+      </if>
+      <if test="regtime != null" >
+        Regtime,
+      </if>
+      <if test="registeredcapital != null" >
+        RegisteredCapital,
+      </if>
+      <if test="lnsize != null" >
+        LNSIZE,
+      </if>
+      <if test="businessscope != null" >
+        BusinessScope,
+      </if>
+      <if test="bankname != null" >
+        BankName,
+      </if>
+      <if test="bankusername != null" >
+        BankUserName,
+      </if>
+      <if test="bankaccount != null" >
+        BankAccount,
+      </if>
+      <if test="companyprovince != null" >
+        CompanyProvince,
+      </if>
+      <if test="companycity != null" >
+        CompanyCity,
+      </if>
+      <if test="companyaddress != null" >
+        CompanyAddress,
+      </if>
+      <if test="companypostcode != null" >
+        CompanyPostcode,
+      </if>
+      <if test="juridicalpersonname != null" >
+        JuridicalPersonName,
+      </if>
+      <if test="juridicalpersonidcode != null" >
+        JuridicalPersonIDCode,
+      </if>
+      <if test="status != null" >
+        Status,
+      </if>
+      <if test="creatoruserid != null" >
+        CreatorUserId,
+      </if>
+      <if test="creationtime != null" >
+        CreationTime,
+      </if>
+      <if test="lastmodifieruserid != null" >
+        LastModifierUserId,
+      </if>
+      <if test="lastmodificationtime != null" >
+        LastModificationTime,
+      </if>
+      <if test="deleteruserid != null" >
+        DeleterUserId,
+      </if>
+      <if test="deletiontime != null" >
+        DeletionTime,
+      </if>
+      <if test="isdeleted != null" >
+        IsDeleted,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="businesslicense != null" >
+        #{businesslicense,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationcode != null" >
+        #{organizationcode,jdbcType=VARCHAR},
+      </if>
+      <if test="bankopenaccountprovince != null" >
+        #{bankopenaccountprovince,jdbcType=VARCHAR},
+      </if>
+      <if test="bankopenaccountcity != null" >
+        #{bankopenaccountcity,jdbcType=VARCHAR},
+      </if>
+      <if test="regtime != null" >
+        #{regtime,jdbcType=VARCHAR},
+      </if>
+      <if test="registeredcapital != null" >
+        #{registeredcapital,jdbcType=DECIMAL},
+      </if>
+      <if test="lnsize != null" >
+        #{lnsize,jdbcType=VARCHAR},
+      </if>
+      <if test="businessscope != null" >
+        #{businessscope,jdbcType=VARCHAR},
+      </if>
+      <if test="bankname != null" >
+        #{bankname,jdbcType=VARCHAR},
+      </if>
+      <if test="bankusername != null" >
+        #{bankusername,jdbcType=VARCHAR},
+      </if>
+      <if test="bankaccount != null" >
+        #{bankaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="companyprovince != null" >
+        #{companyprovince,jdbcType=VARCHAR},
+      </if>
+      <if test="companycity != null" >
+        #{companycity,jdbcType=VARCHAR},
+      </if>
+      <if test="companyaddress != null" >
+        #{companyaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="companypostcode != null" >
+        #{companypostcode,jdbcType=VARCHAR},
+      </if>
+      <if test="juridicalpersonname != null" >
+        #{juridicalpersonname,jdbcType=VARCHAR},
+      </if>
+      <if test="juridicalpersonidcode != null" >
+        #{juridicalpersonidcode,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="creatoruserid != null" >
+        #{creatoruserid,jdbcType=BIGINT},
+      </if>
+      <if test="creationtime != null" >
+        #{creationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastmodifieruserid != null" >
+        #{lastmodifieruserid,jdbcType=BIGINT},
+      </if>
+      <if test="lastmodificationtime != null" >
+        #{lastmodificationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteruserid != null" >
+        #{deleteruserid,jdbcType=BIGINT},
+      </if>
+      <if test="deletiontime != null" >
+        #{deletiontime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isdeleted != null" >
+        #{isdeleted,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.rpym.univweb.entity.BusEnterpriseExample" resultType="java.lang.Integer" >
+    select count(*) from bus_enterprise
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update bus_enterprise
+    <set >
+      <if test="record.id != null" >
+        Id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.name != null" >
+        Name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.businesslicense != null" >
+        BusinessLicense = #{record.businesslicense,jdbcType=VARCHAR},
+      </if>
+      <if test="record.organizationcode != null" >
+        OrganizationCode = #{record.organizationcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankopenaccountprovince != null" >
+        BankOpenAccountProvince = #{record.bankopenaccountprovince,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankopenaccountcity != null" >
+        BankOpenAccountCity = #{record.bankopenaccountcity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.regtime != null" >
+        Regtime = #{record.regtime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.registeredcapital != null" >
+        RegisteredCapital = #{record.registeredcapital,jdbcType=DECIMAL},
+      </if>
+      <if test="record.lnsize != null" >
+        LNSIZE = #{record.lnsize,jdbcType=VARCHAR},
+      </if>
+      <if test="record.businessscope != null" >
+        BusinessScope = #{record.businessscope,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankname != null" >
+        BankName = #{record.bankname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankusername != null" >
+        BankUserName = #{record.bankusername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankaccount != null" >
+        BankAccount = #{record.bankaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyprovince != null" >
+        CompanyProvince = #{record.companyprovince,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companycity != null" >
+        CompanyCity = #{record.companycity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyaddress != null" >
+        CompanyAddress = #{record.companyaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companypostcode != null" >
+        CompanyPostcode = #{record.companypostcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.juridicalpersonname != null" >
+        JuridicalPersonName = #{record.juridicalpersonname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.juridicalpersonidcode != null" >
+        JuridicalPersonIDCode = #{record.juridicalpersonidcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        Status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.creatoruserid != null" >
+        CreatorUserId = #{record.creatoruserid,jdbcType=BIGINT},
+      </if>
+      <if test="record.creationtime != null" >
+        CreationTime = #{record.creationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastmodifieruserid != null" >
+        LastModifierUserId = #{record.lastmodifieruserid,jdbcType=BIGINT},
+      </if>
+      <if test="record.lastmodificationtime != null" >
+        LastModificationTime = #{record.lastmodificationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.deleteruserid != null" >
+        DeleterUserId = #{record.deleteruserid,jdbcType=BIGINT},
+      </if>
+      <if test="record.deletiontime != null" >
+        DeletionTime = #{record.deletiontime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isdeleted != null" >
+        IsDeleted = #{record.isdeleted,jdbcType=BIT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update bus_enterprise
+    set Id = #{record.id,jdbcType=BIGINT},
+      Name = #{record.name,jdbcType=VARCHAR},
+      BusinessLicense = #{record.businesslicense,jdbcType=VARCHAR},
+      OrganizationCode = #{record.organizationcode,jdbcType=VARCHAR},
+      BankOpenAccountProvince = #{record.bankopenaccountprovince,jdbcType=VARCHAR},
+      BankOpenAccountCity = #{record.bankopenaccountcity,jdbcType=VARCHAR},
+      Regtime = #{record.regtime,jdbcType=VARCHAR},
+      RegisteredCapital = #{record.registeredcapital,jdbcType=DECIMAL},
+      LNSIZE = #{record.lnsize,jdbcType=VARCHAR},
+      BusinessScope = #{record.businessscope,jdbcType=VARCHAR},
+      BankName = #{record.bankname,jdbcType=VARCHAR},
+      BankUserName = #{record.bankusername,jdbcType=VARCHAR},
+      BankAccount = #{record.bankaccount,jdbcType=VARCHAR},
+      CompanyProvince = #{record.companyprovince,jdbcType=VARCHAR},
+      CompanyCity = #{record.companycity,jdbcType=VARCHAR},
+      CompanyAddress = #{record.companyaddress,jdbcType=VARCHAR},
+      CompanyPostcode = #{record.companypostcode,jdbcType=VARCHAR},
+      JuridicalPersonName = #{record.juridicalpersonname,jdbcType=VARCHAR},
+      JuridicalPersonIDCode = #{record.juridicalpersonidcode,jdbcType=VARCHAR},
+      Status = #{record.status,jdbcType=INTEGER},
+      CreatorUserId = #{record.creatoruserid,jdbcType=BIGINT},
+      CreationTime = #{record.creationtime,jdbcType=TIMESTAMP},
+      LastModifierUserId = #{record.lastmodifieruserid,jdbcType=BIGINT},
+      LastModificationTime = #{record.lastmodificationtime,jdbcType=TIMESTAMP},
+      DeleterUserId = #{record.deleteruserid,jdbcType=BIGINT},
+      DeletionTime = #{record.deletiontime,jdbcType=TIMESTAMP},
+      IsDeleted = #{record.isdeleted,jdbcType=BIT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rpym.univweb.entity.BusEnterprise" >
+    update bus_enterprise
+    <set >
+      <if test="name != null" >
+        Name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="businesslicense != null" >
+        BusinessLicense = #{businesslicense,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationcode != null" >
+        OrganizationCode = #{organizationcode,jdbcType=VARCHAR},
+      </if>
+      <if test="bankopenaccountprovince != null" >
+        BankOpenAccountProvince = #{bankopenaccountprovince,jdbcType=VARCHAR},
+      </if>
+      <if test="bankopenaccountcity != null" >
+        BankOpenAccountCity = #{bankopenaccountcity,jdbcType=VARCHAR},
+      </if>
+      <if test="regtime != null" >
+        Regtime = #{regtime,jdbcType=VARCHAR},
+      </if>
+      <if test="registeredcapital != null" >
+        RegisteredCapital = #{registeredcapital,jdbcType=DECIMAL},
+      </if>
+      <if test="lnsize != null" >
+        LNSIZE = #{lnsize,jdbcType=VARCHAR},
+      </if>
+      <if test="businessscope != null" >
+        BusinessScope = #{businessscope,jdbcType=VARCHAR},
+      </if>
+      <if test="bankname != null" >
+        BankName = #{bankname,jdbcType=VARCHAR},
+      </if>
+      <if test="bankusername != null" >
+        BankUserName = #{bankusername,jdbcType=VARCHAR},
+      </if>
+      <if test="bankaccount != null" >
+        BankAccount = #{bankaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="companyprovince != null" >
+        CompanyProvince = #{companyprovince,jdbcType=VARCHAR},
+      </if>
+      <if test="companycity != null" >
+        CompanyCity = #{companycity,jdbcType=VARCHAR},
+      </if>
+      <if test="companyaddress != null" >
+        CompanyAddress = #{companyaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="companypostcode != null" >
+        CompanyPostcode = #{companypostcode,jdbcType=VARCHAR},
+      </if>
+      <if test="juridicalpersonname != null" >
+        JuridicalPersonName = #{juridicalpersonname,jdbcType=VARCHAR},
+      </if>
+      <if test="juridicalpersonidcode != null" >
+        JuridicalPersonIDCode = #{juridicalpersonidcode,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        Status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="creatoruserid != null" >
+        CreatorUserId = #{creatoruserid,jdbcType=BIGINT},
+      </if>
+      <if test="creationtime != null" >
+        CreationTime = #{creationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastmodifieruserid != null" >
+        LastModifierUserId = #{lastmodifieruserid,jdbcType=BIGINT},
+      </if>
+      <if test="lastmodificationtime != null" >
+        LastModificationTime = #{lastmodificationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteruserid != null" >
+        DeleterUserId = #{deleteruserid,jdbcType=BIGINT},
+      </if>
+      <if test="deletiontime != null" >
+        DeletionTime = #{deletiontime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isdeleted != null" >
+        IsDeleted = #{isdeleted,jdbcType=BIT},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rpym.univweb.entity.BusEnterprise" >
+    update bus_enterprise
+    set Name = #{name,jdbcType=VARCHAR},
+      BusinessLicense = #{businesslicense,jdbcType=VARCHAR},
+      OrganizationCode = #{organizationcode,jdbcType=VARCHAR},
+      BankOpenAccountProvince = #{bankopenaccountprovince,jdbcType=VARCHAR},
+      BankOpenAccountCity = #{bankopenaccountcity,jdbcType=VARCHAR},
+      Regtime = #{regtime,jdbcType=VARCHAR},
+      RegisteredCapital = #{registeredcapital,jdbcType=DECIMAL},
+      LNSIZE = #{lnsize,jdbcType=VARCHAR},
+      BusinessScope = #{businessscope,jdbcType=VARCHAR},
+      BankName = #{bankname,jdbcType=VARCHAR},
+      BankUserName = #{bankusername,jdbcType=VARCHAR},
+      BankAccount = #{bankaccount,jdbcType=VARCHAR},
+      CompanyProvince = #{companyprovince,jdbcType=VARCHAR},
+      CompanyCity = #{companycity,jdbcType=VARCHAR},
+      CompanyAddress = #{companyaddress,jdbcType=VARCHAR},
+      CompanyPostcode = #{companypostcode,jdbcType=VARCHAR},
+      JuridicalPersonName = #{juridicalpersonname,jdbcType=VARCHAR},
+      JuridicalPersonIDCode = #{juridicalpersonidcode,jdbcType=VARCHAR},
+      Status = #{status,jdbcType=INTEGER},
+      CreatorUserId = #{creatoruserid,jdbcType=BIGINT},
+      CreationTime = #{creationtime,jdbcType=TIMESTAMP},
+      LastModifierUserId = #{lastmodifieruserid,jdbcType=BIGINT},
+      LastModificationTime = #{lastmodificationtime,jdbcType=TIMESTAMP},
+      DeleterUserId = #{deleteruserid,jdbcType=BIGINT},
+      DeletionTime = #{deletiontime,jdbcType=TIMESTAMP},
+      IsDeleted = #{isdeleted,jdbcType=BIT}
+    where Id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

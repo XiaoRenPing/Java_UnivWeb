@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rpym.univweb.dao.SysRolesMapper" >
+  <resultMap id="BaseResultMap" type="com.rpym.univweb.entity.SysRoles" >
+    <id column="Id" property="id" jdbcType="INTEGER" />
+    <result column="TenantId" property="tenantid" jdbcType="INTEGER" />
+    <result column="Name" property="name" jdbcType="VARCHAR" />
+    <result column="DisplayName" property="displayname" jdbcType="VARCHAR" />
+    <result column="LastModificationTime" property="lastmodificationtime" jdbcType="TIMESTAMP" />
+    <result column="LastModifierUserId" property="lastmodifieruserid" jdbcType="BIGINT" />
+    <result column="CreationTime" property="creationtime" jdbcType="TIMESTAMP" />
+    <result column="CreatorUserId" property="creatoruserid" jdbcType="BIGINT" />
+    <result column="IsStatic" property="isstatic" jdbcType="BIT" />
+    <result column="IsDefault" property="isdefault" jdbcType="BIT" />
+    <result column="IsDeleted" property="isdeleted" jdbcType="BIT" />
+    <result column="DeleterUserId" property="deleteruserid" jdbcType="BIGINT" />
+    <result column="DeletionTime" property="deletiontime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Id, TenantId, Name, DisplayName, LastModificationTime, LastModifierUserId, CreationTime, 
+    CreatorUserId, IsStatic, IsDefault, IsDeleted, DeleterUserId, DeletionTime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.rpym.univweb.entity.SysRolesExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from sys_roles
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_roles
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sys_roles
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.rpym.univweb.entity.SysRolesExample" >
+    delete from sys_roles
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.rpym.univweb.entity.SysRoles" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into sys_roles (TenantId, Name, DisplayName, 
+      LastModificationTime, LastModifierUserId, 
+      CreationTime, CreatorUserId, IsStatic, 
+      IsDefault, IsDeleted, DeleterUserId, 
+      DeletionTime)
+    values (#{tenantid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{displayname,jdbcType=VARCHAR}, 
+      #{lastmodificationtime,jdbcType=TIMESTAMP}, #{lastmodifieruserid,jdbcType=BIGINT}, 
+      #{creationtime,jdbcType=TIMESTAMP}, #{creatoruserid,jdbcType=BIGINT}, #{isstatic,jdbcType=BIT}, 
+      #{isdefault,jdbcType=BIT}, #{isdeleted,jdbcType=BIT}, #{deleteruserid,jdbcType=BIGINT}, 
+      #{deletiontime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.rpym.univweb.entity.SysRoles" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into sys_roles
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tenantid != null" >
+        TenantId,
+      </if>
+      <if test="name != null" >
+        Name,
+      </if>
+      <if test="displayname != null" >
+        DisplayName,
+      </if>
+      <if test="lastmodificationtime != null" >
+        LastModificationTime,
+      </if>
+      <if test="lastmodifieruserid != null" >
+        LastModifierUserId,
+      </if>
+      <if test="creationtime != null" >
+        CreationTime,
+      </if>
+      <if test="creatoruserid != null" >
+        CreatorUserId,
+      </if>
+      <if test="isstatic != null" >
+        IsStatic,
+      </if>
+      <if test="isdefault != null" >
+        IsDefault,
+      </if>
+      <if test="isdeleted != null" >
+        IsDeleted,
+      </if>
+      <if test="deleteruserid != null" >
+        DeleterUserId,
+      </if>
+      <if test="deletiontime != null" >
+        DeletionTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tenantid != null" >
+        #{tenantid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="displayname != null" >
+        #{displayname,jdbcType=VARCHAR},
+      </if>
+      <if test="lastmodificationtime != null" >
+        #{lastmodificationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastmodifieruserid != null" >
+        #{lastmodifieruserid,jdbcType=BIGINT},
+      </if>
+      <if test="creationtime != null" >
+        #{creationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatoruserid != null" >
+        #{creatoruserid,jdbcType=BIGINT},
+      </if>
+      <if test="isstatic != null" >
+        #{isstatic,jdbcType=BIT},
+      </if>
+      <if test="isdefault != null" >
+        #{isdefault,jdbcType=BIT},
+      </if>
+      <if test="isdeleted != null" >
+        #{isdeleted,jdbcType=BIT},
+      </if>
+      <if test="deleteruserid != null" >
+        #{deleteruserid,jdbcType=BIGINT},
+      </if>
+      <if test="deletiontime != null" >
+        #{deletiontime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.rpym.univweb.entity.SysRolesExample" resultType="java.lang.Integer" >
+    select count(*) from sys_roles
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sys_roles
+    <set >
+      <if test="record.id != null" >
+        Id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.tenantid != null" >
+        TenantId = #{record.tenantid,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null" >
+        Name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.displayname != null" >
+        DisplayName = #{record.displayname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastmodificationtime != null" >
+        LastModificationTime = #{record.lastmodificationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastmodifieruserid != null" >
+        LastModifierUserId = #{record.lastmodifieruserid,jdbcType=BIGINT},
+      </if>
+      <if test="record.creationtime != null" >
+        CreationTime = #{record.creationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.creatoruserid != null" >
+        CreatorUserId = #{record.creatoruserid,jdbcType=BIGINT},
+      </if>
+      <if test="record.isstatic != null" >
+        IsStatic = #{record.isstatic,jdbcType=BIT},
+      </if>
+      <if test="record.isdefault != null" >
+        IsDefault = #{record.isdefault,jdbcType=BIT},
+      </if>
+      <if test="record.isdeleted != null" >
+        IsDeleted = #{record.isdeleted,jdbcType=BIT},
+      </if>
+      <if test="record.deleteruserid != null" >
+        DeleterUserId = #{record.deleteruserid,jdbcType=BIGINT},
+      </if>
+      <if test="record.deletiontime != null" >
+        DeletionTime = #{record.deletiontime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sys_roles
+    set Id = #{record.id,jdbcType=INTEGER},
+      TenantId = #{record.tenantid,jdbcType=INTEGER},
+      Name = #{record.name,jdbcType=VARCHAR},
+      DisplayName = #{record.displayname,jdbcType=VARCHAR},
+      LastModificationTime = #{record.lastmodificationtime,jdbcType=TIMESTAMP},
+      LastModifierUserId = #{record.lastmodifieruserid,jdbcType=BIGINT},
+      CreationTime = #{record.creationtime,jdbcType=TIMESTAMP},
+      CreatorUserId = #{record.creatoruserid,jdbcType=BIGINT},
+      IsStatic = #{record.isstatic,jdbcType=BIT},
+      IsDefault = #{record.isdefault,jdbcType=BIT},
+      IsDeleted = #{record.isdeleted,jdbcType=BIT},
+      DeleterUserId = #{record.deleteruserid,jdbcType=BIGINT},
+      DeletionTime = #{record.deletiontime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rpym.univweb.entity.SysRoles" >
+    update sys_roles
+    <set >
+      <if test="tenantid != null" >
+        TenantId = #{tenantid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        Name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="displayname != null" >
+        DisplayName = #{displayname,jdbcType=VARCHAR},
+      </if>
+      <if test="lastmodificationtime != null" >
+        LastModificationTime = #{lastmodificationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastmodifieruserid != null" >
+        LastModifierUserId = #{lastmodifieruserid,jdbcType=BIGINT},
+      </if>
+      <if test="creationtime != null" >
+        CreationTime = #{creationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatoruserid != null" >
+        CreatorUserId = #{creatoruserid,jdbcType=BIGINT},
+      </if>
+      <if test="isstatic != null" >
+        IsStatic = #{isstatic,jdbcType=BIT},
+      </if>
+      <if test="isdefault != null" >
+        IsDefault = #{isdefault,jdbcType=BIT},
+      </if>
+      <if test="isdeleted != null" >
+        IsDeleted = #{isdeleted,jdbcType=BIT},
+      </if>
+      <if test="deleteruserid != null" >
+        DeleterUserId = #{deleteruserid,jdbcType=BIGINT},
+      </if>
+      <if test="deletiontime != null" >
+        DeletionTime = #{deletiontime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rpym.univweb.entity.SysRoles" >
+    update sys_roles
+    set TenantId = #{tenantid,jdbcType=INTEGER},
+      Name = #{name,jdbcType=VARCHAR},
+      DisplayName = #{displayname,jdbcType=VARCHAR},
+      LastModificationTime = #{lastmodificationtime,jdbcType=TIMESTAMP},
+      LastModifierUserId = #{lastmodifieruserid,jdbcType=BIGINT},
+      CreationTime = #{creationtime,jdbcType=TIMESTAMP},
+      CreatorUserId = #{creatoruserid,jdbcType=BIGINT},
+      IsStatic = #{isstatic,jdbcType=BIT},
+      IsDefault = #{isdefault,jdbcType=BIT},
+      IsDeleted = #{isdeleted,jdbcType=BIT},
+      DeleterUserId = #{deleteruserid,jdbcType=BIGINT},
+      DeletionTime = #{deletiontime,jdbcType=TIMESTAMP}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

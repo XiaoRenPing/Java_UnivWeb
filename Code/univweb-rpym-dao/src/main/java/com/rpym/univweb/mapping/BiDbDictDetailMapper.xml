@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rpym.univweb.dao.BiDbDictDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.rpym.univweb.entity.BiDbDictDetail" >
+    <id column="Id" property="id" jdbcType="INTEGER" />
+    <result column="PId" property="pid" jdbcType="BIGINT" />
+    <result column="Code" property="code" jdbcType="VARCHAR" />
+    <result column="Name" property="name" jdbcType="VARCHAR" />
+    <result column="English" property="english" jdbcType="VARCHAR" />
+    <result column="Remark" property="remark" jdbcType="VARCHAR" />
+    <result column="IsSystem" property="issystem" jdbcType="BIT" />
+    <result column="SelfPid" property="selfpid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Id, PId, Code, Name, English, Remark, IsSystem, SelfPid
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.rpym.univweb.entity.BiDbDictDetailExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from bi_db_dict_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from bi_db_dict_detail
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from bi_db_dict_detail
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.rpym.univweb.entity.BiDbDictDetailExample" >
+    delete from bi_db_dict_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.rpym.univweb.entity.BiDbDictDetail" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into bi_db_dict_detail (PId, Code, Name, 
+      English, Remark, IsSystem, 
+      SelfPid)
+    values (#{pid,jdbcType=BIGINT}, #{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{english,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{issystem,jdbcType=BIT}, 
+      #{selfpid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.rpym.univweb.entity.BiDbDictDetail" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into bi_db_dict_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pid != null" >
+        PId,
+      </if>
+      <if test="code != null" >
+        Code,
+      </if>
+      <if test="name != null" >
+        Name,
+      </if>
+      <if test="english != null" >
+        English,
+      </if>
+      <if test="remark != null" >
+        Remark,
+      </if>
+      <if test="issystem != null" >
+        IsSystem,
+      </if>
+      <if test="selfpid != null" >
+        SelfPid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pid != null" >
+        #{pid,jdbcType=BIGINT},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="english != null" >
+        #{english,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="issystem != null" >
+        #{issystem,jdbcType=BIT},
+      </if>
+      <if test="selfpid != null" >
+        #{selfpid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.rpym.univweb.entity.BiDbDictDetailExample" resultType="java.lang.Integer" >
+    select count(*) from bi_db_dict_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update bi_db_dict_detail
+    <set >
+      <if test="record.id != null" >
+        Id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.pid != null" >
+        PId = #{record.pid,jdbcType=BIGINT},
+      </if>
+      <if test="record.code != null" >
+        Code = #{record.code,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        Name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.english != null" >
+        English = #{record.english,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        Remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.issystem != null" >
+        IsSystem = #{record.issystem,jdbcType=BIT},
+      </if>
+      <if test="record.selfpid != null" >
+        SelfPid = #{record.selfpid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update bi_db_dict_detail
+    set Id = #{record.id,jdbcType=INTEGER},
+      PId = #{record.pid,jdbcType=BIGINT},
+      Code = #{record.code,jdbcType=VARCHAR},
+      Name = #{record.name,jdbcType=VARCHAR},
+      English = #{record.english,jdbcType=VARCHAR},
+      Remark = #{record.remark,jdbcType=VARCHAR},
+      IsSystem = #{record.issystem,jdbcType=BIT},
+      SelfPid = #{record.selfpid,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rpym.univweb.entity.BiDbDictDetail" >
+    update bi_db_dict_detail
+    <set >
+      <if test="pid != null" >
+        PId = #{pid,jdbcType=BIGINT},
+      </if>
+      <if test="code != null" >
+        Code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        Name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="english != null" >
+        English = #{english,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        Remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="issystem != null" >
+        IsSystem = #{issystem,jdbcType=BIT},
+      </if>
+      <if test="selfpid != null" >
+        SelfPid = #{selfpid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rpym.univweb.entity.BiDbDictDetail" >
+    update bi_db_dict_detail
+    set PId = #{pid,jdbcType=BIGINT},
+      Code = #{code,jdbcType=VARCHAR},
+      Name = #{name,jdbcType=VARCHAR},
+      English = #{english,jdbcType=VARCHAR},
+      Remark = #{remark,jdbcType=VARCHAR},
+      IsSystem = #{issystem,jdbcType=BIT},
+      SelfPid = #{selfpid,jdbcType=VARCHAR}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,673 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rpym.univweb.dao.SysUsersMapper" >
+  <resultMap id="BaseResultMap" type="com.rpym.univweb.entity.SysUsers" >
+    <id column="Id" property="id" jdbcType="BIGINT" />
+    <result column="EnterpriseId" property="enterpriseid" jdbcType="INTEGER" />
+    <result column="TenantId" property="tenantid" jdbcType="INTEGER" />
+    <result column="Name" property="name" jdbcType="VARCHAR" />
+    <result column="Surname" property="surname" jdbcType="VARCHAR" />
+    <result column="UserName" property="username" jdbcType="VARCHAR" />
+    <result column="Password" property="password" jdbcType="VARCHAR" />
+    <result column="EmailAddress" property="emailaddress" jdbcType="VARCHAR" />
+    <result column="IsEmailConfirmed" property="isemailconfirmed" jdbcType="BIT" />
+    <result column="EmailConfirmationCode" property="emailconfirmationcode" jdbcType="VARCHAR" />
+    <result column="PasswordResetCode" property="passwordresetcode" jdbcType="VARCHAR" />
+    <result column="LastLoginTime" property="lastlogintime" jdbcType="TIMESTAMP" />
+    <result column="IsDeleted" property="isdeleted" jdbcType="BIT" />
+    <result column="DeleterUserId" property="deleteruserid" jdbcType="BIGINT" />
+    <result column="DeletionTime" property="deletiontime" jdbcType="TIMESTAMP" />
+    <result column="LastModificationTime" property="lastmodificationtime" jdbcType="TIMESTAMP" />
+    <result column="LastModifierUserId" property="lastmodifieruserid" jdbcType="BIGINT" />
+    <result column="CreationTime" property="creationtime" jdbcType="TIMESTAMP" />
+    <result column="CreatorUserId" property="creatoruserid" jdbcType="BIGINT" />
+    <result column="IsActive" property="isactive" jdbcType="BIT" />
+    <result column="ShouldChangePasswordOnNextLogin" property="shouldchangepasswordonnextlogin" jdbcType="BIT" />
+    <result column="ProfilePictureId" property="profilepictureid" jdbcType="CHAR" />
+    <result column="AuthenticationSource" property="authenticationsource" jdbcType="VARCHAR" />
+    <result column="LockoutEndDateUtc" property="lockoutenddateutc" jdbcType="TIMESTAMP" />
+    <result column="AccessFailedCount" property="accessfailedcount" jdbcType="INTEGER" />
+    <result column="IsLockoutEnabled" property="islockoutenabled" jdbcType="BIT" />
+    <result column="MobileNumber" property="mobilenumber" jdbcType="VARCHAR" />
+    <result column="PhoneNumber" property="phonenumber" jdbcType="VARCHAR" />
+    <result column="IsPhoneNumberConfirmed" property="isphonenumberconfirmed" jdbcType="BIT" />
+    <result column="SecurityStamp" property="securitystamp" jdbcType="VARCHAR" />
+    <result column="IsTwoFactorEnabled" property="istwofactorenabled" jdbcType="BIT" />
+    <result column="ClientId" property="clientid" jdbcType="VARCHAR" />
+    <result column="ClientSecret" property="clientsecret" jdbcType="VARCHAR" />
+    <result column="IdCardNumber" property="idcardnumber" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Id, EnterpriseId, TenantId, Name, Surname, UserName, Password, EmailAddress, IsEmailConfirmed, 
+    EmailConfirmationCode, PasswordResetCode, LastLoginTime, IsDeleted, DeleterUserId, 
+    DeletionTime, LastModificationTime, LastModifierUserId, CreationTime, CreatorUserId, 
+    IsActive, ShouldChangePasswordOnNextLogin, ProfilePictureId, AuthenticationSource, 
+    LockoutEndDateUtc, AccessFailedCount, IsLockoutEnabled, MobileNumber, PhoneNumber, 
+    IsPhoneNumberConfirmed, SecurityStamp, IsTwoFactorEnabled, ClientId, ClientSecret, 
+    IdCardNumber
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.rpym.univweb.entity.SysUsersExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from sys_users
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_users
+    where Id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from sys_users
+    where Id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.rpym.univweb.entity.SysUsersExample" >
+    delete from sys_users
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.rpym.univweb.entity.SysUsers" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into sys_users (EnterpriseId, TenantId, Name, 
+      Surname, UserName, Password, 
+      EmailAddress, IsEmailConfirmed, EmailConfirmationCode, 
+      PasswordResetCode, LastLoginTime, IsDeleted, 
+      DeleterUserId, DeletionTime, LastModificationTime, 
+      LastModifierUserId, CreationTime, CreatorUserId, 
+      IsActive, ShouldChangePasswordOnNextLogin, ProfilePictureId, 
+      AuthenticationSource, LockoutEndDateUtc, 
+      AccessFailedCount, IsLockoutEnabled, MobileNumber, 
+      PhoneNumber, IsPhoneNumberConfirmed, SecurityStamp, 
+      IsTwoFactorEnabled, ClientId, ClientSecret, 
+      IdCardNumber)
+    values (#{enterpriseid,jdbcType=INTEGER}, #{tenantid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
+      #{surname,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{emailaddress,jdbcType=VARCHAR}, #{isemailconfirmed,jdbcType=BIT}, #{emailconfirmationcode,jdbcType=VARCHAR}, 
+      #{passwordresetcode,jdbcType=VARCHAR}, #{lastlogintime,jdbcType=TIMESTAMP}, #{isdeleted,jdbcType=BIT}, 
+      #{deleteruserid,jdbcType=BIGINT}, #{deletiontime,jdbcType=TIMESTAMP}, #{lastmodificationtime,jdbcType=TIMESTAMP}, 
+      #{lastmodifieruserid,jdbcType=BIGINT}, #{creationtime,jdbcType=TIMESTAMP}, #{creatoruserid,jdbcType=BIGINT}, 
+      #{isactive,jdbcType=BIT}, #{shouldchangepasswordonnextlogin,jdbcType=BIT}, #{profilepictureid,jdbcType=CHAR}, 
+      #{authenticationsource,jdbcType=VARCHAR}, #{lockoutenddateutc,jdbcType=TIMESTAMP}, 
+      #{accessfailedcount,jdbcType=INTEGER}, #{islockoutenabled,jdbcType=BIT}, #{mobilenumber,jdbcType=VARCHAR}, 
+      #{phonenumber,jdbcType=VARCHAR}, #{isphonenumberconfirmed,jdbcType=BIT}, #{securitystamp,jdbcType=VARCHAR}, 
+      #{istwofactorenabled,jdbcType=BIT}, #{clientid,jdbcType=VARCHAR}, #{clientsecret,jdbcType=VARCHAR}, 
+      #{idcardnumber,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.rpym.univweb.entity.SysUsers" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into sys_users
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="enterpriseid != null" >
+        EnterpriseId,
+      </if>
+      <if test="tenantid != null" >
+        TenantId,
+      </if>
+      <if test="name != null" >
+        Name,
+      </if>
+      <if test="surname != null" >
+        Surname,
+      </if>
+      <if test="username != null" >
+        UserName,
+      </if>
+      <if test="password != null" >
+        Password,
+      </if>
+      <if test="emailaddress != null" >
+        EmailAddress,
+      </if>
+      <if test="isemailconfirmed != null" >
+        IsEmailConfirmed,
+      </if>
+      <if test="emailconfirmationcode != null" >
+        EmailConfirmationCode,
+      </if>
+      <if test="passwordresetcode != null" >
+        PasswordResetCode,
+      </if>
+      <if test="lastlogintime != null" >
+        LastLoginTime,
+      </if>
+      <if test="isdeleted != null" >
+        IsDeleted,
+      </if>
+      <if test="deleteruserid != null" >
+        DeleterUserId,
+      </if>
+      <if test="deletiontime != null" >
+        DeletionTime,
+      </if>
+      <if test="lastmodificationtime != null" >
+        LastModificationTime,
+      </if>
+      <if test="lastmodifieruserid != null" >
+        LastModifierUserId,
+      </if>
+      <if test="creationtime != null" >
+        CreationTime,
+      </if>
+      <if test="creatoruserid != null" >
+        CreatorUserId,
+      </if>
+      <if test="isactive != null" >
+        IsActive,
+      </if>
+      <if test="shouldchangepasswordonnextlogin != null" >
+        ShouldChangePasswordOnNextLogin,
+      </if>
+      <if test="profilepictureid != null" >
+        ProfilePictureId,
+      </if>
+      <if test="authenticationsource != null" >
+        AuthenticationSource,
+      </if>
+      <if test="lockoutenddateutc != null" >
+        LockoutEndDateUtc,
+      </if>
+      <if test="accessfailedcount != null" >
+        AccessFailedCount,
+      </if>
+      <if test="islockoutenabled != null" >
+        IsLockoutEnabled,
+      </if>
+      <if test="mobilenumber != null" >
+        MobileNumber,
+      </if>
+      <if test="phonenumber != null" >
+        PhoneNumber,
+      </if>
+      <if test="isphonenumberconfirmed != null" >
+        IsPhoneNumberConfirmed,
+      </if>
+      <if test="securitystamp != null" >
+        SecurityStamp,
+      </if>
+      <if test="istwofactorenabled != null" >
+        IsTwoFactorEnabled,
+      </if>
+      <if test="clientid != null" >
+        ClientId,
+      </if>
+      <if test="clientsecret != null" >
+        ClientSecret,
+      </if>
+      <if test="idcardnumber != null" >
+        IdCardNumber,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="enterpriseid != null" >
+        #{enterpriseid,jdbcType=INTEGER},
+      </if>
+      <if test="tenantid != null" >
+        #{tenantid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="surname != null" >
+        #{surname,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="emailaddress != null" >
+        #{emailaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="isemailconfirmed != null" >
+        #{isemailconfirmed,jdbcType=BIT},
+      </if>
+      <if test="emailconfirmationcode != null" >
+        #{emailconfirmationcode,jdbcType=VARCHAR},
+      </if>
+      <if test="passwordresetcode != null" >
+        #{passwordresetcode,jdbcType=VARCHAR},
+      </if>
+      <if test="lastlogintime != null" >
+        #{lastlogintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isdeleted != null" >
+        #{isdeleted,jdbcType=BIT},
+      </if>
+      <if test="deleteruserid != null" >
+        #{deleteruserid,jdbcType=BIGINT},
+      </if>
+      <if test="deletiontime != null" >
+        #{deletiontime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastmodificationtime != null" >
+        #{lastmodificationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastmodifieruserid != null" >
+        #{lastmodifieruserid,jdbcType=BIGINT},
+      </if>
+      <if test="creationtime != null" >
+        #{creationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatoruserid != null" >
+        #{creatoruserid,jdbcType=BIGINT},
+      </if>
+      <if test="isactive != null" >
+        #{isactive,jdbcType=BIT},
+      </if>
+      <if test="shouldchangepasswordonnextlogin != null" >
+        #{shouldchangepasswordonnextlogin,jdbcType=BIT},
+      </if>
+      <if test="profilepictureid != null" >
+        #{profilepictureid,jdbcType=CHAR},
+      </if>
+      <if test="authenticationsource != null" >
+        #{authenticationsource,jdbcType=VARCHAR},
+      </if>
+      <if test="lockoutenddateutc != null" >
+        #{lockoutenddateutc,jdbcType=TIMESTAMP},
+      </if>
+      <if test="accessfailedcount != null" >
+        #{accessfailedcount,jdbcType=INTEGER},
+      </if>
+      <if test="islockoutenabled != null" >
+        #{islockoutenabled,jdbcType=BIT},
+      </if>
+      <if test="mobilenumber != null" >
+        #{mobilenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="phonenumber != null" >
+        #{phonenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="isphonenumberconfirmed != null" >
+        #{isphonenumberconfirmed,jdbcType=BIT},
+      </if>
+      <if test="securitystamp != null" >
+        #{securitystamp,jdbcType=VARCHAR},
+      </if>
+      <if test="istwofactorenabled != null" >
+        #{istwofactorenabled,jdbcType=BIT},
+      </if>
+      <if test="clientid != null" >
+        #{clientid,jdbcType=VARCHAR},
+      </if>
+      <if test="clientsecret != null" >
+        #{clientsecret,jdbcType=VARCHAR},
+      </if>
+      <if test="idcardnumber != null" >
+        #{idcardnumber,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.rpym.univweb.entity.SysUsersExample" resultType="java.lang.Integer" >
+    select count(*) from sys_users
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sys_users
+    <set >
+      <if test="record.id != null" >
+        Id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.enterpriseid != null" >
+        EnterpriseId = #{record.enterpriseid,jdbcType=INTEGER},
+      </if>
+      <if test="record.tenantid != null" >
+        TenantId = #{record.tenantid,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null" >
+        Name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.surname != null" >
+        Surname = #{record.surname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.username != null" >
+        UserName = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null" >
+        Password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.emailaddress != null" >
+        EmailAddress = #{record.emailaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isemailconfirmed != null" >
+        IsEmailConfirmed = #{record.isemailconfirmed,jdbcType=BIT},
+      </if>
+      <if test="record.emailconfirmationcode != null" >
+        EmailConfirmationCode = #{record.emailconfirmationcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.passwordresetcode != null" >
+        PasswordResetCode = #{record.passwordresetcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastlogintime != null" >
+        LastLoginTime = #{record.lastlogintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isdeleted != null" >
+        IsDeleted = #{record.isdeleted,jdbcType=BIT},
+      </if>
+      <if test="record.deleteruserid != null" >
+        DeleterUserId = #{record.deleteruserid,jdbcType=BIGINT},
+      </if>
+      <if test="record.deletiontime != null" >
+        DeletionTime = #{record.deletiontime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastmodificationtime != null" >
+        LastModificationTime = #{record.lastmodificationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastmodifieruserid != null" >
+        LastModifierUserId = #{record.lastmodifieruserid,jdbcType=BIGINT},
+      </if>
+      <if test="record.creationtime != null" >
+        CreationTime = #{record.creationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.creatoruserid != null" >
+        CreatorUserId = #{record.creatoruserid,jdbcType=BIGINT},
+      </if>
+      <if test="record.isactive != null" >
+        IsActive = #{record.isactive,jdbcType=BIT},
+      </if>
+      <if test="record.shouldchangepasswordonnextlogin != null" >
+        ShouldChangePasswordOnNextLogin = #{record.shouldchangepasswordonnextlogin,jdbcType=BIT},
+      </if>
+      <if test="record.profilepictureid != null" >
+        ProfilePictureId = #{record.profilepictureid,jdbcType=CHAR},
+      </if>
+      <if test="record.authenticationsource != null" >
+        AuthenticationSource = #{record.authenticationsource,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lockoutenddateutc != null" >
+        LockoutEndDateUtc = #{record.lockoutenddateutc,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.accessfailedcount != null" >
+        AccessFailedCount = #{record.accessfailedcount,jdbcType=INTEGER},
+      </if>
+      <if test="record.islockoutenabled != null" >
+        IsLockoutEnabled = #{record.islockoutenabled,jdbcType=BIT},
+      </if>
+      <if test="record.mobilenumber != null" >
+        MobileNumber = #{record.mobilenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phonenumber != null" >
+        PhoneNumber = #{record.phonenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isphonenumberconfirmed != null" >
+        IsPhoneNumberConfirmed = #{record.isphonenumberconfirmed,jdbcType=BIT},
+      </if>
+      <if test="record.securitystamp != null" >
+        SecurityStamp = #{record.securitystamp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.istwofactorenabled != null" >
+        IsTwoFactorEnabled = #{record.istwofactorenabled,jdbcType=BIT},
+      </if>
+      <if test="record.clientid != null" >
+        ClientId = #{record.clientid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.clientsecret != null" >
+        ClientSecret = #{record.clientsecret,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idcardnumber != null" >
+        IdCardNumber = #{record.idcardnumber,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sys_users
+    set Id = #{record.id,jdbcType=BIGINT},
+      EnterpriseId = #{record.enterpriseid,jdbcType=INTEGER},
+      TenantId = #{record.tenantid,jdbcType=INTEGER},
+      Name = #{record.name,jdbcType=VARCHAR},
+      Surname = #{record.surname,jdbcType=VARCHAR},
+      UserName = #{record.username,jdbcType=VARCHAR},
+      Password = #{record.password,jdbcType=VARCHAR},
+      EmailAddress = #{record.emailaddress,jdbcType=VARCHAR},
+      IsEmailConfirmed = #{record.isemailconfirmed,jdbcType=BIT},
+      EmailConfirmationCode = #{record.emailconfirmationcode,jdbcType=VARCHAR},
+      PasswordResetCode = #{record.passwordresetcode,jdbcType=VARCHAR},
+      LastLoginTime = #{record.lastlogintime,jdbcType=TIMESTAMP},
+      IsDeleted = #{record.isdeleted,jdbcType=BIT},
+      DeleterUserId = #{record.deleteruserid,jdbcType=BIGINT},
+      DeletionTime = #{record.deletiontime,jdbcType=TIMESTAMP},
+      LastModificationTime = #{record.lastmodificationtime,jdbcType=TIMESTAMP},
+      LastModifierUserId = #{record.lastmodifieruserid,jdbcType=BIGINT},
+      CreationTime = #{record.creationtime,jdbcType=TIMESTAMP},
+      CreatorUserId = #{record.creatoruserid,jdbcType=BIGINT},
+      IsActive = #{record.isactive,jdbcType=BIT},
+      ShouldChangePasswordOnNextLogin = #{record.shouldchangepasswordonnextlogin,jdbcType=BIT},
+      ProfilePictureId = #{record.profilepictureid,jdbcType=CHAR},
+      AuthenticationSource = #{record.authenticationsource,jdbcType=VARCHAR},
+      LockoutEndDateUtc = #{record.lockoutenddateutc,jdbcType=TIMESTAMP},
+      AccessFailedCount = #{record.accessfailedcount,jdbcType=INTEGER},
+      IsLockoutEnabled = #{record.islockoutenabled,jdbcType=BIT},
+      MobileNumber = #{record.mobilenumber,jdbcType=VARCHAR},
+      PhoneNumber = #{record.phonenumber,jdbcType=VARCHAR},
+      IsPhoneNumberConfirmed = #{record.isphonenumberconfirmed,jdbcType=BIT},
+      SecurityStamp = #{record.securitystamp,jdbcType=VARCHAR},
+      IsTwoFactorEnabled = #{record.istwofactorenabled,jdbcType=BIT},
+      ClientId = #{record.clientid,jdbcType=VARCHAR},
+      ClientSecret = #{record.clientsecret,jdbcType=VARCHAR},
+      IdCardNumber = #{record.idcardnumber,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rpym.univweb.entity.SysUsers" >
+    update sys_users
+    <set >
+      <if test="enterpriseid != null" >
+        EnterpriseId = #{enterpriseid,jdbcType=INTEGER},
+      </if>
+      <if test="tenantid != null" >
+        TenantId = #{tenantid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        Name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="surname != null" >
+        Surname = #{surname,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        UserName = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        Password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="emailaddress != null" >
+        EmailAddress = #{emailaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="isemailconfirmed != null" >
+        IsEmailConfirmed = #{isemailconfirmed,jdbcType=BIT},
+      </if>
+      <if test="emailconfirmationcode != null" >
+        EmailConfirmationCode = #{emailconfirmationcode,jdbcType=VARCHAR},
+      </if>
+      <if test="passwordresetcode != null" >
+        PasswordResetCode = #{passwordresetcode,jdbcType=VARCHAR},
+      </if>
+      <if test="lastlogintime != null" >
+        LastLoginTime = #{lastlogintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isdeleted != null" >
+        IsDeleted = #{isdeleted,jdbcType=BIT},
+      </if>
+      <if test="deleteruserid != null" >
+        DeleterUserId = #{deleteruserid,jdbcType=BIGINT},
+      </if>
+      <if test="deletiontime != null" >
+        DeletionTime = #{deletiontime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastmodificationtime != null" >
+        LastModificationTime = #{lastmodificationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastmodifieruserid != null" >
+        LastModifierUserId = #{lastmodifieruserid,jdbcType=BIGINT},
+      </if>
+      <if test="creationtime != null" >
+        CreationTime = #{creationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatoruserid != null" >
+        CreatorUserId = #{creatoruserid,jdbcType=BIGINT},
+      </if>
+      <if test="isactive != null" >
+        IsActive = #{isactive,jdbcType=BIT},
+      </if>
+      <if test="shouldchangepasswordonnextlogin != null" >
+        ShouldChangePasswordOnNextLogin = #{shouldchangepasswordonnextlogin,jdbcType=BIT},
+      </if>
+      <if test="profilepictureid != null" >
+        ProfilePictureId = #{profilepictureid,jdbcType=CHAR},
+      </if>
+      <if test="authenticationsource != null" >
+        AuthenticationSource = #{authenticationsource,jdbcType=VARCHAR},
+      </if>
+      <if test="lockoutenddateutc != null" >
+        LockoutEndDateUtc = #{lockoutenddateutc,jdbcType=TIMESTAMP},
+      </if>
+      <if test="accessfailedcount != null" >
+        AccessFailedCount = #{accessfailedcount,jdbcType=INTEGER},
+      </if>
+      <if test="islockoutenabled != null" >
+        IsLockoutEnabled = #{islockoutenabled,jdbcType=BIT},
+      </if>
+      <if test="mobilenumber != null" >
+        MobileNumber = #{mobilenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="phonenumber != null" >
+        PhoneNumber = #{phonenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="isphonenumberconfirmed != null" >
+        IsPhoneNumberConfirmed = #{isphonenumberconfirmed,jdbcType=BIT},
+      </if>
+      <if test="securitystamp != null" >
+        SecurityStamp = #{securitystamp,jdbcType=VARCHAR},
+      </if>
+      <if test="istwofactorenabled != null" >
+        IsTwoFactorEnabled = #{istwofactorenabled,jdbcType=BIT},
+      </if>
+      <if test="clientid != null" >
+        ClientId = #{clientid,jdbcType=VARCHAR},
+      </if>
+      <if test="clientsecret != null" >
+        ClientSecret = #{clientsecret,jdbcType=VARCHAR},
+      </if>
+      <if test="idcardnumber != null" >
+        IdCardNumber = #{idcardnumber,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rpym.univweb.entity.SysUsers" >
+    update sys_users
+    set EnterpriseId = #{enterpriseid,jdbcType=INTEGER},
+      TenantId = #{tenantid,jdbcType=INTEGER},
+      Name = #{name,jdbcType=VARCHAR},
+      Surname = #{surname,jdbcType=VARCHAR},
+      UserName = #{username,jdbcType=VARCHAR},
+      Password = #{password,jdbcType=VARCHAR},
+      EmailAddress = #{emailaddress,jdbcType=VARCHAR},
+      IsEmailConfirmed = #{isemailconfirmed,jdbcType=BIT},
+      EmailConfirmationCode = #{emailconfirmationcode,jdbcType=VARCHAR},
+      PasswordResetCode = #{passwordresetcode,jdbcType=VARCHAR},
+      LastLoginTime = #{lastlogintime,jdbcType=TIMESTAMP},
+      IsDeleted = #{isdeleted,jdbcType=BIT},
+      DeleterUserId = #{deleteruserid,jdbcType=BIGINT},
+      DeletionTime = #{deletiontime,jdbcType=TIMESTAMP},
+      LastModificationTime = #{lastmodificationtime,jdbcType=TIMESTAMP},
+      LastModifierUserId = #{lastmodifieruserid,jdbcType=BIGINT},
+      CreationTime = #{creationtime,jdbcType=TIMESTAMP},
+      CreatorUserId = #{creatoruserid,jdbcType=BIGINT},
+      IsActive = #{isactive,jdbcType=BIT},
+      ShouldChangePasswordOnNextLogin = #{shouldchangepasswordonnextlogin,jdbcType=BIT},
+      ProfilePictureId = #{profilepictureid,jdbcType=CHAR},
+      AuthenticationSource = #{authenticationsource,jdbcType=VARCHAR},
+      LockoutEndDateUtc = #{lockoutenddateutc,jdbcType=TIMESTAMP},
+      AccessFailedCount = #{accessfailedcount,jdbcType=INTEGER},
+      IsLockoutEnabled = #{islockoutenabled,jdbcType=BIT},
+      MobileNumber = #{mobilenumber,jdbcType=VARCHAR},
+      PhoneNumber = #{phonenumber,jdbcType=VARCHAR},
+      IsPhoneNumberConfirmed = #{isphonenumberconfirmed,jdbcType=BIT},
+      SecurityStamp = #{securitystamp,jdbcType=VARCHAR},
+      IsTwoFactorEnabled = #{istwofactorenabled,jdbcType=BIT},
+      ClientId = #{clientid,jdbcType=VARCHAR},
+      ClientSecret = #{clientsecret,jdbcType=VARCHAR},
+      IdCardNumber = #{idcardnumber,jdbcType=VARCHAR}
+    where Id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

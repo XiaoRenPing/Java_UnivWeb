@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rpym.univweb.dao.BusMerchandiseMapper" >
+  <resultMap id="BaseResultMap" type="com.rpym.univweb.entity.BusMerchandise" >
+    <id column="Id" property="id" jdbcType="BIGINT" />
+    <result column="MerchandiseName" property="merchandisename" jdbcType="VARCHAR" />
+    <result column="Price" property="price" jdbcType="DECIMAL" />
+    <result column="SPrice" property="sprice" jdbcType="DECIMAL" />
+    <result column="MerchandiseModel" property="merchandisemodel" jdbcType="VARCHAR" />
+    <result column="Pictures" property="pictures" jdbcType="VARCHAR" />
+    <result column="Vedios" property="vedios" jdbcType="VARCHAR" />
+    <result column="MerchandiseDesc" property="merchandisedesc" jdbcType="VARCHAR" />
+    <result column="FactoryDate" property="factorydate" jdbcType="TIMESTAMP" />
+    <result column="HtmlPath" property="htmlpath" jdbcType="VARCHAR" />
+    <result column="Status" property="status" jdbcType="INTEGER" />
+    <result column="ProduceDate" property="producedate" jdbcType="TIMESTAMP" />
+    <result column="PostTime" property="posttime" jdbcType="TIMESTAMP" />
+    <result column="CategoryId" property="categoryid" jdbcType="BIGINT" />
+    <result column="IsDeleted" property="isdeleted" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Id, MerchandiseName, Price, SPrice, MerchandiseModel, Pictures, Vedios, MerchandiseDesc, 
+    FactoryDate, HtmlPath, Status, ProduceDate, PostTime, CategoryId, IsDeleted
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.rpym.univweb.entity.BusMerchandiseExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from bus_merchandise
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from bus_merchandise
+    where Id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from bus_merchandise
+    where Id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.rpym.univweb.entity.BusMerchandiseExample" >
+    delete from bus_merchandise
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.rpym.univweb.entity.BusMerchandise" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into bus_merchandise (MerchandiseName, Price, SPrice, 
+      MerchandiseModel, Pictures, Vedios, 
+      MerchandiseDesc, FactoryDate, HtmlPath, 
+      Status, ProduceDate, PostTime, 
+      CategoryId, IsDeleted)
+    values (#{merchandisename,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, #{sprice,jdbcType=DECIMAL}, 
+      #{merchandisemodel,jdbcType=VARCHAR}, #{pictures,jdbcType=VARCHAR}, #{vedios,jdbcType=VARCHAR}, 
+      #{merchandisedesc,jdbcType=VARCHAR}, #{factorydate,jdbcType=TIMESTAMP}, #{htmlpath,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER}, #{producedate,jdbcType=TIMESTAMP}, #{posttime,jdbcType=TIMESTAMP}, 
+      #{categoryid,jdbcType=BIGINT}, #{isdeleted,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.rpym.univweb.entity.BusMerchandise" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into bus_merchandise
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="merchandisename != null" >
+        MerchandiseName,
+      </if>
+      <if test="price != null" >
+        Price,
+      </if>
+      <if test="sprice != null" >
+        SPrice,
+      </if>
+      <if test="merchandisemodel != null" >
+        MerchandiseModel,
+      </if>
+      <if test="pictures != null" >
+        Pictures,
+      </if>
+      <if test="vedios != null" >
+        Vedios,
+      </if>
+      <if test="merchandisedesc != null" >
+        MerchandiseDesc,
+      </if>
+      <if test="factorydate != null" >
+        FactoryDate,
+      </if>
+      <if test="htmlpath != null" >
+        HtmlPath,
+      </if>
+      <if test="status != null" >
+        Status,
+      </if>
+      <if test="producedate != null" >
+        ProduceDate,
+      </if>
+      <if test="posttime != null" >
+        PostTime,
+      </if>
+      <if test="categoryid != null" >
+        CategoryId,
+      </if>
+      <if test="isdeleted != null" >
+        IsDeleted,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="merchandisename != null" >
+        #{merchandisename,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="sprice != null" >
+        #{sprice,jdbcType=DECIMAL},
+      </if>
+      <if test="merchandisemodel != null" >
+        #{merchandisemodel,jdbcType=VARCHAR},
+      </if>
+      <if test="pictures != null" >
+        #{pictures,jdbcType=VARCHAR},
+      </if>
+      <if test="vedios != null" >
+        #{vedios,jdbcType=VARCHAR},
+      </if>
+      <if test="merchandisedesc != null" >
+        #{merchandisedesc,jdbcType=VARCHAR},
+      </if>
+      <if test="factorydate != null" >
+        #{factorydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="htmlpath != null" >
+        #{htmlpath,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="producedate != null" >
+        #{producedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="posttime != null" >
+        #{posttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="categoryid != null" >
+        #{categoryid,jdbcType=BIGINT},
+      </if>
+      <if test="isdeleted != null" >
+        #{isdeleted,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.rpym.univweb.entity.BusMerchandiseExample" resultType="java.lang.Integer" >
+    select count(*) from bus_merchandise
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update bus_merchandise
+    <set >
+      <if test="record.id != null" >
+        Id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.merchandisename != null" >
+        MerchandiseName = #{record.merchandisename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.price != null" >
+        Price = #{record.price,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sprice != null" >
+        SPrice = #{record.sprice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.merchandisemodel != null" >
+        MerchandiseModel = #{record.merchandisemodel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pictures != null" >
+        Pictures = #{record.pictures,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vedios != null" >
+        Vedios = #{record.vedios,jdbcType=VARCHAR},
+      </if>
+      <if test="record.merchandisedesc != null" >
+        MerchandiseDesc = #{record.merchandisedesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.factorydate != null" >
+        FactoryDate = #{record.factorydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.htmlpath != null" >
+        HtmlPath = #{record.htmlpath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        Status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.producedate != null" >
+        ProduceDate = #{record.producedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.posttime != null" >
+        PostTime = #{record.posttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.categoryid != null" >
+        CategoryId = #{record.categoryid,jdbcType=BIGINT},
+      </if>
+      <if test="record.isdeleted != null" >
+        IsDeleted = #{record.isdeleted,jdbcType=TINYINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update bus_merchandise
+    set Id = #{record.id,jdbcType=BIGINT},
+      MerchandiseName = #{record.merchandisename,jdbcType=VARCHAR},
+      Price = #{record.price,jdbcType=DECIMAL},
+      SPrice = #{record.sprice,jdbcType=DECIMAL},
+      MerchandiseModel = #{record.merchandisemodel,jdbcType=VARCHAR},
+      Pictures = #{record.pictures,jdbcType=VARCHAR},
+      Vedios = #{record.vedios,jdbcType=VARCHAR},
+      MerchandiseDesc = #{record.merchandisedesc,jdbcType=VARCHAR},
+      FactoryDate = #{record.factorydate,jdbcType=TIMESTAMP},
+      HtmlPath = #{record.htmlpath,jdbcType=VARCHAR},
+      Status = #{record.status,jdbcType=INTEGER},
+      ProduceDate = #{record.producedate,jdbcType=TIMESTAMP},
+      PostTime = #{record.posttime,jdbcType=TIMESTAMP},
+      CategoryId = #{record.categoryid,jdbcType=BIGINT},
+      IsDeleted = #{record.isdeleted,jdbcType=TINYINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rpym.univweb.entity.BusMerchandise" >
+    update bus_merchandise
+    <set >
+      <if test="merchandisename != null" >
+        MerchandiseName = #{merchandisename,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        Price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="sprice != null" >
+        SPrice = #{sprice,jdbcType=DECIMAL},
+      </if>
+      <if test="merchandisemodel != null" >
+        MerchandiseModel = #{merchandisemodel,jdbcType=VARCHAR},
+      </if>
+      <if test="pictures != null" >
+        Pictures = #{pictures,jdbcType=VARCHAR},
+      </if>
+      <if test="vedios != null" >
+        Vedios = #{vedios,jdbcType=VARCHAR},
+      </if>
+      <if test="merchandisedesc != null" >
+        MerchandiseDesc = #{merchandisedesc,jdbcType=VARCHAR},
+      </if>
+      <if test="factorydate != null" >
+        FactoryDate = #{factorydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="htmlpath != null" >
+        HtmlPath = #{htmlpath,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        Status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="producedate != null" >
+        ProduceDate = #{producedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="posttime != null" >
+        PostTime = #{posttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="categoryid != null" >
+        CategoryId = #{categoryid,jdbcType=BIGINT},
+      </if>
+      <if test="isdeleted != null" >
+        IsDeleted = #{isdeleted,jdbcType=TINYINT},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rpym.univweb.entity.BusMerchandise" >
+    update bus_merchandise
+    set MerchandiseName = #{merchandisename,jdbcType=VARCHAR},
+      Price = #{price,jdbcType=DECIMAL},
+      SPrice = #{sprice,jdbcType=DECIMAL},
+      MerchandiseModel = #{merchandisemodel,jdbcType=VARCHAR},
+      Pictures = #{pictures,jdbcType=VARCHAR},
+      Vedios = #{vedios,jdbcType=VARCHAR},
+      MerchandiseDesc = #{merchandisedesc,jdbcType=VARCHAR},
+      FactoryDate = #{factorydate,jdbcType=TIMESTAMP},
+      HtmlPath = #{htmlpath,jdbcType=VARCHAR},
+      Status = #{status,jdbcType=INTEGER},
+      ProduceDate = #{producedate,jdbcType=TIMESTAMP},
+      PostTime = #{posttime,jdbcType=TIMESTAMP},
+      CategoryId = #{categoryid,jdbcType=BIGINT},
+      IsDeleted = #{isdeleted,jdbcType=TINYINT}
+    where Id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

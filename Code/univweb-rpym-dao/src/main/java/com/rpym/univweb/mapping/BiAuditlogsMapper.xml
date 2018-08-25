@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rpym.univweb.dao.BiAuditlogsMapper" >
+  <resultMap id="BaseResultMap" type="com.rpym.univweb.entity.BiAuditlogs" >
+    <id column="Id" property="id" jdbcType="BIGINT" />
+    <result column="UserId" property="userid" jdbcType="BIGINT" />
+    <result column="MethodName" property="methodname" jdbcType="VARCHAR" />
+    <result column="Parameters" property="parameters" jdbcType="VARCHAR" />
+    <result column="ExecutionTime" property="executiontime" jdbcType="TIMESTAMP" />
+    <result column="ExecutionDuration" property="executionduration" jdbcType="INTEGER" />
+    <result column="ClientIpAddress" property="clientipaddress" jdbcType="VARCHAR" />
+    <result column="ClientName" property="clientname" jdbcType="VARCHAR" />
+    <result column="Response" property="response" jdbcType="VARCHAR" />
+    <result column="ApiOperation" property="apioperation" jdbcType="VARCHAR" />
+    <result column="UrlId" property="urlid" jdbcType="BIGINT" />
+    <result column="UserAgentId" property="useragentid" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Id, UserId, MethodName, Parameters, ExecutionTime, ExecutionDuration, ClientIpAddress, 
+    ClientName, Response, ApiOperation, UrlId, UserAgentId
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.rpym.univweb.entity.BiAuditlogsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from bi_auditlogs
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from bi_auditlogs
+    where Id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from bi_auditlogs
+    where Id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.rpym.univweb.entity.BiAuditlogsExample" >
+    delete from bi_auditlogs
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.rpym.univweb.entity.BiAuditlogs" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into bi_auditlogs (UserId, MethodName, Parameters, 
+      ExecutionTime, ExecutionDuration, ClientIpAddress, 
+      ClientName, Response, ApiOperation, 
+      UrlId, UserAgentId)
+    values (#{userid,jdbcType=BIGINT}, #{methodname,jdbcType=VARCHAR}, #{parameters,jdbcType=VARCHAR}, 
+      #{executiontime,jdbcType=TIMESTAMP}, #{executionduration,jdbcType=INTEGER}, #{clientipaddress,jdbcType=VARCHAR}, 
+      #{clientname,jdbcType=VARCHAR}, #{response,jdbcType=VARCHAR}, #{apioperation,jdbcType=VARCHAR}, 
+      #{urlid,jdbcType=BIGINT}, #{useragentid,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.rpym.univweb.entity.BiAuditlogs" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into bi_auditlogs
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        UserId,
+      </if>
+      <if test="methodname != null" >
+        MethodName,
+      </if>
+      <if test="parameters != null" >
+        Parameters,
+      </if>
+      <if test="executiontime != null" >
+        ExecutionTime,
+      </if>
+      <if test="executionduration != null" >
+        ExecutionDuration,
+      </if>
+      <if test="clientipaddress != null" >
+        ClientIpAddress,
+      </if>
+      <if test="clientname != null" >
+        ClientName,
+      </if>
+      <if test="response != null" >
+        Response,
+      </if>
+      <if test="apioperation != null" >
+        ApiOperation,
+      </if>
+      <if test="urlid != null" >
+        UrlId,
+      </if>
+      <if test="useragentid != null" >
+        UserAgentId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        #{userid,jdbcType=BIGINT},
+      </if>
+      <if test="methodname != null" >
+        #{methodname,jdbcType=VARCHAR},
+      </if>
+      <if test="parameters != null" >
+        #{parameters,jdbcType=VARCHAR},
+      </if>
+      <if test="executiontime != null" >
+        #{executiontime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="executionduration != null" >
+        #{executionduration,jdbcType=INTEGER},
+      </if>
+      <if test="clientipaddress != null" >
+        #{clientipaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="clientname != null" >
+        #{clientname,jdbcType=VARCHAR},
+      </if>
+      <if test="response != null" >
+        #{response,jdbcType=VARCHAR},
+      </if>
+      <if test="apioperation != null" >
+        #{apioperation,jdbcType=VARCHAR},
+      </if>
+      <if test="urlid != null" >
+        #{urlid,jdbcType=BIGINT},
+      </if>
+      <if test="useragentid != null" >
+        #{useragentid,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.rpym.univweb.entity.BiAuditlogsExample" resultType="java.lang.Integer" >
+    select count(*) from bi_auditlogs
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update bi_auditlogs
+    <set >
+      <if test="record.id != null" >
+        Id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.userid != null" >
+        UserId = #{record.userid,jdbcType=BIGINT},
+      </if>
+      <if test="record.methodname != null" >
+        MethodName = #{record.methodname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parameters != null" >
+        Parameters = #{record.parameters,jdbcType=VARCHAR},
+      </if>
+      <if test="record.executiontime != null" >
+        ExecutionTime = #{record.executiontime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.executionduration != null" >
+        ExecutionDuration = #{record.executionduration,jdbcType=INTEGER},
+      </if>
+      <if test="record.clientipaddress != null" >
+        ClientIpAddress = #{record.clientipaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.clientname != null" >
+        ClientName = #{record.clientname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.response != null" >
+        Response = #{record.response,jdbcType=VARCHAR},
+      </if>
+      <if test="record.apioperation != null" >
+        ApiOperation = #{record.apioperation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.urlid != null" >
+        UrlId = #{record.urlid,jdbcType=BIGINT},
+      </if>
+      <if test="record.useragentid != null" >
+        UserAgentId = #{record.useragentid,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update bi_auditlogs
+    set Id = #{record.id,jdbcType=BIGINT},
+      UserId = #{record.userid,jdbcType=BIGINT},
+      MethodName = #{record.methodname,jdbcType=VARCHAR},
+      Parameters = #{record.parameters,jdbcType=VARCHAR},
+      ExecutionTime = #{record.executiontime,jdbcType=TIMESTAMP},
+      ExecutionDuration = #{record.executionduration,jdbcType=INTEGER},
+      ClientIpAddress = #{record.clientipaddress,jdbcType=VARCHAR},
+      ClientName = #{record.clientname,jdbcType=VARCHAR},
+      Response = #{record.response,jdbcType=VARCHAR},
+      ApiOperation = #{record.apioperation,jdbcType=VARCHAR},
+      UrlId = #{record.urlid,jdbcType=BIGINT},
+      UserAgentId = #{record.useragentid,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rpym.univweb.entity.BiAuditlogs" >
+    update bi_auditlogs
+    <set >
+      <if test="userid != null" >
+        UserId = #{userid,jdbcType=BIGINT},
+      </if>
+      <if test="methodname != null" >
+        MethodName = #{methodname,jdbcType=VARCHAR},
+      </if>
+      <if test="parameters != null" >
+        Parameters = #{parameters,jdbcType=VARCHAR},
+      </if>
+      <if test="executiontime != null" >
+        ExecutionTime = #{executiontime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="executionduration != null" >
+        ExecutionDuration = #{executionduration,jdbcType=INTEGER},
+      </if>
+      <if test="clientipaddress != null" >
+        ClientIpAddress = #{clientipaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="clientname != null" >
+        ClientName = #{clientname,jdbcType=VARCHAR},
+      </if>
+      <if test="response != null" >
+        Response = #{response,jdbcType=VARCHAR},
+      </if>
+      <if test="apioperation != null" >
+        ApiOperation = #{apioperation,jdbcType=VARCHAR},
+      </if>
+      <if test="urlid != null" >
+        UrlId = #{urlid,jdbcType=BIGINT},
+      </if>
+      <if test="useragentid != null" >
+        UserAgentId = #{useragentid,jdbcType=BIGINT},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rpym.univweb.entity.BiAuditlogs" >
+    update bi_auditlogs
+    set UserId = #{userid,jdbcType=BIGINT},
+      MethodName = #{methodname,jdbcType=VARCHAR},
+      Parameters = #{parameters,jdbcType=VARCHAR},
+      ExecutionTime = #{executiontime,jdbcType=TIMESTAMP},
+      ExecutionDuration = #{executionduration,jdbcType=INTEGER},
+      ClientIpAddress = #{clientipaddress,jdbcType=VARCHAR},
+      ClientName = #{clientname,jdbcType=VARCHAR},
+      Response = #{response,jdbcType=VARCHAR},
+      ApiOperation = #{apioperation,jdbcType=VARCHAR},
+      UrlId = #{urlid,jdbcType=BIGINT},
+      UserAgentId = #{useragentid,jdbcType=BIGINT}
+    where Id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
