@@ -1,4 +1,4 @@
-package com.rpym.univweb.service.system.menu.impl;
+package com.rpym.univweb.service.system.menu;
 
 import java.util.List;
 

@@ -20,4 +20,8 @@ public interface IUserService {
 
 	public String logout(String token, HttpServletRequest request);
 
+	public String updateUserInfo(SysUsers user);
+
+	public String deleteUser(Long id);
+
 }

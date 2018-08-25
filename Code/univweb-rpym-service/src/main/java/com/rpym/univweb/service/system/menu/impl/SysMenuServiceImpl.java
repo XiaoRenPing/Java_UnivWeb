@@ -1,4 +1,4 @@
-package com.rpym.univweb.service.system.menu;
+package com.rpym.univweb.service.system.menu.impl;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ import com.rpym.univweb.entity.SysMenuExample;
 import com.rpym.univweb.entity.SysUserRoles;
 import com.rpym.univweb.entity.SysUserRolesExample;
 import com.rpym.univweb.entity.SysUsers;
-import com.rpym.univweb.service.system.menu.impl.ISysMenuService;
+import com.rpym.univweb.service.system.menu.ISysMenuService;
 
 @Service("sysMenuService")
 public class SysMenuServiceImpl implements ISysMenuService {

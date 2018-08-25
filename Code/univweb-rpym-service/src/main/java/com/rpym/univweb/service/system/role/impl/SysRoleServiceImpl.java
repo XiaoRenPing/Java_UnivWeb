@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.github.pagehelper.PageInfo;
-import com.rpym.univweb.constants.CommonConst;
 import com.rpym.univweb.dao.SysRolesMapper;
 import com.rpym.univweb.dto.role.QuerySysRoleDto;
 import com.rpym.univweb.dto.role.SysRolesDto;
@@ -16,6 +15,8 @@ import com.rpym.univweb.entity.SysRoles;
 import com.rpym.univweb.entity.SysRolesExample;
 import com.rpym.univweb.service.base.BaseService;
 import com.rpym.univweb.service.system.role.ISysRoleService;
+
+
 @Service("roleService")
 public class SysRoleServiceImpl extends BaseService implements ISysRoleService{
 
@@ -34,17 +35,19 @@ public class SysRoleServiceImpl extends BaseService implements ISysRoleService{
 		roles.setIsdefault(true);
 		roles.setIsstatic(true);
 		roles.setIsdeleted(false);
-		return sysRolesDao.insert(roles)==CommonConst.NUM_1;
+		sysRolesDao.insert(roles);
+		return true;
 	}
 	
 	/**
 	 * 删除一个角色,软删除，其实更新操作
 	 */
 	public boolean deleteRole(int id) {
-		SysRoles s = new SysRoles();
-		s.setId(id);
-		s.setIsdeleted(false);
-		return sysRolesDao.updateByPrimaryKeySelective(s)==CommonConst.NUM_1;
+		SysRoles sysRoles = new SysRoles();
+		sysRoles.setId(id);
+		sysRoles.setIsdeleted(false);
+		sysRolesDao.updateByPrimaryKeySelective(sysRoles);
+		return true;
 	}
 	
 	/**
@@ -80,6 +83,7 @@ public class SysRoleServiceImpl extends BaseService implements ISysRoleService{
 		SysRoles role = new SysRoles();
 		BeanUtils.copyProperties(dto, role);
 		role.setLastmodificationtime(new Date());
-		return sysRolesDao.updateByPrimaryKeySelective(role)==CommonConst.NUM_1;
+		sysRolesDao.updateByPrimaryKeySelective(role);
+		return true;
 	}
 }

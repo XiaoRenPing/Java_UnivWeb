@@ -209,6 +209,18 @@ public class UserServiceImpl extends BaseService implements IUserService{
 		return "/view/user/login";
 	}
 
+
+	public String updateUserInfo(SysUsers user) {
+		userDao.updateByPrimaryKeySelective(user);
+		return "/view/user/list";
+	}
+
+
+	public String deleteUser(Long id) {
+		userDao.deleteByPrimaryKey(id);
+		return "/view/user/list";
+	}
+
 	
 	
 

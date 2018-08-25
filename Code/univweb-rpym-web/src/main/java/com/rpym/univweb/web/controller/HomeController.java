@@ -14,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.rpym.univweb.dto.menu.SysMenusExt;
 import com.rpym.univweb.entity.SysConfig;
 import com.rpym.univweb.entity.SysUsers;
-import com.rpym.univweb.service.system.menu.impl.ISysMenuService;
+import com.rpym.univweb.service.system.menu.ISysMenuService;
 import com.rpym.univweb.service.system.sysconfig.ISysConfigService;
 
 @Controller
