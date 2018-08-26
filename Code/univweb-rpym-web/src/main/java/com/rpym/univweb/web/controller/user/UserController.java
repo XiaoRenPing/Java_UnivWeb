@@ -121,7 +121,7 @@ public class UserController extends BaseController{
 	 * @author 肖仁枰
 	 * @date 2018年8月9日
 	 */
-	@RequestMapping(method=RequestMethod.GET, value="/userlist")
+	@RequestMapping(method=RequestMethod.GET, value="/list")
 	@ResponseBody
 	public PageInfo<UserQueryOutDto> pageUserList(@ModelAttribute UserQueryDto userQryDto){
 		return userService.queryUserList(userQryDto);

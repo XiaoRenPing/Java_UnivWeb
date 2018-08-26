@@ -101,4 +101,15 @@ public class SysJobServiceImpl extends BaseService implements ISysJobsService{
 		return sysJobsDao.insertSelective(sysJobsWithBlobs);
 	}
 
+	/**
+	 * 批量启动
+	 */
+	public Integer startSysJob(String ids) {
+		return null;
+	}
+
+	public Integer stopJob(String ids) {
+		return null;
+	}
+
 }

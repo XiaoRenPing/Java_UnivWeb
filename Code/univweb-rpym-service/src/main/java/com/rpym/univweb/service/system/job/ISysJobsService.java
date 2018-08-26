@@ -17,5 +17,9 @@ public interface ISysJobsService {
 
 	public Integer saveSysJobs(SysJobsDto sysJobsDto);
 
+	public Integer startSysJob(String ids);
+
+	public Integer stopJob(String ids);
+
 	
 }

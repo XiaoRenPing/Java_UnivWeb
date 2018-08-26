@@ -70,14 +70,14 @@ public class UserServiceImpl extends BaseService implements IUserService{
 	 * @return   
 	 * @see com.rpym.univweb.service.system.user.IUserService#queryUserList(com.rpym.univweb.dto.user.UserQueryDto)
 	 */
-	@Cacheable(value="univweb_cache")
+	//@Cacheable(value="univweb_cache")
 	public PageInfo<UserQueryOutDto> queryUserList(UserQueryDto userQryDto) {
 		SysUsersExample userExample = new SysUsersExample();
 		userExample.createCriteria().andIdIsNotNull();
 		//this.initPage(userQryDto);
-		PageHelper.startPage(userQryDto.getPageNum(), userQryDto.getPageSize());
+		//PageHelper.startPage(userQryDto.getPageNum(), userQryDto.getPageSize()); //设置页面问题
 		List<SysUsers> userList = userDao.selectByExample(userExample);
-		List<UserQueryOutDto> userQryOutList = this.convert(userList, UserQueryOutDto.class);
+		List<UserQueryOutDto> userQryOutList = convert(userList, UserQueryOutDto.class);
 		PageInfo<UserQueryOutDto> userPageInfo = new PageInfo<UserQueryOutDto>(userQryOutList);
 		return userPageInfo;
 	}

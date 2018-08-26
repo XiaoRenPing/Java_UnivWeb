@@ -60,4 +60,22 @@ public class JobController {
 	public Integer deleteJob(@RequestParam("id") Long id) {
 		return jobsService.deleteSysJobs(id);
 	}
+	
+	// -------------------------- 启动/停止     -----------------------------
+	/**
+	 * 启动任务
+	 * @param ids id字符串数组
+	 * @return
+	 */
+	@RequestMapping(method=RequestMethod.GET, value="/start")
+	@ResponseBody
+	public Integer startJob(@RequestParam("ids") String ids) {
+		return jobsService.startSysJob(ids);
+	}
+	
+	@RequestMapping(method=RequestMethod.GET, value="/stop")
+	@ResponseBody
+	public Integer stopJob(@RequestParam("ids") String ids) {
+		return jobsService.stopJob(ids);
+	}
 }
