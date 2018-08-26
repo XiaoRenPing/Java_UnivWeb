@@ -3,6 +3,8 @@ package com.rpym.univweb.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class SysPermissions implements Serializable {
     private Long id;
 
@@ -10,6 +12,7 @@ public class SysPermissions implements Serializable {
 
     private Boolean isgranted;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date creationtime;
 
     private Long creatoruserid;

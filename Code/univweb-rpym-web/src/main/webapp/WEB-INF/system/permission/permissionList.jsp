@@ -8,13 +8,13 @@
 <body class="fixed-sidebar full-height-layout gray-bg">
     <div class="row wrapper border-bottom white-bg page-heading">
                 <div class="col-lg-10">
-                    <h2>用户列表</h2>
+                    <h2>权限列表</h2>
                     <ol class="breadcrumb">
                         <li>
                             <a href="home/index">主页</a>
                         </li>
                         <li>
-                            <a>用户管理</a>
+                            <a>权限管理</a>
                         </li>
                     </ol>
                 </div>
@@ -29,18 +29,14 @@
                     <div class="col-lg-12 clearfix" >
                         <div class="ibox float-e-margins">
                         	<div class="operation-btn pull-left">
-                        	<a href="javascript:void(0)" class="btn btn-primary" id="add_btn" >新增用户</a> 
+                        	<a href="javascript:void(0)" class="btn btn-primary" id="add_btn" >新增权限</a> 
                         	</div>
                             <div class="pull-right">
                                 <div class="ibox-tools">
 		                            <form role="form" class="form-inline" id="searchForm">
 		                                <div class="form-group">
 		                                    <label>用户名：</label>
-		                                    <input type="text" name="username" placeholder="请输入用户名" class="form-control input-middle">
-		                                </div>
-		                                <div class="form-group">
-		                                    <label>邮箱：</label>
-		                                    <input type="text" name="email" placeholder="请输入邮箱" class="form-control input-middle">
+		                                    <input type="text" name="username" placeholder="请输入权限" class="form-control input-middle">
 		                                </div>
 		                                <a class="btn btn-primary"  role="button" id="searchBtn">查询</a>
 		                                <a href="javascript:void(0)" class="btn btn-primary" id="refresh_btn">重置</a>
@@ -48,24 +44,20 @@
                                 </div>
                             </div>
                              <div class="ibox-content">
-	                            <div id="vue-userList">
+	                            <div id="vue-permissionList">
 									<table class="table table-striped table-bordered table-hover">
 										<tr>
 											<td><input type="checkbox" name="ids">全选</td>
-											<td>用户名</td>
-											<td>姓名</td>
-											<td>邮箱</td>
-											<td>手机号</td>
-											<td>状态</td>
+											<td>名称</td>
+											<td>创建人</td>
+											<td>创建时间</td>
 											<td>操作</td>
 										</tr>
-										<tr v-for="user in userList">
+										<tr v-for="permission in permissionList">
 											<td><input type="checkbox" name="ids"></td>
-											<td>{{user.username}}</td>
-											<td>{{user.name}}</td>
-											<td>{{user.emailaddress}}</td>
-											<td>{{user.phonenumber}}</td>
-											<td>{{user.isactivetext}}</td>
+											<td>{{permission.name}}</td>
+											<td>{{permission.creatoruserid}}</td>
+											<td>{{permission.creationtime}}</td>
 											<td>
 												<a>查看</a>
 												<a>编辑</a>
@@ -86,19 +78,19 @@
 	<script>
     Vue.use(VueResource);      //这个一定要加上，指的是调用vue-resource.js
     new Vue({
-        el: '#vue-userList',      //div的id
+        el: '#vue-permissionList',      //div的id
         data: {
-        	userList: ""    //数据，名称自定
+        	permissionList: ""    //数据，名称自定
         },
         created: function () { //created方法，页面初始调用   
         	var page = 1;
         	var rows = 1;
-            var url = "http://127.0.0.1:8081/univweb-rpym-web/users/list"//?page="+page+"&rows="+rows;
+            var url = "http://127.0.0.1:8081/univweb-rpym-web/permissions/list"//?page="+page+"&rows="+rows;
             this.$http.get(url).then(function (data) {   //ajax请求封装
                 var json = data.bodyText;
                 var resultData = JSON.parse(json);
                 //我的json数据参考下面
-                this.userList = resultData["list"];
+                this.permissionList = resultData["list"];
             }, function (response) {     //返回失败方法调用，暂不处理
                 console.info(response);
             })

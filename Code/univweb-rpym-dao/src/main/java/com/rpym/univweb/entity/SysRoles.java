@@ -3,6 +3,8 @@ package com.rpym.univweb.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class SysRoles implements Serializable {
     private Integer id;
 
@@ -12,10 +14,14 @@ public class SysRoles implements Serializable {
 
     private String displayname;
 
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date lastmodificationtime;
 
     private Long lastmodifieruserid;
 
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date creationtime;
 
     private Long creatoruserid;
@@ -28,6 +34,8 @@ public class SysRoles implements Serializable {
 
     private Long deleteruserid;
 
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date deletiontime;
 
     private static final long serialVersionUID = 1L;

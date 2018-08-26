@@ -4,6 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.rpym.univweb.dto.role.QuerySysRoleDto;
 import com.rpym.univweb.dto.role.SysRolesDto;
 import com.rpym.univweb.entity.SysRoles;
+import com.rpym.univweb.entity.SysUserRoles;
 
 public interface ISysRoleService {
 

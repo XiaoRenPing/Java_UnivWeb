@@ -23,17 +23,17 @@ public class NotificationController {
 	
 	@RequestMapping(method=RequestMethod.GET, value="/toadd")
 	public String toAddNotification() {
-		return "system/notifications/addNotification";
+		return "system/notification/addNotification";
 	}
 	
 	@RequestMapping(method=RequestMethod.GET, value="/toedit")
 	public String toEditNotification() {
-		return "system/notifications/editNotification";
+		return "system/notification/editNotification";
 	}
 	
 	@RequestMapping(method=RequestMethod.GET, value="/index")
 	public String pageListNotification() {
-		return "system/notifications/notificationList";
+		return "system/notification/notificationList";
 	}
 	
 	//------------------------------- 定时器管理 -------------------------------------
