@@ -11,6 +11,7 @@ import com.github.pagehelper.PageInfo;
 import com.rpym.univweb.dao.SysRolesMapper;
 import com.rpym.univweb.dto.role.QuerySysRoleDto;
 import com.rpym.univweb.dto.role.SysRolesDto;
+import com.rpym.univweb.dto.role.SysRolesQryOutDto;
 import com.rpym.univweb.entity.SysRoles;
 import com.rpym.univweb.entity.SysRolesExample;
 import com.rpym.univweb.service.base.BaseService;
@@ -53,7 +54,7 @@ public class SysRoleServiceImpl extends BaseService implements ISysRoleService{
 	/**
 	 * 全表查询
 	 */
-	public PageInfo<SysRoles> queryRoles(QuerySysRoleDto qdto) {
+	public PageInfo<SysRolesQryOutDto> queryRoles(QuerySysRoleDto qdto) {
 		SysRolesExample roleExample = new SysRolesExample();
 		SysRolesExample.Criteria criteria = roleExample.createCriteria();
 		if(qdto.getName() != null) {
@@ -64,7 +65,8 @@ public class SysRoleServiceImpl extends BaseService implements ISysRoleService{
 		}
 		//initPage(qdto);
 		List<SysRoles> list = sysRolesDao.selectByExample(roleExample);
-		return new PageInfo<SysRoles>(list);
+		List<SysRolesQryOutDto> rolesList = this.convert(list, SysRolesQryOutDto.class);
+		return new PageInfo<SysRolesQryOutDto>(rolesList);
 	}
 	
 	/**

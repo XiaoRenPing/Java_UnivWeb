@@ -36,7 +36,7 @@
 		                            <form role="form" class="form-inline" id="searchForm">
 		                                <div class="form-group">
 		                                    <label>菜单名：</label>
-		                                    <input type="text" name="username" placeholder="请输入角色" class="form-control input-middle">
+		                                    <input type="text" name="title" placeholder="请输入角色" class="form-control input-middle">
 		                                </div>
 		                                <a class="btn btn-primary"  role="button" id="searchBtn">查询</a>
 		                                <a href="javascript:void(0)" class="btn btn-primary" id="refresh_btn">重置</a>
@@ -78,26 +78,26 @@
         </div>  
 	<jsp:include page="/common/footer.jsp"></jsp:include>
 	<script>
-    Vue.use(VueResource);      //这个一定要加上，指的是调用vue-resource.js
-    new Vue({
-        el: '#vue-notificationList',      //div的id
-        data: {
-        	notificationList: ""    //数据，名称自定
-        },
-        created: function () { //created方法，页面初始调用   
-        	var page = 1;
-        	var rows = 1;
-            var url = "http://127.0.0.1:8081/univweb-rpym-web/notifications/list"//?page="+page+"&rows="+rows;
-            this.$http.get(url).then(function (data) {   //ajax请求封装
-                var json = data.bodyText;
-                var resultData = JSON.parse(json);
-                //我的json数据参考下面
-                this.notificationList = resultData["list"];
-            }, function (response) {     //返回失败方法调用，暂不处理
-                console.info(response);
-            })
-        }
-    });
+	    Vue.use(VueResource);      //这个一定要加上，指的是调用vue-resource.js
+	    new Vue({
+	        el: '#vue-notificationList',      //div的id
+	        data: {
+	        	notificationList: ""    //数据，名称自定
+	        },
+	        created: function () { //created方法，页面初始调用   
+	        	var page = 1;
+	        	var rows = 1;
+	            var url = "http://127.0.0.1:8081/univweb-rpym-web/notifications/list"//?page="+page+"&rows="+rows;
+	            this.$http.get(url).then(function (data) {   //ajax请求封装
+	                var json = data.bodyText;
+	                var resultData = JSON.parse(json);
+	                //我的json数据参考下面
+	                this.notificationList = resultData["list"];
+	            }, function (response) {     //返回失败方法调用，暂不处理
+	                console.info(response);
+	            })
+	        }
+	    });
 </script>
 </body>
 </html>

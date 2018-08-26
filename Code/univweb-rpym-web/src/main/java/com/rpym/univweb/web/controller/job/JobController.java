@@ -12,6 +12,7 @@ import com.rpym.univweb.dto.job.SysJobsDto;
 import com.rpym.univweb.dto.job.SysJobsQueryDto;
 import com.rpym.univweb.entity.SysJobs;
 import com.rpym.univweb.service.system.job.ISysJobsService;
+import com.rpym.univweb.utils.ResponseResult;
 
 @Controller
 @RequestMapping("/jobs/*")
@@ -69,13 +70,27 @@ public class JobController {
 	 */
 	@RequestMapping(method=RequestMethod.GET, value="/start")
 	@ResponseBody
-	public Integer startJob(@RequestParam("ids") String ids) {
+	public ResponseResult startJob(@RequestParam("id") Long id) {
+		return jobsService.startSingleSysJob(id);
+	}
+	
+	
+	
+	@RequestMapping(method=RequestMethod.GET, value="/batchstart")
+	@ResponseBody
+	public Integer startJobs(@RequestParam("ids") String ids) {
 		return jobsService.startSysJob(ids);
 	}
 	
 	@RequestMapping(method=RequestMethod.GET, value="/stop")
 	@ResponseBody
-	public Integer stopJob(@RequestParam("ids") String ids) {
-		return jobsService.stopJob(ids);
+	public ResponseResult stopJob(@RequestParam("id") Long id) {
+		return jobsService.startSingleSysJob(id);
+	}
+	
+	@RequestMapping(method=RequestMethod.GET, value="/batchstop")
+	@ResponseBody
+	public Integer stopJobs(@RequestParam("ids") String ids) {
+		return jobsService.stopJobs(ids);
 	}
 }

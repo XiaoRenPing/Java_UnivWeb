@@ -4,6 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.rpym.univweb.dto.job.SysJobsDto;
 import com.rpym.univweb.dto.job.SysJobsQueryDto;
 import com.rpym.univweb.entity.SysJobs;
+import com.rpym.univweb.utils.ResponseResult;
 
 public interface ISysJobsService {
 
@@ -19,7 +20,7 @@ public interface ISysJobsService {
 
 	public Integer startSysJob(String ids);
 
-	public Integer stopJob(String ids);
+	public Integer stopJobs(String ids);
 
-	
+	public ResponseResult startSingleSysJob(Long id);
 }

@@ -8,13 +8,13 @@
 <body class="fixed-sidebar full-height-layout gray-bg">
     <div class="row wrapper border-bottom white-bg page-heading">
                 <div class="col-lg-10">
-                    <h2>菜单列表</h2>
+                    <h2>配置列表</h2>
                     <ol class="breadcrumb">
                         <li>
                             <a href="home/index">主页</a>
                         </li>
                         <li>
-                            <a>菜单管理</a>
+                            <a>配置管理</a>
                         </li>
                     </ol>
                 </div>
@@ -29,13 +29,13 @@
                     <div class="col-lg-12 clearfix" >
                         <div class="ibox float-e-margins">
                         	<div class="operation-btn pull-left">
-                        	<a href="javascript:void(0)" class="btn btn-primary" id="add_btn" >新增角色</a> 
+                        	<a href="javascript:void(0)" class="btn btn-primary" id="add_btn" >新增配置</a> 
                         	</div>
                             <div class="pull-right">
                                 <div class="ibox-tools">
 		                            <form role="form" class="form-inline" id="searchForm">
 		                                <div class="form-group">
-		                                    <label>菜单名：</label>
+		                                    <label>配置名称：</label>
 		                                    <input type="text" name="displayname" placeholder="请输入菜单" class="form-control input-middle">
 		                                </div>
 		                                <a class="btn btn-primary"  role="button" id="searchBtn">查询</a>
@@ -56,14 +56,14 @@
 											<td>菜单图标</td>
 											<td>操作</td>
 										</tr>
-										<tr v-for="menu in menuList">
+										<tr v-for="group in groupList">
 											<td><input type="checkbox" name="ids"></td>
-											<td>{{menu.displayname}}</td>
-											<td>{{menu.permissionname}}</td>
-											<td>{{menu.menuurl}}</td>
-											<td>{{menu.parents}}</td>
-											<td>{{menu.menuorder}}</td>
-											<td>{{menu.menuicon}}</td>
+											<td>{{group.displayname}}</td>
+											<td>{{group.permissionname}}</td>
+											<td>{{group.menuurl}}</td>
+											<td>{{group.parents}}</td>
+											<td>{{group.menuorder}}</td>
+											<td>{{group.menuicon}}</td>
 											<td>
 												<a>查看</a>
 												<a>编辑</a>
@@ -84,19 +84,19 @@
 	<script>
     Vue.use(VueResource);      //这个一定要加上，指的是调用vue-resource.js
     new Vue({
-        el: '#vue-menuList',      //div的id
+        el: '#vue-groupList',      //div的id
         data: {
         	menuList: ""    //数据，名称自定
         },
         created: function () { //created方法，页面初始调用   
         	var page = 1;
         	var rows = 1;
-            var url = "http://127.0.0.1:8081/univweb-rpym-web/menus/list"//?page="+page+"&rows="+rows;
+            var url = "http://127.0.0.1:8081/univweb-rpym-web/groups/list"//?page="+page+"&rows="+rows;
             this.$http.get(url).then(function (data) {   //ajax请求封装
                 var json = data.bodyText;
                 var resultData = JSON.parse(json);
                 //我的json数据参考下面
-                this.menuList = resultData["list"];
+                this.groupList = resultData["list"];
             }, function (response) {     //返回失败方法调用，暂不处理
                 console.info(response);
             })

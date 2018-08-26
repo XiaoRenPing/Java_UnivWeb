@@ -12,7 +12,7 @@ import com.rpym.univweb.annotation.ScheduleJob;
 import com.rpym.univweb.service.base.BaseService;
 
 @Service("advertisementJob")
-@ScheduleJob(name = "广告倒计时", desc = "广告倒计时", cron = "*/2 * * * * ?", args = "", isabandoned = "0")
+@ScheduleJob(name = "advertisementJob", desc = "advertisementJob", cron = "*/2 * * * * ?", args = "", isabandoned = "0")
 public class AdvertisementJob extends BaseService implements Job{
 	
 	private static final Logger logger = Logger.getLogger(AdvertisementJob.class);

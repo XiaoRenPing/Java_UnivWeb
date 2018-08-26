@@ -16,6 +16,8 @@ import com.rpym.univweb.entity.SysJobs;
 import com.rpym.univweb.entity.SysJobsExample;
 import com.rpym.univweb.service.base.BaseService;
 import com.rpym.univweb.service.system.job.ISysJobsService;
+import com.rpym.univweb.utils.QuartzManager;
+import com.rpym.univweb.utils.ResponseResult;
 import com.rpym.univweb.utils.UWException;
 
 @Service("sysJobsService")
@@ -102,13 +104,31 @@ public class SysJobServiceImpl extends BaseService implements ISysJobsService{
 	}
 
 	/**
-	 * 批量启动
+	 * 启动
 	 */
-	public Integer startSysJob(String ids) {
+	public ResponseResult startSingleSysJob(Long id) {
+		SysJobs job = sysJobsDao.selectByPrimaryKey(id);
+		if(job != null) {
+			QuartzManager.addJob(job.getJobname(),  QuartzManager.JOB_GROUP_NAME, "univweb_"+job.getJobname(), QuartzManager.TRIGGER_GROUP_NAME, job.getClass(), job.getJobcron());
+		}
+		return ResponseResult.ok();
+	}
+	
+	public ResponseResult stopSingleSysJob(Long id) {
+		SysJobs job = sysJobsDao.selectByPrimaryKey(id);
+		if(job != null) {
+			QuartzManager.pauseJob(job.getJobname(), QuartzManager.JOB_GROUP_NAME, "univweb_"+job.getJobname(), QuartzManager.TRIGGER_GROUP_NAME);
+		}
+		return ResponseResult.ok();
+	}
+
+	
+	public Integer stopJobs(String ids) {
 		return null;
 	}
 
-	public Integer stopJob(String ids) {
+	public Integer startSysJob(String ids) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 

@@ -60,6 +60,8 @@ public class SpringContextHolder implements ApplicationListener<ContextRefreshed
 				dto.setJobcron(job.cron());
 				try {
 					sysJobsService.saveSysJobs(dto);
+					//启动
+					//QuartzManager.addJob(job.name(), "EXTJWEB_JOBGROUP_NAME", "univb"+job.name(), "EXTJWEB_TRIGGERGROUP_NAME", jobImpl.getClass(), job.cron());
 				} catch (Exception e) {
 					System.out.println(e.getMessage());
 				}

@@ -3,8 +3,8 @@ package com.rpym.univweb.service.system.role;
 import com.github.pagehelper.PageInfo;
 import com.rpym.univweb.dto.role.QuerySysRoleDto;
 import com.rpym.univweb.dto.role.SysRolesDto;
+import com.rpym.univweb.dto.role.SysRolesQryOutDto;
 import com.rpym.univweb.entity.SysRoles;
-import com.rpym.univweb.entity.SysUserRoles;
 
 public interface ISysRoleService {
 
@@ -13,7 +13,7 @@ public interface ISysRoleService {
     //删除角色
     public boolean deleteRole(int id);
     //角色列表
-    public PageInfo<SysRoles> queryRoles(QuerySysRoleDto qdto);
+    public PageInfo<SysRolesQryOutDto> queryRoles(QuerySysRoleDto qdto);
     //单个详情
     public SysRoles queryRolesById(int id);
     //更新角色

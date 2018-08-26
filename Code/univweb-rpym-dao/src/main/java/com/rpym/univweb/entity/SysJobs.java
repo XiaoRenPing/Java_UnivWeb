@@ -3,6 +3,8 @@ package com.rpym.univweb.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class SysJobs implements Serializable {
     private Long id;
 
@@ -24,12 +26,15 @@ public class SysJobs implements Serializable {
 
     private Short trycount;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date nexttrytime;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date lasttrytime;
 
     private Boolean isabandoned;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date creationtime;
 
     private Long creatoruserid;

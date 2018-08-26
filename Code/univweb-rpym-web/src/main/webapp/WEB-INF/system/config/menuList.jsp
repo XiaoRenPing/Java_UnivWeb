@@ -8,13 +8,13 @@
 <body class="fixed-sidebar full-height-layout gray-bg">
     <div class="row wrapper border-bottom white-bg page-heading">
                 <div class="col-lg-10">
-                    <h2>菜单列表</h2>
+                    <h2>配置列表</h2>
                     <ol class="breadcrumb">
                         <li>
                             <a href="home/index">主页</a>
                         </li>
                         <li>
-                            <a>菜单管理</a>
+                            <a>配置管理</a>
                         </li>
                     </ol>
                 </div>
@@ -29,13 +29,13 @@
                     <div class="col-lg-12 clearfix" >
                         <div class="ibox float-e-margins">
                         	<div class="operation-btn pull-left">
-                        	<a href="javascript:void(0)" class="btn btn-primary" id="add_btn" >新增角色</a> 
+                        	<a href="javascript:void(0)" class="btn btn-primary" id="add_btn" >新增配置</a> 
                         	</div>
                             <div class="pull-right">
                                 <div class="ibox-tools">
 		                            <form role="form" class="form-inline" id="searchForm">
 		                                <div class="form-group">
-		                                    <label>菜单名：</label>
+		                                    <label>配置名称：</label>
 		                                    <input type="text" name="displayname" placeholder="请输入菜单" class="form-control input-middle">
 		                                </div>
 		                                <a class="btn btn-primary"  role="button" id="searchBtn">查询</a>

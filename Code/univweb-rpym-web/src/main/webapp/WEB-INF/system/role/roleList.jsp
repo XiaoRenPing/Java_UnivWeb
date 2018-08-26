@@ -35,8 +35,8 @@
                                 <div class="ibox-tools">
 		                            <form role="form" class="form-inline" id="searchForm">
 		                                <div class="form-group">
-		                                    <label>用户名：</label>
-		                                    <input type="text" name="username" placeholder="请输入角色" class="form-control input-middle">
+		                                    <label>角色名称：</label>
+		                                    <input type="text" name="name" placeholder="请输入角色" class="form-control input-middle">
 		                                </div>
 		                                <a class="btn btn-primary"  role="button" id="searchBtn">查询</a>
 		                                <a href="javascript:void(0)" class="btn btn-primary" id="refresh_btn">重置</a>
@@ -47,7 +47,7 @@
 	                            <div id="vue-roleList">
 									<table class="table table-striped table-bordered table-hover">
 										<tr>
-											<td><div class="checkbox i-checks"><label><input type="checkbox" name="ids"><i></i>全选</label></div></td>
+											<td><div class="checkbox-inline i-checks"><label><input type="checkbox" name="ids"><i></i>全选</label></div></td>
 											<td>权限名称</td>
 											<td>名称</td>
 											<td>更新时间</td>
@@ -56,7 +56,7 @@
 											<td>操作</td>
 										</tr>
 										<tr v-for="role in roleList">
-											<td><div class="checkbox i-checks"><label><input type="checkbox" name="id"><i></i></label></div></td>
+											<td><div class="checkbox-inline i-checks"><label><input type="checkbox" name="id"><i></i></label></div></td>
 											<td>{{role.name}}</td>
 											<td>{{role.displayname}}</td>
 											<td>{{role.lastmodificationtime}}</td>

@@ -8,13 +8,13 @@
 <body class="fixed-sidebar full-height-layout gray-bg">
     <div class="row wrapper border-bottom white-bg page-heading">
                 <div class="col-lg-10">
-                    <h2>菜单列表</h2>
+                    <h2>任务列表</h2>
                     <ol class="breadcrumb">
                         <li>
                             <a href="home/index">主页</a>
                         </li>
                         <li>
-                            <a>菜单管理</a>
+                            <a>任务管理</a>
                         </li>
                     </ol>
                 </div>
@@ -29,14 +29,14 @@
                     <div class="col-lg-12 clearfix" >
                         <div class="ibox float-e-margins">
                         	<div class="operation-btn pull-left">
-                        	<a href="javascript:void(0)" class="btn btn-primary" id="add_btn" >新增角色</a> 
+                        	<a href="javascript:void(0)" class="btn btn-primary" id="add_btn" >新增定时任务</a> 
                         	</div>
                             <div class="pull-right">
                                 <div class="ibox-tools">
 		                            <form role="form" class="form-inline" id="searchForm">
 		                                <div class="form-group">
-		                                    <label>菜单名：</label>
-		                                    <input type="text" name="displayname" placeholder="请输入菜单" class="form-control input-middle">
+		                                    <label>定时任务名称：</label>
+		                                    <input type="text" name="name" placeholder="请输入定时任务" class="form-control input-middle">
 		                                </div>
 		                                <a class="btn btn-primary"  role="button" id="searchBtn">查询</a>
 		                                <a href="javascript:void(0)" class="btn btn-primary" id="refresh_btn">重置</a>
@@ -44,30 +44,32 @@
                                 </div>
                             </div>
                              <div class="ibox-content">
-	                            <div id="vue-menuList">
+	                            <div id="vue-jobList">
 									<table class="table table-striped table-bordered table-hover">
 										<tr>
-											<td><input type="checkbox" name="ids">全选</td>
-											<td>名称</td>
-											<td>对应授权</td>
-											<td>链接</td>
-											<td>上级菜单</td>
-											<td>菜单排序</td>
-											<td>菜单图标</td>
+											<td><div class="checkbox-inline i-checks"><label><input type="checkbox" name="ids"><i></i>全选</label></div></td>
+											<td>定时任务名称</td>
+											<td>执行类</td>
+											<td>参数</td>
+											<td>描述</td>
+											<td>运行状态</td>
+											<td>创建时间</td>
 											<td>操作</td>
 										</tr>
-										<tr v-for="menu in menuList">
-											<td><input type="checkbox" name="ids"></td>
-											<td>{{menu.displayname}}</td>
-											<td>{{menu.permissionname}}</td>
-											<td>{{menu.menuurl}}</td>
-											<td>{{menu.parents}}</td>
-											<td>{{menu.menuorder}}</td>
-											<td>{{menu.menuicon}}</td>
+										<tr v-for="job in jobList">
+											<td><div class="checkbox-inline i-checks"><label><input type="checkbox" name="id"><i></i></label></div></td>
+											<td>{{job.jobname}}</td>
+											<td>{{job.jobclass}}</td>
+											<td>{{job.jobargs}}</td>
+											<td>{{job.jobdesc}}</td>
+											<td>{{job.jobstatus}}</td>
+											<td>{{job.creationtime}}</td>
 											<td>
 												<a>查看</a>
 												<a>编辑</a>
 												<a>删除</a>
+												<a v-bind:href="'http://127.0.0.1:8081/univweb-rpym-web/jobs/start?id='+job.id">启动</a>
+												<a v-bind:href="'http://127.0.0.1:8081/univweb-rpym-web/jobs/stop?id='+job.id">停止</a>
 											</td>
 										</tr>
 									</table>
@@ -84,19 +86,19 @@
 	<script>
     Vue.use(VueResource);      //这个一定要加上，指的是调用vue-resource.js
     new Vue({
-        el: '#vue-menuList',      //div的id
+        el: '#vue-jobList',      //div的id
         data: {
-        	menuList: ""    //数据，名称自定
+        	jobList: ""    //数据，名称自定
         },
         created: function () { //created方法，页面初始调用   
         	var page = 1;
         	var rows = 1;
-            var url = "http://127.0.0.1:8081/univweb-rpym-web/menus/list"//?page="+page+"&rows="+rows;
+            var url = "http://127.0.0.1:8081/univweb-rpym-web/jobs/list"//?page="+page+"&rows="+rows;
             this.$http.get(url).then(function (data) {   //ajax请求封装
                 var json = data.bodyText;
                 var resultData = JSON.parse(json);
                 //我的json数据参考下面
-                this.menuList = resultData["list"];
+                this.jobList = resultData["list"];
             }, function (response) {     //返回失败方法调用，暂不处理
                 console.info(response);
             })

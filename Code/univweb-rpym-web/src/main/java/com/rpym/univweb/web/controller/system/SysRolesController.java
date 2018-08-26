@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.github.pagehelper.PageInfo;
 import com.rpym.univweb.dto.role.QuerySysRoleDto;
 import com.rpym.univweb.dto.role.SysRolesDto;
+import com.rpym.univweb.dto.role.SysRolesQryOutDto;
 import com.rpym.univweb.entity.SysRoles;
 import com.rpym.univweb.entity.SysUserRoles;
 import com.rpym.univweb.service.system.role.ISysRoleService;
@@ -41,7 +42,7 @@ public class SysRolesController {
 	
 	@RequestMapping(method=RequestMethod.GET, value="/list")
 	@ResponseBody
-	public PageInfo<SysRoles> listRole(@ModelAttribute QuerySysRoleDto roleQueryDto) {
+	public PageInfo<SysRolesQryOutDto> listRole(@ModelAttribute QuerySysRoleDto roleQueryDto) {
 		return sysRoleService.queryRoles(roleQueryDto);
 	}
 	

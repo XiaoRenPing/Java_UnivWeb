@@ -7,16 +7,28 @@ import org.quartz.JobBuilder;
 import org.quartz.JobDetail;
 import org.quartz.JobKey;
 import org.quartz.Scheduler;
+import org.quartz.SchedulerException;
+import org.quartz.SchedulerFactory;
 import org.quartz.Trigger;
 import org.quartz.TriggerBuilder;
 import org.quartz.TriggerKey;
+import org.quartz.impl.StdSchedulerFactory;
 import org.quartz.impl.triggers.SimpleTriggerImpl;
 
 public class QuartzManager {
 	
-	private static Scheduler scheduler = null;
+	public static String JOB_GROUP_NAME = "EXTJWEB_JOBGROUP_NAME";
+	public static String TRIGGER_GROUP_NAME = "EXTJWEB_TRIGGERGROUP_NAME";
+
 	
+	private static Scheduler scheduler = null;
+	private static SchedulerFactory gSchedulerFactory = new StdSchedulerFactory();
 	public static Scheduler getScheduler() {
+		try {
+			scheduler = gSchedulerFactory.getScheduler();
+		} catch (SchedulerException e) {
+			e.printStackTrace();
+		}
         return scheduler;
     }
 	
@@ -51,6 +63,7 @@ public class QuartzManager {
             
             //scheduler = (Scheduler) SpringContextUtils.getBean("schedulerFactory");
             // 调度容器设置JobDetail和Trigger
+            scheduler = getScheduler();
             if(scheduler != null) {
             	scheduler.scheduleJob(jobDetail, trigger);  
             	// 启动  
@@ -63,8 +76,6 @@ public class QuartzManager {
         }  
     }  
 
-   
-
 	/** 
      * @Description: 修改一个任务的触发时间
      *  
@@ -74,8 +85,7 @@ public class QuartzManager {
      * @param triggerGroupName 触发器组名 
      * @param cron   时间设置，参考quartz说明文档   
      */  
-    public static void modifyJobTime(String jobName, 
-            String jobGroupName, String triggerName, String triggerGroupName, String cron) {  
+    public static void modifyJobTime(String jobName, String jobGroupName, String triggerName, String triggerGroupName, String cron) {  
         try {  
             TriggerKey triggerKey = TriggerKey.triggerKey(triggerName, triggerGroupName);
             CronTrigger trigger = (CronTrigger) scheduler.getTrigger(triggerKey);  

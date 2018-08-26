@@ -36,7 +36,7 @@
 		                            <form role="form" class="form-inline" id="searchForm">
 		                                <div class="form-group">
 		                                    <label>用户名：</label>
-		                                    <input type="text" name="username" placeholder="请输入权限" class="form-control input-middle">
+		                                    <input type="text" name="name" placeholder="请输入权限" class="form-control input-middle">
 		                                </div>
 		                                <a class="btn btn-primary"  role="button" id="searchBtn">查询</a>
 		                                <a href="javascript:void(0)" class="btn btn-primary" id="refresh_btn">重置</a>
