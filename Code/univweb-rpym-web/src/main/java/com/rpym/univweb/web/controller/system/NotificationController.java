@@ -15,7 +15,7 @@ import com.rpym.univweb.entity.SysUserNotifications;
 import com.rpym.univweb.service.system.notification.INotificationService;
 
 @Controller
-@RequestMapping("/notification/*")
+@RequestMapping("/notifications/*")
 public class NotificationController {
 
 	@Autowired

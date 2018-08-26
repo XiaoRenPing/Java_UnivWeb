@@ -17,6 +17,8 @@ public class UserQueryOutDto {
     private String idcardnumber;
 
     private Boolean isactive;
+    private String isactivetext;
+    
     
 	public Long getId() {
 		return id;
@@ -81,6 +83,18 @@ public class UserQueryOutDto {
 	public void setIsactive(Boolean isactive) {
 		this.isactive = isactive;
 	}
-    
+
+	public String getIsactivetext() {
+		if(this.getIsactive()) {
+			this.setIsactivetext("正常");
+		}else {
+			this.setIsactivetext("禁用");
+		}
+		return isactivetext;
+	}
+
+	public void setIsactivetext(String isactivetext) {
+		this.isactivetext = isactivetext;
+	}
     
 }

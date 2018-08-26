@@ -17,6 +17,7 @@ import com.rpym.univweb.entity.SysUserNotificationsExample;
 import com.rpym.univweb.entity.SysUsers;
 import com.rpym.univweb.service.base.BaseService;
 import com.rpym.univweb.service.system.notification.INotificationService;
+import com.rpym.univweb.utils.UWException;
 
 /**
  * 系统消息业务服务
@@ -78,6 +79,9 @@ public class NotificationServiceImpl extends BaseService implements INotificatio
 	public PageInfo<SysUserNotifications> findNotificationByUser(NotificationsQueryDto jobQueryDto, HttpServletRequest request) {
 		//接收人
 		SysUsers sessionUser = (SysUsers) request.getSession().getAttribute("sessionUser");
+		if(sessionUser == null) {
+			throw new UWException("您的登录失效，请重新登录！");
+		}
 		SysUserNotificationsExample sysUserNotificationsExample = new SysUserNotificationsExample();
 		SysUserNotificationsExample.Criteria sysUserNotificationsCriteria = sysUserNotificationsExample.createCriteria();
 		sysUserNotificationsCriteria.andCreatoruseridEqualTo(sessionUser.getId());

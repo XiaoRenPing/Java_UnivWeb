@@ -108,7 +108,7 @@ public class UserController extends BaseController{
 	 */
 	@RequestMapping(method=RequestMethod.GET, value="/index")
 	public String userIndex(){
-		return "/view/user/userList";
+		return "/view/user/user";
 	}
 	
 	/**
