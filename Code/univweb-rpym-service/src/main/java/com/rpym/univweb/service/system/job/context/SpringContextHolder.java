@@ -23,7 +23,7 @@ public class SpringContextHolder implements ApplicationListener<ContextRefreshed
 
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
 		SpringContextHolder.applicationContext = applicationContext;
-		SpringContextUtils.setApplicationContext(applicationContext);
+		//SpringContextUtils.setApplicationContext(applicationContext);
 		Scheduler scheduler = (Scheduler) SpringContextHolder.getBean("schedulerFactory");
 		QuartzManager.setScheduler(scheduler);
 		initJobToDB();
@@ -46,10 +46,10 @@ public class SpringContextHolder implements ApplicationListener<ContextRefreshed
 		ISysJobsService sysJobsService = (ISysJobsService)applicationContext.getBean("sysJobsService");
 		String names[] = applicationContext.getBeanNamesForAnnotation(ScheduleJob.class);
 		for(String name : names) {
+			System.out.println(">>>>>>>>>>>>>>>>>>>任务:"+name+"<<<<<<<<<<<<<<<<<<<<<");
 			
 			Job jobImpl = getBeanFromProxy((Job)applicationContext.getBean(name));
 			ScheduleJob job = jobImpl.getClass().getAnnotation(ScheduleJob.class);
-			
 			if (null != job) {
 				//插入到数据中
 				SysJobsDto dto = new SysJobsDto();

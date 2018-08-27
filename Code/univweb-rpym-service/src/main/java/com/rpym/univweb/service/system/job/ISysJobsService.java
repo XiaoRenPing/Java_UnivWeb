@@ -23,4 +23,6 @@ public interface ISysJobsService {
 	public Integer stopJobs(String ids);
 
 	public ResponseResult startSingleSysJob(Long id);
+
+	public ResponseResult stopSingleSysJob(Long id);
 }

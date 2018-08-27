@@ -85,7 +85,7 @@ public class JobController {
 	@RequestMapping(method=RequestMethod.GET, value="/stop")
 	@ResponseBody
 	public ResponseResult stopJob(@RequestParam("id") Long id) {
-		return jobsService.startSingleSysJob(id);
+		return jobsService.stopSingleSysJob(id);
 	}
 	
 	@RequestMapping(method=RequestMethod.GET, value="/batchstop")

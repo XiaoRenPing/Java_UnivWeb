@@ -129,8 +129,7 @@ public class QuartzManager {
      * @param triggerName 
      * @param triggerGroupName 
      */  
-    public static void pauseJob(String jobName, String jobGroupName,  
-            String triggerName, String triggerGroupName) {  
+    public static void pauseJob(String jobName, String jobGroupName, String triggerName, String triggerGroupName) {  
         try {  
             TriggerKey triggerKey = TriggerKey.triggerKey(triggerName, triggerGroupName);
             scheduler.pauseTrigger(triggerKey);// 停止触发器  

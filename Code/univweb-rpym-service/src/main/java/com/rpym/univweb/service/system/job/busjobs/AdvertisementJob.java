@@ -13,15 +13,12 @@ import com.rpym.univweb.service.base.BaseService;
 
 @Service("advertisementJob")
 @ScheduleJob(name = "advertisementJob", desc = "advertisementJob", cron = "*/2 * * * * ?", args = "", isabandoned = "0")
-public class AdvertisementJob extends BaseService implements Job{
+public class AdvertisementJob implements Job{
 	
 	private static final Logger logger = Logger.getLogger(AdvertisementJob.class);
 	
 	public void execute(JobExecutionContext context) throws JobExecutionException {
-		  System.out.println(new Date() + ": 开始检查广告到期....");
-		  
-		  
-		  System.out.println(new Date() + ": 结束检查广告到期....");
+		  System.out.println(String.format("%tF %tT", new Date()) + ": 检查广告到期....");
 	}
 
 }
