@@ -18,7 +18,7 @@ public class UserOnlineTimeJob implements Job {
 	private static final Logger logger = Logger.getLogger(UserOnlineTimeJob.class);
 	
 	public void execute(JobExecutionContext context) throws JobExecutionException {
-		System.out.println(String.format("%tF %tT", new Date() + ": 检查用户登录任务...."));
+		System.out.println(String.format("%tF %<tT", new Date()) + ": 检查用户登录任务....");
 	}
 
 }

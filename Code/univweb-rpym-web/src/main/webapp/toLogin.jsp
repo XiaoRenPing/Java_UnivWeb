@@ -12,7 +12,7 @@
 <head>
 <base href="<%=basePath%>">
 
-<title>高星文网络科技-用户登录</title>
+<title>univweb-用户登录</title>
 
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">

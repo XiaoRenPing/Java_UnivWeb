@@ -23,7 +23,6 @@ public class SpringContextHolder implements ApplicationListener<ContextRefreshed
 
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
 		SpringContextHolder.applicationContext = applicationContext;
-		//SpringContextUtils.setApplicationContext(applicationContext);
 		Scheduler scheduler = (Scheduler) SpringContextHolder.getBean("schedulerFactory");
 		QuartzManager.setScheduler(scheduler);
 		initJobToDB();

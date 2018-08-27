@@ -68,7 +68,7 @@
 							</a>
 							<ul class="nav nav-second-level">
 								<li>
-									<a class="J_menuItem" href="http://127.0.0.1:8081/activiti-explorer/" target="dataContent">流程设计</a>
+									<a class="J_menuItem" href="http://127.0.0.1:8081/workflow/" target="dataContent">流程设计</a>
 								</li>
 							</ul>
                  		  </li>

@@ -18,7 +18,7 @@ public class AdvertisementJob implements Job{
 	private static final Logger logger = Logger.getLogger(AdvertisementJob.class);
 	
 	public void execute(JobExecutionContext context) throws JobExecutionException {
-		  System.out.println(String.format("%tF %tT", new Date()) + ": 检查广告到期....");
+		  System.out.println(String.format("%tF %<tT", new Date()) + ": 检查广告到期....");
 	}
 
 }

@@ -63,7 +63,7 @@ public class QuartzManager {
             
             //scheduler = (Scheduler) SpringContextUtils.getBean("schedulerFactory");
             // 调度容器设置JobDetail和Trigger
-            scheduler = getScheduler();
+            //scheduler = getScheduler();
             if(scheduler != null) {
             	scheduler.scheduleJob(jobDetail, trigger);  
             	// 启动  
