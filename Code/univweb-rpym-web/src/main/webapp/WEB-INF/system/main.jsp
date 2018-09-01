@@ -62,19 +62,34 @@
                     </c:forEach>
                     	<li>
 							<a href="#">
-								<i class="fa fa-desktop"></i> 
-								<span class="nav-label">流程设计</span>
+								<i class="fa fa-deviantart"></i> 
+								<span class="nav-label">工作流管理</span>
 								<span class="fa arrow"></span>
 							</a>
 							<ul class="nav nav-second-level">
-								<li>
-									<a class="J_menuItem" href="http://127.0.0.1:8081/workflow/" target="dataContent">流程设计</a>
-								</li>
-							</ul>
-                 		  </li>
-                </ul>
-                
-                
+								 <li>
+	                                <a href="index.html#">
+	                        	 		<i class="fa fa-cubes"></i> 
+	                        	 		<span class="nav-label">综合流程</span>
+	                        	 		<span class="fa arrow"></span>
+	                        	 	</a>
+	                                <ul class="nav nav-third-level">
+		                                <li><a class="J_menuItem" href="http://127.0.0.1:8081/univweb-xrp-workflow/form/dynamic/process-list?processType=all" target="dataContent">流程列表</a></li>
+		                            </ul>
+		                         </li>
+	                        	 <li>
+	                        	 	<a href="index.html#">
+	                        	 		<i class="fa fa-magic"></i> 
+	                        	 		<span class="nav-label">流程设计</span>
+	                        	 		<span class="fa arrow"></span>
+	                        	 	</a>
+									<ul class="nav nav-third-level">
+										<li><a class="J_menuItem" href="http://127.0.0.1:8081/univweb-xrp-workflow/workflow/model/list" target="dataContent">流程设计</a>
+	                                    <li><a class="J_menuItem" href='http://127.0.0.1:8081/univweb-xrp-workflow/workflow/process-list' target="dataContent">流程定义及部署管理</a></li>
+										<li><a class="J_menuItem" href='http://127.0.0.1:8081/univweb-xrp-workflow/workflow/processinstance/running' target="dataContent">运行中流程</a></li>
+									</ul>
+                 		 		 </li>
+                			</ul>
             </div>
         </nav>
         <!--左侧导航结束-->

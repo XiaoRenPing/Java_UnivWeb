@@ -1,20 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<%@ include file="/common/global.jsp"%>
-	<script>
-		var notLogon = ${empty user};
-		if (notLogon) {
-			location.href = '${ctx}/login?error=nologon';
-		}
-	</script>
-	<%@ include file="/common/meta.jsp" %>
-	<%@ include file="/common/include-base-styles.jsp" %>
-	<%@ include file="/common/include-jquery-ui-theme.jsp" %>
-	<%@ include file="/common/include-custom-styles.jsp" %>
+	
+<%@ include file="/common/meta.jsp" %>
+	<%-- <%@ include file="/common/include-base-styles.jsp" %>
+	<%@ include file="/common/include-jquery-ui-theme.jsp" %>--%>
+	<%@ include file="/common/include-custom-styles.jsp" %> 
 	<title>流程列表</title>
 
+		<link href="${ctx }/style/aceui/css/bootstrap.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="${ctx }/style/aceui/css/font-awesome.min.css" />
+		
+		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" />
+		
+		<link rel="stylesheet" href="${ctx }/style/aceui/css/ace.min.css" />
+		<link rel="stylesheet" href="${ctx }/style/aceui/css/ace-rtl.min.css" />
+		<link rel="stylesheet" href="${ctx }/style/aceui/css/ace-skins.min.css" />
+		
 	<script src="${ctx }/js/common/jquery-1.8.3.js" type="text/javascript"></script>
     <script src="${ctx }/js/common/plugins/jui/jquery-ui-${themeVersion }.min.js" type="text/javascript"></script>
     <script type="text/javascript">
@@ -35,8 +40,22 @@
     </script>
 </head>
 <body>
+
+	<div class="page-content">
+		<div class="page-header">
+			<h1>
+				模型列表
+			</h1>
+		</div>
+		
+	<div class="row">
+		<div class="col-xs-12">		
+		
+<!-- 容器 -->		
+<div class="row">
+	
 	<c:if test="${not empty message}">
-	<div class="ui-widget">
+		<div class="ui-widget">
 			<div class="ui-state-highlight ui-corner-all" style="margin-top: 20px; padding: 0 .7em;"> 
 				<p><span class="ui-icon ui-icon-info" style="float: left; margin-right: .3em;"></span>
 				<strong>提示：</strong>${message}</p>
@@ -56,50 +75,73 @@
 			<input type="submit" value="Submit" />
 		</form>
 	</fieldset>
-	<table width="100%" class="need-border">
-		<thead>
-			<tr>
-				<th>ProcessDefinitionId</th>
-				<th>DeploymentId</th>
-				<th>名称</th>
-				<th>KEY</th>
-				<th>版本号</th>
-				<th>XML</th>
-				<th>图片</th>
-				<th>部署时间</th>
-				<th>是否挂起</th>
-				<th>操作</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach items="${page.result }" var="object">
-				<c:set var="process" value="${object[0] }" />
-				<c:set var="deployment" value="${object[1] }" />
-				<tr>
-					<td>${process.id }</td>
-					<td>${process.deploymentId }</td>
-					<td>${process.name }</td>
-					<td>${process.key }</td>
-					<td>${process.version }</td>
-					<td><a target="_blank" href='${ctx }/workflow/resource/read?processDefinitionId=${process.id}&resourceType=xml'>${process.resourceName }</a></td>
-					<td><a target="_blank" href='${ctx }/workflow/resource/read?processDefinitionId=${process.id}&resourceType=image'>${process.diagramResourceName }</a></td>
-					<td>${deployment.deploymentTime }</td>
-					<td>${process.suspended} |
-						<c:if test="${process.suspended }">
-							<a href="processdefinition/update/active/${process.id}">激活</a>
-						</c:if>
-						<c:if test="${!process.suspended }">
-							<a href="processdefinition/update/suspend/${process.id}">挂起</a>
-						</c:if>
-					</td>
-					<td>
-                        <a href='${ctx }/workflow/process/delete?deploymentId=${process.deploymentId}'>删除</a>
-                        <a href='${ctx }/workflow/process/convert-to-model/${process.id}'>转换为Model</a>
-                    </td>
-				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
+	
+	
+	 <!-- 表格内容 start -->
+	   <div class="col-xs-12">
+			<div class="table-responsive">
+				<table id="sample-table-1" class="table table-striped table-bordered table-hover">
+					<thead>
+						<tr>
+							<!-- <th>ProcessDefinitionId</th>
+							<th>DeploymentId</th> -->
+							<th class="center">
+								<label>
+									<input type="checkbox" class="ace" />
+									<span class="lbl"></span>
+								</label>
+							</th>
+							<th>名称</th>
+							<th>KEY</th>
+							<th>版本号</th>
+							<th>部署时间</th>
+							<th>是否挂起</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${page.result }" var="object">
+							<c:set var="process" value="${object[0] }" />
+							<c:set var="deployment" value="${object[1] }" />
+							<tr>
+								<%-- <td>${process.id }</td>
+								<td>${process.deploymentId }</td> --%>
+								<td class="center">
+									<label>
+										<input type="checkbox" class="ace" />
+										<span class="lbl"></span>
+									</label>
+								</td>
+								<td>${process.name }</td>
+								<td>${process.key }</td>
+								<td>${process.version }</td>
+								<td><fmt:formatDate value="${deployment.deploymentTime }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+								<td>${process.suspended} |
+									<c:if test="${process.suspended }">
+										<a href="processdefinition/update/active/${process.id}">激活</a>
+									</c:if>
+									<c:if test="${!process.suspended }">
+										<a href="processdefinition/update/suspend/${process.id}">挂起</a>
+									</c:if>
+								</td>
+								<td>
+									<a class="btn btn-xs btn-success" target="_blank" href='${ctx }/workflow/resource/read?processDefinitionId=${process.id}&resourceType=xml' title="${process.resourceName }">查看文件</a>
+									<a class="btn btn-xs btn-success" target="_blank" href='${ctx }/workflow/resource/read?processDefinitionId=${process.id}&resourceType=image' title="${process.diagramResourceName }">预览</a>
+			                        <a class="btn btn-xs btn-success" href='${ctx }/workflow/process/delete?deploymentId=${process.deploymentId}'>删除</a>
+			                        <a class="btn btn-xs btn-success" href='${ctx }/workflow/process/convert-to-model/${process.id}'>转换为Model</a>
+			                    </td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	<!-- 表格内容 end -->
 	<tags:pagination page="${page}" paginationSize="${page.pageSize}"/>
+	</div>
+	</div>
+	</div>
+</div>
+	
 </body>
 </html>

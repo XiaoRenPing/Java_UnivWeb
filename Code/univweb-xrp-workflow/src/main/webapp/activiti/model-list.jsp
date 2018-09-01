@@ -1,6 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%> 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,14 +20,6 @@
 		<script src="${ctx }/style/aceui/js/ace-extra.min.js"></script>
 	<title>流程列表</title>
 
-<style type="text/css">
-	.info{
-		max-width: 250px;
-		overflow: hidden;
-		text-overflow: ellipsis;
-		white-space: nowrap;
-	}
-</style>
 	<script src="${ctx }/js/common/jquery-1.8.3.js" type="text/javascript"></script>
     <script src="${ctx }/js/common/plugins/jui/jquery-ui-${themeVersion }.min.js" type="text/javascript"></script>
     <script type="text/javascript">
@@ -65,7 +55,11 @@
 	<div class="page-content">
 		<div class="page-header">
 			<h1>
-				模型列表
+				Tables
+				<small>
+					<i class="icon-double-angle-right"></i>
+					Static &amp; Dynamic Tables
+				</small>
 			</h1>
 		</div>
 		
@@ -73,8 +67,8 @@
 		<div class="col-xs-12">				
 	
 	
-		<!-- 容器 -->	
-		<div class="row">
+<!-- 容器 -->	
+<div class="row">
 							<c:if test="${not empty message}">
 							<div class="ui-widget">
 									<div class="ui-state-highlight ui-corner-all" style="margin-top: 20px; padding: 0 .7em;"> 
@@ -84,58 +78,56 @@
 								</div>
 							</c:if>
 							<div style="text-align: right"><button id="create">创建</button></div>
-							
-						   <!-- 表格内容 start -->
-						   <div class="col-xs-12">
-									<div class="table-responsive">
-										<table id="sample-table-1" class="table table-striped table-bordered table-hover">
-											<thead>
-												<tr>
-													<th class="center">
-														<label>
-															<input type="checkbox" class="ace" />
-															<span class="lbl"></span>
-														</label>
-													</th>
-													<!-- <th>ID</th> -->
-													<th>键值</th>
-													<th>名称</th>
-													<th>版本</th>
-													<th>创建时间</th>
-													<th>最后更新时间</th>
-													<th>元数据</th>
-													<th>操作</th>
-												</tr>
-											</thead>
-											<tbody>
-												<c:forEach items="${list }" var="model">
-													<tr>
-														<td class="center">
-															<label>
-																<input type="checkbox" class="ace" />
-																<span class="lbl"></span>
-															</label>
-														</td>
-														<%-- <td>${model.id }</td> --%>
-														<td>${model.key }</td>
-														<td>${model.name}</td>
-														<td>${model.version}</td>
-														<td><fmt:formatDate value="${model.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-														<td><fmt:formatDate value="${model.lastUpdateTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-														<td class="info">${model.metaInfo}</td>
-														<td>
-															<a class="btn btn-xs btn-success" href="${ctx}/service/editor?id=${model.id}" target="_blank">编辑</a>
-															<a class="btn btn-xs btn-success" href="${ctx}/workflow/model/deploy/${model.id}">部署</a>
-															<a class="btn btn-xs btn-success" href="${ctx}/workflow/model/export/${model.id}" target="_blank">导出</a>
-									                        <a class="btn btn-xs btn-success" href="${ctx}/workflow/model/delete/${model.id}">删除</a>
-														</td>
-													</tr>
-												</c:forEach>
-											</tbody>
-										</table>
-									</div>
+				<div class="col-xs-12">
+							<div class="table-responsive">
+								<table id="sample-table-1" class="table table-striped table-bordered table-hover">
+								<thead>
+									<tr>
+										<th class="center">
+											<label>
+												<input type="checkbox" class="ace" />
+												<span class="lbl"></span>
+											</label>
+										</th>
+										<th>ID</th>
+										<th>KEY</th>
+										<th>Name</th>
+										<th>Version</th>
+										<th>创建时间</th>
+										<th>最后更新时间</th>
+										<th>元数据</th>
+										<th>操作</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach items="${list }" var="model">
+										<tr>
+											<td class="center">
+												<label>
+													<input type="checkbox" class="ace" />
+													<span class="lbl"></span>
+												</label>
+											</td>
+											<td>${model.id }</td>
+											<td>${model.key }</td>
+											<td>${model.name}</td>
+											<td>${model.version}</td>
+											<td>${model.createTime}</td>
+											<td>${model.lastUpdateTime}</td>
+											<td>${model.metaInfo}</td>
+											<td>
+												<a class="btn btn-xs btn-success" href="${ctx}/service/editor?id=${model.id}" target="_blank">编辑</a>
+												<a class="btn btn-xs btn-success" href="${ctx}/workflow/model/deploy/${model.id}">部署</a>
+												<a class="btn btn-xs btn-success" href="${ctx}/workflow/model/export/${model.id}" target="_blank">导出</a>
+						                        <a class="btn btn-xs btn-success" href="${ctx}/workflow/model/delete/${model.id}">删除</a>
+											</td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
 							</div>
-							 <!-- 表格内容 end -->
+					</div>
+							
 							
 							<div id="createModelTemplate" title="创建模型" class="template" style="display:none;">
 						        <form id="modelForm" action="${ctx}/workflow/model/create" target="_blank" method="post">
@@ -161,9 +153,10 @@
 								</table>
 						        </form>
 							</div>
-					</div>
-			 </div>
+	
+	
 		</div>
 	</div>
+	
 </body>
 </html>

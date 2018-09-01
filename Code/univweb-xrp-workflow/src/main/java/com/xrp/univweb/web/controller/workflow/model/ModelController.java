@@ -45,7 +45,7 @@ public class ModelController {
 	    @RequestMapping(value = "list")
 	    public ModelAndView modelList() {
 	        ModelAndView mav = new ModelAndView("workflow/model-list");
-	        List<Model> list = repositoryService.createModelQuery().list();
+	        List<Model> list = repositoryService.createModelQuery().list();  //可以通过listPage传入分页
 	        mav.addObject("list", list);
 	        return mav;
 	    }
