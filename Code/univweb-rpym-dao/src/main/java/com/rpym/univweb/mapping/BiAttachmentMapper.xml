@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rpym.univweb.dao.BiAttachmentMapper" >
+  <resultMap id="BaseResultMap" type="com.rpym.univweb.entity.BiAttachment" >
+    <id column="Id" property="id" jdbcType="BIGINT" />
+    <result column="OwnerType" property="ownertype" jdbcType="BIGINT" />
+    <result column="OwnerId" property="ownerid" jdbcType="BIGINT" />
+    <result column="FileName" property="filename" jdbcType="VARCHAR" />
+    <result column="Path" property="path" jdbcType="VARCHAR" />
+    <result column="Size" property="size" jdbcType="BIGINT" />
+    <result column="BussinessId" property="bussinessid" jdbcType="VARCHAR" />
+    <result column="CreatorUserId" property="creatoruserid" jdbcType="BIGINT" />
+    <result column="CreationTime" property="creationtime" jdbcType="TIMESTAMP" />
+    <result column="DeleterUserId" property="deleteruserid" jdbcType="BIGINT" />
+    <result column="DeletionTime" property="deletiontime" jdbcType="TIMESTAMP" />
+    <result column="IsDeleted" property="isdeleted" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Id, OwnerType, OwnerId, FileName, Path, Size, BussinessId, CreatorUserId, CreationTime, 
+    DeleterUserId, DeletionTime, IsDeleted
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.rpym.univweb.entity.BiAttachmentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from bi_attachment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from bi_attachment
+    where Id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from bi_attachment
+    where Id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.rpym.univweb.entity.BiAttachmentExample" >
+    delete from bi_attachment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.rpym.univweb.entity.BiAttachment" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into bi_attachment (OwnerType, OwnerId, FileName, 
+      Path, Size, BussinessId, 
+      CreatorUserId, CreationTime, DeleterUserId, 
+      DeletionTime, IsDeleted)
+    values (#{ownertype,jdbcType=BIGINT}, #{ownerid,jdbcType=BIGINT}, #{filename,jdbcType=VARCHAR}, 
+      #{path,jdbcType=VARCHAR}, #{size,jdbcType=BIGINT}, #{bussinessid,jdbcType=VARCHAR}, 
+      #{creatoruserid,jdbcType=BIGINT}, #{creationtime,jdbcType=TIMESTAMP}, #{deleteruserid,jdbcType=BIGINT}, 
+      #{deletiontime,jdbcType=TIMESTAMP}, #{isdeleted,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.rpym.univweb.entity.BiAttachment" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into bi_attachment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ownertype != null" >
+        OwnerType,
+      </if>
+      <if test="ownerid != null" >
+        OwnerId,
+      </if>
+      <if test="filename != null" >
+        FileName,
+      </if>
+      <if test="path != null" >
+        Path,
+      </if>
+      <if test="size != null" >
+        Size,
+      </if>
+      <if test="bussinessid != null" >
+        BussinessId,
+      </if>
+      <if test="creatoruserid != null" >
+        CreatorUserId,
+      </if>
+      <if test="creationtime != null" >
+        CreationTime,
+      </if>
+      <if test="deleteruserid != null" >
+        DeleterUserId,
+      </if>
+      <if test="deletiontime != null" >
+        DeletionTime,
+      </if>
+      <if test="isdeleted != null" >
+        IsDeleted,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ownertype != null" >
+        #{ownertype,jdbcType=BIGINT},
+      </if>
+      <if test="ownerid != null" >
+        #{ownerid,jdbcType=BIGINT},
+      </if>
+      <if test="filename != null" >
+        #{filename,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null" >
+        #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="size != null" >
+        #{size,jdbcType=BIGINT},
+      </if>
+      <if test="bussinessid != null" >
+        #{bussinessid,jdbcType=VARCHAR},
+      </if>
+      <if test="creatoruserid != null" >
+        #{creatoruserid,jdbcType=BIGINT},
+      </if>
+      <if test="creationtime != null" >
+        #{creationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteruserid != null" >
+        #{deleteruserid,jdbcType=BIGINT},
+      </if>
+      <if test="deletiontime != null" >
+        #{deletiontime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isdeleted != null" >
+        #{isdeleted,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.rpym.univweb.entity.BiAttachmentExample" resultType="java.lang.Integer" >
+    select count(*) from bi_attachment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update bi_attachment
+    <set >
+      <if test="record.id != null" >
+        Id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.ownertype != null" >
+        OwnerType = #{record.ownertype,jdbcType=BIGINT},
+      </if>
+      <if test="record.ownerid != null" >
+        OwnerId = #{record.ownerid,jdbcType=BIGINT},
+      </if>
+      <if test="record.filename != null" >
+        FileName = #{record.filename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.path != null" >
+        Path = #{record.path,jdbcType=VARCHAR},
+      </if>
+      <if test="record.size != null" >
+        Size = #{record.size,jdbcType=BIGINT},
+      </if>
+      <if test="record.bussinessid != null" >
+        BussinessId = #{record.bussinessid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creatoruserid != null" >
+        CreatorUserId = #{record.creatoruserid,jdbcType=BIGINT},
+      </if>
+      <if test="record.creationtime != null" >
+        CreationTime = #{record.creationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.deleteruserid != null" >
+        DeleterUserId = #{record.deleteruserid,jdbcType=BIGINT},
+      </if>
+      <if test="record.deletiontime != null" >
+        DeletionTime = #{record.deletiontime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isdeleted != null" >
+        IsDeleted = #{record.isdeleted,jdbcType=BIT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update bi_attachment
+    set Id = #{record.id,jdbcType=BIGINT},
+      OwnerType = #{record.ownertype,jdbcType=BIGINT},
+      OwnerId = #{record.ownerid,jdbcType=BIGINT},
+      FileName = #{record.filename,jdbcType=VARCHAR},
+      Path = #{record.path,jdbcType=VARCHAR},
+      Size = #{record.size,jdbcType=BIGINT},
+      BussinessId = #{record.bussinessid,jdbcType=VARCHAR},
+      CreatorUserId = #{record.creatoruserid,jdbcType=BIGINT},
+      CreationTime = #{record.creationtime,jdbcType=TIMESTAMP},
+      DeleterUserId = #{record.deleteruserid,jdbcType=BIGINT},
+      DeletionTime = #{record.deletiontime,jdbcType=TIMESTAMP},
+      IsDeleted = #{record.isdeleted,jdbcType=BIT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rpym.univweb.entity.BiAttachment" >
+    update bi_attachment
+    <set >
+      <if test="ownertype != null" >
+        OwnerType = #{ownertype,jdbcType=BIGINT},
+      </if>
+      <if test="ownerid != null" >
+        OwnerId = #{ownerid,jdbcType=BIGINT},
+      </if>
+      <if test="filename != null" >
+        FileName = #{filename,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null" >
+        Path = #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="size != null" >
+        Size = #{size,jdbcType=BIGINT},
+      </if>
+      <if test="bussinessid != null" >
+        BussinessId = #{bussinessid,jdbcType=VARCHAR},
+      </if>
+      <if test="creatoruserid != null" >
+        CreatorUserId = #{creatoruserid,jdbcType=BIGINT},
+      </if>
+      <if test="creationtime != null" >
+        CreationTime = #{creationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteruserid != null" >
+        DeleterUserId = #{deleteruserid,jdbcType=BIGINT},
+      </if>
+      <if test="deletiontime != null" >
+        DeletionTime = #{deletiontime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isdeleted != null" >
+        IsDeleted = #{isdeleted,jdbcType=BIT},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rpym.univweb.entity.BiAttachment" >
+    update bi_attachment
+    set OwnerType = #{ownertype,jdbcType=BIGINT},
+      OwnerId = #{ownerid,jdbcType=BIGINT},
+      FileName = #{filename,jdbcType=VARCHAR},
+      Path = #{path,jdbcType=VARCHAR},
+      Size = #{size,jdbcType=BIGINT},
+      BussinessId = #{bussinessid,jdbcType=VARCHAR},
+      CreatorUserId = #{creatoruserid,jdbcType=BIGINT},
+      CreationTime = #{creationtime,jdbcType=TIMESTAMP},
+      DeleterUserId = #{deleteruserid,jdbcType=BIGINT},
+      DeletionTime = #{deletiontime,jdbcType=TIMESTAMP},
+      IsDeleted = #{isdeleted,jdbcType=BIT}
+    where Id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
