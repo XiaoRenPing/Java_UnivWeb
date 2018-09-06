@@ -13,13 +13,14 @@
 <!-- head start -->
 	<div class="page-content">
 		<div class="page-header">
-			<h1>创建定时任务</h1>
+			<h1>定时任务列表</h1>
 		</div>
 <!-- head end -->
 		<div class="row">
 			<div class="col-xs-12">
 <!-- content start -->			
-				<form class="form-horizontal" role="form" id="dataForm" action="http://127.0.0.1:8081/univweb-rpym-web/jobs/add" method="post">
+				<form class="form-horizontal" role="form" id="dataForm" action="http://127.0.0.1:8081/univweb-rpym-web/jobs/edit" method="post">
+						<input type="hidden" name="id" value="${job.id }"/>
 						<div class="form-group">
 							<label class="col-sm-3 control-label no-padding-right" for="form-field-1">任务名称</label>
 							<div class="col-sm-9">
@@ -72,5 +73,13 @@
 <!-- content end -->			
 			</div>
 		</div>
+	<script type="text/javascript">
+		$(function(){
+			
+			$("#submit_Btn").click(function(){
+				$("#dataForm").submit();
+			});
+		});
+	</script>
 </body>
 </html>
