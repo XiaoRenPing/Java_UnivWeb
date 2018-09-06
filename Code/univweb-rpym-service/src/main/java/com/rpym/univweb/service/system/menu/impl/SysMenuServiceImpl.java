@@ -34,7 +34,7 @@ public class SysMenuServiceImpl implements ISysMenuService {
 
 	public String addSysMenu(SysMenu sysMenu) {
 		sysMenuDao.updateByPrimaryKeySelective(sysMenu);
-		return sysMenu.getName();
+		return sysMenu.getDisplayname();
 	}
 
 	public SysMenu findSysMenuById(Long id) {
@@ -45,7 +45,7 @@ public class SysMenuServiceImpl implements ISysMenuService {
 	public String deleteSysMenu(Long id) {
 		SysMenu sysMenu = sysMenuDao.selectByPrimaryKey(id);
 		sysMenuDao.deleteByPrimaryKey(sysMenu.getId());
-		return sysMenu.getName();
+		return sysMenu.getDisplayname();
 	}
 
 	/**
@@ -65,7 +65,7 @@ public class SysMenuServiceImpl implements ISysMenuService {
 		SysMenuExample menuExample = new SysMenuExample();
 		SysMenuExample.Criteria menuCriteria = menuExample.createCriteria();
 		if (menuQueryDto.getMenuname() != null) {
-			menuCriteria.andNameLike(menuQueryDto.getMenuname());
+			menuCriteria.andDisplaynameLike(menuQueryDto.getMenuname());
 		}
 		List<SysMenu> sysMenuList = sysMenuDao.selectByExample(menuExample);
 		return new PageInfo<SysMenu>(sysMenuList);

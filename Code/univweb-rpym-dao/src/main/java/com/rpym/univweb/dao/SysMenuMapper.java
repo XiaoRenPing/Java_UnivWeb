@@ -34,4 +34,5 @@ public interface SysMenuMapper {
     //List<SysMenu> selectMenusByUserAndRole(@Param("pojo")MenuQryPojo pojo);
 
 	List<SysMenu> selectMenusByUserAndRole(@Param("userId")Long userId, @Param("roleIds")List<Long> roleIdList);
+
 }
