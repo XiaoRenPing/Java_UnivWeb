@@ -47,7 +47,7 @@
 	                            <div id="vue-jobList">
 									<table class="table table-striped table-bordered table-hover">
 										<tr>
-											<td><div class="checkbox-inline i-checks"><label><input type="checkbox" name="ids"><i></i>全选</label></div></td>
+											<td><div class="checkbox-inline i-checks"><label><input type="checkbox" name="ids"><i></i></label></div></td>
 											<td>定时任务名称</td>
 											<td>执行类</td>
 											<td>参数</td>
@@ -57,8 +57,8 @@
 											<td>操作</td>
 										</tr>
 										<tr v-for="job in jobList">
-											<td><div class="checkbox-inline i-checks"><label><input type="checkbox" name="id"><i></i></label></div></td>
-											<td>{{job.jobname}}</td>
+											<td><input type="checkbox" name="ids"></td>
+											<td><a v-bind:href="'http://127.0.0.1:8081/univweb-rpym-web/jobs/toview?id='+job.id">{{job.jobname}}</a></td>
 											<td>{{job.jobclass}}</td>
 											<td>{{job.jobargs}}</td>
 											<td>{{job.jobdesc}}</td>
@@ -66,9 +66,8 @@
 											<td>{{job.creationtime}}</td>
 											<td>
 												<!-- 带查询参数，下面的结果为 /register?plan=private -->
-												 <router-link :to="{ path: '/univweb-rpym-web/edit.jsp', query: { id: job.id }}">Go to Foo</router-link>
-												<a v-bind:href="'http://127.0.0.1:8081/univweb-rpym-web/edit.jsp?id='+job.id">编辑</a>
-												<a v-bind:href="'http://127.0.0.1:8081/univweb-rpym-web/jobs/delete?id='+job.id">删除</a>
+												<a v-bind:href="'http://127.0.0.1:8081/univweb-rpym-web/jobs/toedit?id='+job.id">编辑</a>
+												<a v-bind:href="'http://127.0.0.1:8081/univweb-rpym-web/jobs/delete?id='+job.id">禁用</a>
 												<a v-bind:href="'http://127.0.0.1:8081/univweb-rpym-web/jobs/start?id='+job.id">启动</a>
 												<a v-bind:href="'http://127.0.0.1:8081/univweb-rpym-web/jobs/stop?id='+job.id">停止</a>
 											</td>
@@ -86,38 +85,12 @@
 	<jsp:include page="/common/footer.jsp"></jsp:include>
 	<script>
     Vue.use(VueResource);      //这个一定要加上，指的是调用vue-resource.js
-    //Vue.use(VueRouter)
-	    // 1. 定义 (路由) 组件。
-	// 可以从其他文件 import 进来
-	const Foo = { template: '<div>foo</div>' }
-	const Bar = { template: '<div>bar</div>' }
-	
-	// 2. 定义路由
-	// 每个路由应该映射一个组件。 其中"component" 可以是
-	// 通过 Vue.extend() 创建的组件构造器，
-	// 或者，只是一个组件配置对象。
-	// 我们晚点再讨论嵌套路由。
-	const routes = [
-	  { path: '/foo', component: Foo },
-	  { path: '/bar', component: Bar }
-	]
-	
-	// 3. 创建 router 实例，然后传 `routes` 配置
-	// 你还可以传别的配置参数, 不过先这么简单着吧。
-	/* const router = new VueRouter({
-	  routes // (缩写) 相当于 routes: routes
-	}) */
-    
-    
     new Vue({
-    	//router,
         el: '#vue-jobList',      //div的id
         data: {
         	jobList: ""    //数据，名称自定
         },
         created: function () { //created方法，页面初始调用   
-        	var page = 1;
-        	var rows = 1;
             var url = "http://127.0.0.1:8081/univweb-rpym-web/jobs/list"//?page="+page+"&rows="+rows;
             this.$http.get(url).then(function (data) {   //ajax请求封装
                 var json = data.bodyText;
@@ -129,6 +102,13 @@
             })
         }
     });
+</script>
+<script type="text/javascript">
+	$(function(){
+		$("#add_btn").click(function(){
+			 window.location.href="http://127.0.0.1:8081/univweb-rpym-web/jobs/toadd";
+		});
+	});
 </script>
 </body>
 </html>

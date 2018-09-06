@@ -10,7 +10,7 @@ public interface ISysJobsService {
 
 	public Integer deleteSysJobs(Long id);
 
-	public Integer updateSysJobsInfo(SysJobsDto sysJobsDto);
+	public Boolean updateSysJobsInfo(SysJobsDto sysJobsDto);
 
 	public SysJobs getSysJobsById(Long id);
 

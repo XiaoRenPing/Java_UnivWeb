@@ -2,6 +2,7 @@ package com.rpym.univweb.web.controller.job;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,26 +28,33 @@ public class JobController {
 		return "system/jobs/addJob";
 	}
 	
-	@RequestMapping(method=RequestMethod.GET, value="/toedit")
+/*	@RequestMapping(method=RequestMethod.GET, value="/toedit")
 	public String toEditJob() {
 		return "system/jobs/editJob";
 	}
-	
+*/	
 	@RequestMapping(method=RequestMethod.GET, value="/index")
 	public String pageListJob() {
 		return "system/jobs/jobList";
 	}
 	
-	@RequestMapping(method=RequestMethod.GET, value="/view")
-	public ModelAndView viewJob(@RequestParam("id") Long id) {
+	@RequestMapping(method=RequestMethod.GET, value="/toview")
+	public ModelAndView toViewJob(@RequestParam("id") Long id) {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("system/jobs/viewJob");
-		mv.addObject(id);
+		mv.addObject("job", jobsService.getSysJobsById(id));
+		return mv;
+	}
+	
+	@RequestMapping(method=RequestMethod.GET, value="/toedit")
+	public ModelAndView toEditJob(@RequestParam("id") Long id) {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("system/jobs/editJob");
+		mv.addObject("job", jobsService.getSysJobsById(id));
 		return mv;
 	}
 	
 	//------------------------------- 瀹氭椂鍣ㄧ鐞� -------------------------------------
-	
 	@RequestMapping(method=RequestMethod.GET, value="/list")
 	@ResponseBody
 	public PageInfo<SysJobs> listJob(SysJobsQueryDto jobQueryDto) {
@@ -61,7 +69,7 @@ public class JobController {
 	
 	@RequestMapping(method=RequestMethod.POST, value="/edit")
 	@ResponseBody
-	public Integer editJob(SysJobsDto sysJobsDto) {
+	public Boolean editJob(SysJobsDto sysJobsDto) { //@ModelAttribute
 		return jobsService.updateSysJobsInfo(sysJobsDto);
 	}
 	

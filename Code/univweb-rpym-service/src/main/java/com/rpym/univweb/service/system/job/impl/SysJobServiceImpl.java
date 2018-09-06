@@ -43,13 +43,14 @@ public class SysJobServiceImpl extends BaseService implements ISysJobsService{
 	 * @param id
 	 * @return   
 	 */
-	public Integer updateSysJobsInfo(SysJobsDto sysJobsDto) {
+	public Boolean updateSysJobsInfo(SysJobsDto sysJobsDto) {
 		if(sysJobsDto == null || sysJobsDto.getId() == null) {
 			throw new UWException("参数id不能为空");
 		}
 		SysJobs sysJobs = new SysJobs();
 		BeanUtils.copyProperties(sysJobsDto, sysJobs);
-		return sysJobsDao.updateByPrimaryKeySelective(sysJobs);
+		sysJobsDao.updateByPrimaryKeySelective(sysJobs);
+		return true;
 	}
 
 	
