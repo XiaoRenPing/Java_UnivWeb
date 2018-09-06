@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.github.pagehelper.PageInfo;
 import com.rpym.univweb.dto.job.SysJobsDto;
@@ -36,7 +37,15 @@ public class JobController {
 		return "system/jobs/jobList";
 	}
 	
-	//------------------------------- 定时器管理 -------------------------------------
+	@RequestMapping(method=RequestMethod.GET, value="/view")
+	public ModelAndView viewJob(@RequestParam("id") Long id) {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("system/jobs/viewJob");
+		mv.addObject(id);
+		return mv;
+	}
+	
+	//------------------------------- 瀹氭椂鍣ㄧ鐞� -------------------------------------
 	
 	@RequestMapping(method=RequestMethod.GET, value="/list")
 	@ResponseBody
@@ -62,10 +71,10 @@ public class JobController {
 		return jobsService.deleteSysJobs(id);
 	}
 	
-	// -------------------------- 启动/停止     -----------------------------
+	// -------------------------- 鍚姩/鍋滄     -----------------------------
 	/**
-	 * 启动任务
-	 * @param ids id字符串数组
+	 * 鍚姩浠诲姟
+	 * @param ids id瀛楃涓叉暟缁�
 	 * @return
 	 */
 	@RequestMapping(method=RequestMethod.GET, value="/start")
