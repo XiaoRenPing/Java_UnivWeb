@@ -24,13 +24,13 @@
 						<div class="form-group">
 							<label class="col-sm-3 control-label no-padding-right" for="form-field-1">关键词</label>
 							<div class="col-sm-9">
-								<input type="text" id="form-field-1" class="col-xs-10 col-sm-5" name="permissionname" value=""/>
+								<input type="text" id="form-field-1" class="col-xs-10 col-sm-5" name="permissionname" value="${menu.permissionname }"/>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-sm-3 control-label no-padding-right" for="form-field-1">显示名称</label>
 							<div class="col-sm-9">
-								<input type="text" id="form-field-1" class="col-xs-10 col-sm-5" name="displayname" value=""/>
+								<input type="text" id="form-field-1" class="col-xs-10 col-sm-5" name="displayname" value="${menu.displayname }"/>
 							</div>
 						</div>
 						<div class="form-group">	

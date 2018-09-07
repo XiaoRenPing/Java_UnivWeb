@@ -5,6 +5,7 @@
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="https://unpkg.com/vue-router@2.1.0/dist/vue-router.js"></script>
 <script src="${pageContext.request.contextPath }/style/js/plugins/iCheck/icheck.min.js"></script>
+<script src="${pageContext.request.contextPath }/style/js/plugins/sweetalert/sweetalert.min.js"></script>
     <script>
         $(document).ready(function () {
             $('.i-checks').iCheck({

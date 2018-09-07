@@ -58,18 +58,25 @@
 										</tr>
 										<tr v-for="job in jobList">
 											<td><input type="checkbox" name="ids"></td>
-											<td><a v-bind:href="'http://127.0.0.1:8081/univweb-rpym-web/jobs/toview?id='+job.id">{{job.jobname}}</a></td>
+											<td><a v-bind:href="'${pageContext.request.contextPath}/jobs/toview?id='+job.id">{{job.jobname}}</a></td>
 											<td>{{job.jobclass}}</td>
 											<td>{{job.jobargs}}</td>
 											<td>{{job.jobdesc}}</td>
 											<td>{{job.jobstatus}}</td>
 											<td>{{job.creationtime}}</td>
 											<td>
-												<!-- 带查询参数，下面的结果为 /register?plan=private -->
-												<a v-bind:href="'http://127.0.0.1:8081/univweb-rpym-web/jobs/toedit?id='+job.id">编辑</a>
-												<a v-bind:href="'http://127.0.0.1:8081/univweb-rpym-web/jobs/delete?id='+job.id">禁用</a>
-												<a v-bind:href="'http://127.0.0.1:8081/univweb-rpym-web/jobs/start?id='+job.id">启动</a>
-												<a v-bind:href="'http://127.0.0.1:8081/univweb-rpym-web/jobs/stop?id='+job.id">停止</a>
+												<button class="btn btn-sm btn-primary" type="button" v-on:click="toEdit(job.id)">
+							                        <span class="bold">编辑</span>
+							                    </button>
+							                    <button class="btn btn-sm btn-warning" type="button" v-on:click="del(job.id)">
+							                        <span class="bold">删除</span>
+							                    </button>
+							                    <button class="btn btn-sm btn-primary" type="button" v-on:click="start(job.id)">
+							                        <span class="bold">启动</span>
+							                    </button>
+							                    <button class="btn btn-sm btn-warning" type="button" v-on:click="stop(job.id)">
+							                        <span class="bold">停止</span>
+							                    </button>
 											</td>
 										</tr>
 									</table>
@@ -91,7 +98,7 @@
         	jobList: ""    //数据，名称自定
         },
         created: function () { //created方法，页面初始调用   
-            var url = "http://127.0.0.1:8081/univweb-rpym-web/jobs/list"//?page="+page+"&rows="+rows;
+            var url = "${pageContext.request.contextPath}/jobs/list"//?page="+page+"&rows="+rows;
             this.$http.get(url).then(function (data) {   //ajax请求封装
                 var json = data.bodyText;
                 var resultData = JSON.parse(json);
@@ -101,14 +108,81 @@
                 console.info(response);
             })
         }
+      //定义操作方法
+        methods:{
+	        toEdit: function(id){
+	        	location.href="${pageContext.request.contextPath}/jobs/toedit?id="+id;
+	        },
+	        del: function(id){
+	        	swal({
+	                title: "您确定要删除吗",
+	                text: "删除后将无法恢复，请谨慎操作！",
+	                type: "warning",
+	                showCancelButton: true,
+	                confirmButtonColor: "#DD6B55",
+	                confirmButtonText: "删除",
+	                cancelButtonText: "考虑一下",
+	                closeOnConfirm: false,
+	                closeOnCancel: false
+	            },
+	            function (isConfirm) {
+	                if (isConfirm) {
+	                	$.get(
+	        	    			"${pageContext.request.contextPath}/jobs/delete",
+	        	    			{id:id},
+	        	    			function(msg){
+	        	    				swal("删除成功！", "【"+msg.message+"】", "success");
+	        	    				location.href="${pageContext.request.contextPath}/jobs/index";
+	        	    	});
+	                } else {
+	                    swal("已取消", "您取消了删除操作！", "error");
+	                }
+	            });
+	        },
+	        start: function(id){
+	        	$.get(
+    	    			"${pageContext.request.contextPath}/jobs/start",
+    	    			{id:id},
+    	    			function(msg){
+    	    				swal("启动成功！", "【"+msg.message+"】", "success");
+    	    				location.href="${pageContext.request.contextPath}/jobs/index";
+    	    			}	
+    	    	);
+	        },
+	        stop: function(id){
+	        	swal({
+	                title: "您确定要停止吗",
+	                text: "请谨慎操作！",
+	                type: "warning",
+	                showCancelButton: true,
+	                confirmButtonColor: "#DD6B55",
+	                confirmButtonText: "停止",
+	                cancelButtonText: "考虑一下",
+	                closeOnConfirm: false,
+	                closeOnCancel: false
+	            },
+	            function (isConfirm) {
+	                if (isConfirm) {
+	                	$.get(
+	        	    			"${pageContext.request.contextPath}/jobs/stop",
+	        	    			{id:id},
+	        	    			function(msg){
+	        	    				swal("停止成功！", "【"+msg.message+"】", "success");
+	        	    				location.href="${pageContext.request.contextPath}/jobs/index";
+	        	    	});
+	                } else {
+	                    swal("已取消", "您取消了停止操作！", "error");
+	                }
+	            });
+	        }
     });
 </script>
-<script type="text/javascript">
-	$(function(){
-		$("#add_btn").click(function(){
-			 window.location.href="http://127.0.0.1:8081/univweb-rpym-web/jobs/toadd";
+	<script type="text/javascript">
+		$(function(){
+			$("#add_btn").click(function(){
+				 window.location.href="${pageContext.request.contextPath}/jobs/toadd";
+			});
 		});
-	});
-</script>
+	</script>
 </body>
 </html>

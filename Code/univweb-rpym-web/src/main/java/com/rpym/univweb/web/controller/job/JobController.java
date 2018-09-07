@@ -2,7 +2,6 @@ package com.rpym.univweb.web.controller.job;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,6 +15,10 @@ import com.rpym.univweb.entity.SysJobs;
 import com.rpym.univweb.service.system.job.ISysJobsService;
 import com.rpym.univweb.utils.ResponseResult;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
+@Api("定时任务接口")
 @Controller
 @RequestMapping("/jobs/*")
 public class JobController {
@@ -23,6 +26,7 @@ public class JobController {
 	@Autowired
 	ISysJobsService jobsService;
 	
+	@ApiOperation(value="跳转到添加定时任务界面",httpMethod="GET")
 	@RequestMapping(method=RequestMethod.GET, value="/toadd")
 	public String toAddJob() {
 		return "system/jobs/addJob";

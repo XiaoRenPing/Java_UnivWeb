@@ -75,12 +75,13 @@
 						</div>
 						<div class="clearfix form-actions">
 							<div class="col-md-offset-3 col-md-9">
-								<input id="submit_Btn" class="btn btn-info" type="submit" value="提交"/>
+								<button id="submit_Btn" class="btn btn-info" type="button">提交</button>
 								&nbsp; &nbsp; &nbsp;
 								<button class="btn" type="reset"><i class="icon-undo bigger-110"></i>重填</button>
 							</div>
 						</div>
-<!-- content end -->			
+<!-- content end -->
+<script type="text/javascript" src="${pageContext.request.contextPath}/style/actions/menu.js"></script>			
 			</div>
 		</div>
 </body>
