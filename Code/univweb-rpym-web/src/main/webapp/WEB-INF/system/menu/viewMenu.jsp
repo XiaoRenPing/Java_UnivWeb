@@ -24,51 +24,56 @@
 					<div class="col-xs-12">
 						
 						<div class="form-group">
-							<label class="icon-bell bigger-110 purple" >${job.jobname }</label>
+							<label class="icon-bell bigger-110 purple" >${menu.permissionname }</label>
 							<div class="col-sm-5">
-								任务名称
+								功能名称
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="icon-bell bigger-110 purple" >${menu.displayname }</label>
+							<div class="col-sm-5">
+								显示名称
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="icon-bell bigger-110 purple" >${menu.menuurl }</label>
+							<div class="col-sm-5">
+								功能路径
 							</div>
 						</div>
 						
 						<div class="form-group">
-							<label class="icon-bell bigger-110 purple" >${job.jobclass }</label>
+							<label class="icon-bell bigger-110 purple" >${menu.menutype }</label>
 							<div class="col-sm-5">
-								执行类
+								菜单类型
 							</div>
 						</div>
 						
 						<div class="form-group">
-							<label class="icon-bell bigger-110 purple" >${job.jobdesc }</label>
+							<label class="icon-bell bigger-110 purple" >${menu.remark }</label>
 							<div class="col-sm-5">
 								描述
 							</div>
 						</div>
 						
-						<div class="form-group">
-							<label class="icon-bell bigger-110 purple" >${job.jobargs }</label>
-							<div class="col-sm-5">
-								参数
-							</div>
-						</div>
 						
-						
-						<div class="form-group">
-							<label class="icon-bell bigger-110 purple" >${job.jobstatus }</label>
+						<%-- <div class="form-group">
+							<label class="icon-bell bigger-110 purple" >${menu.isdeleted }</label>
 							<div class="col-sm-5">
 								状态
 							</div>
-						</div>
+						</div> --%>
 						
 						
 						<div class="form-group">
-							<label class="icon-bell bigger-110 purple" >${job.jobcron }</label>
+							<label class="icon-bell bigger-110 purple" >${menu.jobcron }</label>
 							<div class="col-sm-5">
-								运行表达式
+								显示位置
 							</div>
 						</div>
 						
 						<div class="form-group">
-							<label class="icon-bell bigger-110 purple" >${job.creationtime }</label>
+							<label class="icon-bell bigger-110 purple" >${menu.creationtime }</label>
 							<div class="col-sm-5">
 								创建时间
 							</div>

@@ -29,7 +29,7 @@
                     <div class="col-lg-12 clearfix" >
                         <div class="ibox float-e-margins">
                         	<div class="operation-btn pull-left">
-                        	<a href="javascript:void(0)" class="btn btn-primary" id="add_btn" >新增角色</a> 
+                        	<a href="javascript:void(0)" class="btn btn-primary" id="add_btn" >新增菜单</a> 
                         	</div>
                             <div class="pull-right">
                                 <div class="ibox-tools">
@@ -58,16 +58,15 @@
 										</tr>
 										<tr v-for="menu in menuList">
 											<td><input type="checkbox" name="ids"></td>
-											<td>{{menu.displayname}}</td>
+											<td><a v-bind:href="'http://127.0.0.1:8081/univweb-rpym-web/menus/toview?id='+menu.id">{{menu.displayname}}</a></td>
 											<td>{{menu.permissionname}}</td>
 											<td>{{menu.menuurl}}</td>
 											<td>{{menu.parents}}</td>
 											<td>{{menu.menuorder}}</td>
 											<td>{{menu.menuicon}}</td>
 											<td>
-												<a>查看</a>
-												<a>编辑</a>
-												<a>删除</a>
+												<a v-bind:href="'http://127.0.0.1:8081/univweb-rpym-web/menus/toedit?id='+menu.id">编辑</a>
+												<a onclick="javascript:_delete(menu.id);" href="#">删除</a>
 											</td>
 										</tr>
 									</table>

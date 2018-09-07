@@ -15,4 +15,7 @@
     <title>${site.title }</title>
     
 	<jsp:include page="/common/mainheader.jsp"></jsp:include>
+	<script type="text/javascript">
+		var ctx = ${pageContext.request.contextPath };
+	</script>
 </head>

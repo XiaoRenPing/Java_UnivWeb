@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.github.pagehelper.PageInfo;
 import com.rpym.univweb.dto.menu.SysMenuQueryDto;
@@ -30,8 +31,20 @@ public class MemuController {
 	}
 	
 	@RequestMapping(method=RequestMethod.GET, value="/toedit")
-	public String toEditMenu() {
-		return "system/menu/editMenu";
+	public ModelAndView toEditMenu(Long id) {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("menu", menuService.findSysMenuById(id));
+		mv.setViewName("system/menu/editMenu");
+		return mv;
+	}
+	
+	
+	@RequestMapping(method=RequestMethod.GET, value="/toview")
+	public ModelAndView toView(Long id) {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("menu", menuService.findSysMenuById(id));
+		mv.setViewName("system/menu/editMenu");
+		return mv;
 	}
 	
 	@RequestMapping(method=RequestMethod.GET, value="/index")

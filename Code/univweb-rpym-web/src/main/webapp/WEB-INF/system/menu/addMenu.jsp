@@ -19,49 +19,60 @@
 		<div class="row">
 			<div class="col-xs-12">
 <!-- content start -->			
-				<form class="form-horizontal" role="form" id="dataForm" action="http://127.0.0.1:8081/univweb-rpym-web/jobs/add" method="post">
+				<form class="form-horizontal" role="form" id="dataForm" action="http://127.0.0.1:8081/univweb-rpym-web/menus/add" method="post">
 						<div class="form-group">
-							<label class="col-sm-3 control-label no-padding-right" for="form-field-1">任务名称</label>
+							<label class="col-sm-3 control-label no-padding-right" for="form-field-1">关键词</label>
 							<div class="col-sm-9">
-								<input type="text" id="form-field-1" class="col-xs-10 col-sm-5" name="jobname" value="${job.jobname }"/>
+								<input type="text" id="form-field-1" class="col-xs-10 col-sm-5" name="permissionname" value=""/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right" for="form-field-1">显示名称</label>
+							<div class="col-sm-9">
+								<input type="text" id="form-field-1" class="col-xs-10 col-sm-5" name="displayname" value=""/>
 							</div>
 						</div>
 						<div class="form-group">	
-							<label class="col-sm-3 control-label no-padding-right" for="form-field-1">执行类</label>
+							<label class="col-sm-3 control-label no-padding-right" for="form-field-1">接口路径</label>
 							<div class="col-sm-9">
-								<input type="text" id="form-field-1" class="col-xs-10 col-sm-5 form-control" name="jobclass" value="${job.jobclass }"/>
+								<input type="text" id="form-field-1" class="col-xs-10 col-sm-5 form-control" name="menuurl" value=""/>
 							</div>
 						</div>
 			
 						<div class="form-group">
-							<label class="col-sm-3 control-label no-padding-right" for="form-field-1">描述</label>
+							<label class="col-sm-3 control-label no-padding-right" for="form-field-1">上级菜单</label>
 							<div class="col-sm-9">
-								<input type="text" id="form-field-1" class="col-xs-10 col-sm-5" name="jobdesc" value="${job.jobdesc }"/>
+								<input type="text" id="form-field-1" class="col-xs-10 col-sm-5" name="parentid" value=""/>
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-sm-3 control-label no-padding-right" for="form-field-1">参数</label>
+							<label class="col-sm-3 control-label no-padding-right" for="form-field-1">图标</label>
 							<div class="col-sm-9">
-								<input type="text" id="form-field-1" class="col-xs-10 col-sm-5" name="jobargs" value="${job.jobargs }"/>
+								<input type="text" id="form-field-1" class="col-xs-10 col-sm-5" name="menuicon" value=""/>
 							</div>
 						</div>
 			
 						<div class="form-group">
-							<label class="col-sm-3 control-label no-padding-right" for="form-field-1">间隔表达式</label>
+							<label class="col-sm-3 control-label no-padding-right" for="form-field-1">菜单类型</label>
 							<div class="col-sm-9">
-								<input type="text" id="form-field-1" class="col-xs-10 col-sm-5" name="jobcron" value="${job.jobcron }"/>
+								<input type="text" id="form-field-1" class="col-xs-10 col-sm-5" name="menutype" value=""/>
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-sm-3 control-label no-padding-right" for="form-field-1">是否禁用</label>
+							<label class="col-sm-3 control-label no-padding-right" for="form-field-1">备注</label>
+							<div class="col-sm-9">
+								<input type="text" id="form-field-1" class="col-xs-10 col-sm-5" name="remark" value=""/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right" for="form-field-1">是否启用</label>
 							<div class="col-sm-9">
 								<label align="center">
-									<input name="isabandoned" class="ace ace-switch ace-switch-2" type="checkbox" value="${job.isabandoned }"/>
+									<input name="isdeleted" class="ace ace-switch ace-switch-2" type="checkbox" value=""/>
 									<span class="lbl"></span>
 								</label>
 							</div>
 						</div>
-						
 						<div class="clearfix form-actions">
 							<div class="col-md-offset-3 col-md-9">
 								<input id="submit_Btn" class="btn btn-info" type="submit" value="提交"/>
