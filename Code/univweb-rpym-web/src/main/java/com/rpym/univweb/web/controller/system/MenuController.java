@@ -20,7 +20,7 @@ import com.rpym.univweb.service.system.menu.ISysMenuService;
 
 @Controller
 @RequestMapping("/menus/*")
-public class MemuController {
+public class MenuController {
 
 	@Autowired
 	ISysMenuService menuService;
@@ -86,6 +86,12 @@ public class MemuController {
 	@ResponseBody
 	public String deleteMenu(@RequestParam("id") Long id) {
 		return menuService.deleteSysMenu(id);
+	}
+	
+	@RequestMapping(method=RequestMethod.GET, value="/usermenu")
+	@ResponseBody
+	public SysMenusExt findParentMenuByCurrent(Long id) {
+		return menuService.findParentMenuByCurrent(id);
 	}
 	
 }

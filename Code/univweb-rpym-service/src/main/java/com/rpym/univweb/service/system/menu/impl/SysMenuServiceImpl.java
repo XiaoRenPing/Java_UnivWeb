@@ -2,7 +2,9 @@ package com.rpym.univweb.service.system.menu.impl;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -181,5 +183,40 @@ public class SysMenuServiceImpl implements ISysMenuService {
 			}
 		}
 		return returnList;
+	}
+
+	/**
+	 * 根据当前菜单查找上级菜单，下拉列表回显菜单接口
+	 * 
+	 */
+	public SysMenusExt findParentMenuByCurrent(Long id) {
+		Map<String, Map<String, Map<String, Object>>> menuMap = new HashMap<String, Map<String, Map<String, Object>>>();
+		SysMenu currentMenu = sysMenuDao.selectByPrimaryKey(id);
+		Map<String, Object> currentMap = new HashMap<String, Object>();
+		currentMap.put("current", currentMenu);
+		//menuMap.put("current", new HashMap<String, Object>(currentMap));
+		//获取上级菜单
+		SysMenuExample menuExample = new SysMenuExample();
+		SysMenuExample.Criteria menuCriteria = menuExample.createCriteria();
+		if(currentMenu.getParentid() != null && currentMenu.getParentid() != 0) {//如果有上级菜单
+			menuCriteria.andParentidEqualTo(currentMenu.getParentid());
+			List<SysMenu> parentList = sysMenuDao.selectByExample(menuExample);
+			if(!CollectionUtils.isEmpty(parentList)) {
+				SysMenu parent = parentList.get(0);
+				
+				if(parent.getParentid() != null && parent.getParentid() != 0) {
+					SysMenuExample thirdExample = new SysMenuExample();
+					SysMenuExample.Criteria thirdCriteria = menuExample.createCriteria();
+					thirdCriteria.andParentidEqualTo(parent.getParentid());
+					List<SysMenu> thirdList = sysMenuDao.selectByExample(menuExample);
+					if(!CollectionUtils.isEmpty(thirdList)) {
+						Map<String, Object> thirdParentMap = new HashMap<String, Object>();
+						thirdParentMap.put("parent", thirdList.get(0));
+					}
+					
+				}
+			}
+		}
+		return null;
 	}
 }

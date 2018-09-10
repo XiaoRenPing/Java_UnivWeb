@@ -24,4 +24,6 @@ public interface ISysMenuService {
 	public List<SysMenu> getSubMenuList(Long parenId);
 
 	List<SysMenusExt> findMenuByUser(HttpServletRequest request);
+
+	SysMenusExt findParentMenuByCurrent(Long id);
 }
