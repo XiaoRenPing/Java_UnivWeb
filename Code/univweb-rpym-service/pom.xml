@@ -159,5 +159,12 @@
 			<artifactId>taglibs-standard-impl</artifactId>
 			<version>1.2.1</version>
 		</dependency>
+		<!-- solr客户端 -->
+		<dependency>
+			<groupId>org.apache.solr</groupId>
+			<artifactId>solr-solrj</artifactId>
+			<version>4.10.3</version>
+		</dependency>
+		
 	</dependencies>
 </project>

@@ -73,7 +73,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</form>
 			</div>
 		</div>
-		<div class="bottom">{{copyright}}<a href="http://www.univweb.com">{{application}}</a></div>
+		<div class="bottom">All Rights Reserved<a href="http://www.univweb.com">统一网科技有限公司</a></div>
 	</div>
 </div>
   </body>
