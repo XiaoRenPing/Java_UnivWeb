@@ -38,29 +38,71 @@
 	<!-- 存储区域设置信息
     SessionLocaleResolver类通过一个预定义会话名将区域化信息存储在会话中
     从session判断用户语言defaultLocale :默认语言-->
-<bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
-    <property name="defaultLocale" value="zh_CN" />
-</bean>
+	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+	    <property name="defaultLocale" value="zh_CN" />
+	</bean>
 
-<!-- 国际化资源文件
-messageSource配置的是国际化资源文件的路径，
-classpath:messages指的是classpath路径下的
-messages_zh_CN.properties文件和messages_en_US.properties文件
-设置“useCodeAsDefaultMessage”，默认为false，这样当Spring在ResourceBundle中找不到messageKey的话，就抛出NoSuchMessageException，
-把它设置为True，则找不到不会抛出异常，而是使用messageKey作为返回值。 -->
-<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
-    <property name="defaultEncoding" value="UTF-8" />
-     <!-- 国际化资源文件配置,指定properties文件存放位置 -->
-     <property name="basename" value="classpath:i18n/message" />
-     <!-- 如果在国际化资源文件中找不到对应代码的信息，就用这个代码作为名称  -->               
-     <property name="useCodeAsDefaultMessage" value="true" />
-</bean>
-<!-- 动态切换国际化 ,国际化放在session中 
-<bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver"></bean>-->
-<!--该拦截器通过名为”lang”的参数来拦截HTTP请求，使其重新设置页面的区域化信息-->
-<mvc:interceptors>
-    <bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
-        <property name="paramName" value="lang" />
+	<!-- 国际化资源文件
+	messageSource配置的是国际化资源文件的路径，
+	classpath:messages指的是classpath路径下的
+	messages_zh_CN.properties文件和messages_en_US.properties文件
+	设置“useCodeAsDefaultMessage”，默认为false，这样当Spring在ResourceBundle中找不到messageKey的话，就抛出NoSuchMessageException，
+	把它设置为True，则找不到不会抛出异常，而是使用messageKey作为返回值。 -->
+	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+	    <property name="defaultEncoding" value="UTF-8" />
+	     <!-- 国际化资源文件配置,指定properties文件存放位置 -->
+	     <property name="basename" value="classpath:i18n/message" />
+	     <!-- 如果在国际化资源文件中找不到对应代码的信息，就用这个代码作为名称  -->               
+	     <property name="useCodeAsDefaultMessage" value="true" />
+	</bean>
+	<!-- 动态切换国际化 ,国际化放在session中 
+	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver"></bean>-->
+	<!--该拦截器通过名为”lang”的参数来拦截HTTP请求，使其重新设置页面的区域化信息-->
+	<mvc:interceptors>
+	    <bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+	        <property name="paramName" value="lang" />
+	    </bean>
+	</mvc:interceptors>
+
+	<!-- FreeMarker -->
+	<bean id="freeMarkerConfigurer"
+        class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+        <property name="templateLoaderPath" value="/WEB-INF/ftl/"></property>
+        <property name="defaultEncoding" value="utf-8" />
+        <property name="freemarkerSettings">
+            <props>
+                <prop key="template_update_delay">1</prop>
+                <prop key="locale">zh_CN</prop>
+                <prop key="datetime_format">yyyy-MM-dd</prop><!-- 时间格式化 -->
+                <prop key="date_format">yyyy-MM-dd</prop>
+                <prop key="number_format">#.##</prop>
+            </props>
+        </property>
     </bean>
-</mvc:interceptors>
+
+    <bean id="freeMarkerViewResolver"
+        class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+        <property name="cache" value="true" />
+        <property name="prefix" value="" /><!-- 上面已经配了，这里就不用配啦 -->
+        <property name="suffix" value=".ftl" />
+        <property name="contentType" value="text/html;charset=UTF-8" />
+        <property name="allowSessionOverride" value="true" />
+        <property name="allowRequestOverride" value="true" />
+        <property name="exposeSpringMacroHelpers" value="true" />
+        <property name="exposeRequestAttributes" value="true" />
+        <property name="exposeSessionAttributes" value="true" />
+        <property name="requestContextAttribute" value="request" />
+    </bean>
+    
+    <!-- 文件上传 -->
+    <!-- 配置文件上传，如果没有使用文件上传可以不用配置，当然如果不配，那么配置文件中也不必引入上传组件包 -->
+	  <bean id="multipartResolver"
+	    class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	    <!-- 默认编码 -->
+	    <property name="defaultEncoding" value="utf-8" />
+	    <!-- 文件大小最大值 -->
+	    <property name="maxUploadSize" value="10485760000" />
+	    <!-- 内存中的最大值 -->
+	    <property name="maxInMemorySize" value="40960" />
+	  </bean>
 </beans>
