@@ -6,6 +6,18 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/resources"/>
+        <dependent-module archiveName="univweb-rpym-service-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/univweb-rpym-service/univweb-rpym-service">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="univweb-rpym-dao-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/univweb-rpym-dao/univweb-rpym-dao">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="univweb-rpym-common-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/univweb-rpym-common/univweb-rpym-common">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="univweb-xrp-search-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/univweb-xrp-search/univweb-xrp-search">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="context-root" value="univweb-rpym-portal"/>
         <property name="java-output-path" value="/univweb-rpym-portal/target/classes"/>
     </wb-module>
