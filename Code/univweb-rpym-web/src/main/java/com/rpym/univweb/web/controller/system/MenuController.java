@@ -88,7 +88,7 @@ public class MenuController {
 		return menuService.deleteSysMenu(id);
 	}
 	
-	@RequestMapping(method=RequestMethod.GET, value="/usermenu")
+	@RequestMapping(method=RequestMethod.GET, value="/parentmenus")
 	@ResponseBody
 	public SysMenusExt findParentMenuByCurrent(Long id) {
 		return menuService.findParentMenuByCurrent(id);
