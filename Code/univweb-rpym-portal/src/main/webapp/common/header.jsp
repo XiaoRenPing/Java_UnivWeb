@@ -4,14 +4,14 @@
 
 <title>univweb</title>
 
-<link rel="stylesheet" type="text/css" href="style/enterprise/css/reset.css"/>
-<link rel="stylesheet" type="text/css" href="style/enterprise/plugins/FlexSlider/flexslider.css">
-<link rel="stylesheet" type="text/css" href="style/enterprise/css/thems.css">
-<link rel="stylesheet" type="text/css" href="style/enterprise/css/responsive.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/style/enterprise/css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/style/enterprise/plugins/FlexSlider/flexslider.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/style/enterprise/css/thems.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/style/enterprise/css/responsive.css">
 
-<script type="text/javascript" src="style/enterprise/js/jquery-1.8.3.min.js"></script>
-<script type="text/javascript" src="style/enterprise/plugins/FlexSlider/jquery.flexslider.js"></script>
-<script type="text/javascript" src="style/enterprise/js/main.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/style/enterprise/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/style/enterprise/plugins/FlexSlider/jquery.flexslider.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/style/enterprise/js/main.js"></script>
 
 <script language="javascript">
 	$(window).load(function() {
