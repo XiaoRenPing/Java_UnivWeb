@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class SysMenu implements Serializable {
     private Long id;
 
-    private String name;
+    private String permissionname;
 
     private String displayname;
 
@@ -33,12 +33,12 @@ public class SysMenu implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getPermissionname() {
+        return permissionname;
     }
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+    public void setPermissionname(String permissionname) {
+        this.permissionname = permissionname == null ? null : permissionname.trim();
     }
 
     public String getDisplayname() {

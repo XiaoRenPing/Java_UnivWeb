@@ -24,4 +24,6 @@ public interface IUserService {
 
 	public String deleteUser(Long id);
 
+	public PageInfo<UserQueryOutDto> findUserList(Integer pageNum, Integer pageSize);
+
 }

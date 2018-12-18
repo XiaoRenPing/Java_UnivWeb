@@ -22,7 +22,9 @@ public interface ISysJobsService {
 
 	public Integer stopJobs(String ids);
 
-	public ResponseResult startSingleSysJob(Long id);
+	public ResponseResult startSingleSysJob(Long id) throws Exception;
 
 	public ResponseResult stopSingleSysJob(Long id);
+
+	public PageInfo<SysJobs> findSysJobs(Integer pageNum, Integer pageSize);
 }

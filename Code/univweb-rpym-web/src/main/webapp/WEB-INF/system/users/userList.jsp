@@ -2,20 +2,19 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	<link rel="stylesheet" href="https://unpkg.com/element-ui@2.0.5/lib/theme-chalk/index.css">
-	<script src="https://unpkg.com/vue/dist/vue.js"></script>
-	<script src="http://cdn.bootcss.com/vue-resource/1.3.4/vue-resource.js"></script>
-	<script src="https://unpkg.com/element-ui@2.0.5/lib/index.js"></script>
-	
-	<style>      
+	<link rel="stylesheet" href="${pageContext.request.contextPath }/style/vuejs/elementui.css">
+	<script src="${pageContext.request.contextPath }/style/vuejs/vue.js"></script>
+	<script src="${pageContext.request.contextPath }/style/vuejs/vue-resource.js"></script>
+	<script src="${pageContext.request.contextPath }/style/vuejs/elementui.js"></script>
+<style>      
       #top {
 	      background:#20A0FF;
 	      padding:5px;
 	      overflow:hidden
       }
 	</style>
-</head>
 	
+</head>
 <body>
     <div id="test">		        
 
@@ -36,47 +35,42 @@
 		    border
 		    >
 		    <el-table-column
-		      prop="permissionname"
-		      label="名称"
+		      prop="name"
+		      label="姓名"
 		      sortable
 		      show-overflow-tooltip>
 		    </el-table-column>
 		    
 		    <el-table-column
-		      prop="displayname"
-		      label="显示名称"
+		      prop="username"
+		      label="用户名"
 		      sortable>
 		    </el-table-column>
 		    
    		    <el-table-column
-		      prop="menuurl"
-		      label="路径"
+		      prop="emailaddress"
+		      label="邮箱"
 		      sortable>
 		    </el-table-column>
 		    
    		    <el-table-column
-		      prop="menuorder"
-		      label="排序"
+		      prop="phonenumber"
+		      label="手机号码"
 		      sortable>
 		    </el-table-column>
 		    
 		    <el-table-column
-		      prop="menuicon"
-		      label="菜单图标"
+		      prop="idcardnumber"
+		      label="身份证"
 		      sortable>
 		    </el-table-column>
 		    
 		    <el-table-column
-		      prop="menutype"
-		      label="菜单类型"
+		      prop="isactivetext"
+		      label="状态"
 		      sortable>
 		    </el-table-column>
-		    
-		    <el-table-column
-		      prop="remark"
-		      label="描述"
-		      sortable>
-		    </el-table-column>
+		   
 		    
 	        <el-table-column label="操作" width="300">
 		      <template scope="scope">
@@ -107,20 +101,32 @@
 			  <el-pagination
 			      @size-change="handleSizeChange"
 			      @current-change="handleCurrentChange"
-			      :current-page="pageNum"
+			      :current-page="currentPage"
 			      :page-sizes="[10, 20, 30, 40]"
-			      :page-size="pageSize"
+			      :page-size="pagesize"
 			      layout="total, sizes, prev, pager, next, jumper"
 			      :total="totalCount">
 			  </el-pagination>
 		  </div>
 		</div> 
 		
-		<el-dialog title="添加菜单" :visible.sync="dialogFormVisible">
+		<el-dialog title="添加用户" :visible.sync="dialogFormVisible">
 		  <el-form :model="form">
-		    <el-form-item label="菜单名称" label-width="120px" style="width:35%">
-		      <el-input v-model="form.permissionname" auto-complete="off"></el-input>
+		    <el-form-item label="姓名" label-width="120px" style="width:35%">
+		      <el-input v-model="form.name" auto-complete="off"></el-input>
 		    </el-form-item>	    
+		    <el-form-item label="用户名" label-width="120px" style="width:35%">
+		      <el-input v-model="form.username" auto-complete="off"></el-input>
+		    </el-form-item>
+		    <el-form-item label="邮箱" label-width="120px" style="width:35%">
+		      <el-input v-model="form.emailaddress" auto-complete="off"></el-input>
+		    </el-form-item>
+		    <el-form-item label="手机号" label-width="120px" style="width:35%">
+		      <el-input v-model="form.phonenumber" auto-complete="off"></el-input>
+		    </el-form-item>
+		    <el-form-item label="身份证" label-width="120px" style="width:35%">
+		      <el-input v-model="form.idcardnumber" auto-complete="off"></el-input>
+		    </el-form-item>
 		  </el-form>
 		  <div slot="footer" class="dialog-footer">
 		    <el-button @click="dialogFormVisible = false">取 消</el-button>
@@ -128,10 +134,16 @@
 		  </div>
 		</el-dialog>
 		
-		<el-dialog title="修改菜单" :visible.sync="updateFormVisible">
+		<el-dialog title="修改用户" :visible.sync="updateFormVisible">
 		  <el-form :model="updateform">
-		    <el-form-item label="表达式" label-width="120px" style="width:35%">
-		      <el-input v-model="updateform.permissionname" auto-complete="off"></el-input>
+		    <el-form-item label="用户名" label-width="120px" style="width:35%">
+		      <el-input v-model="updateform.username" auto-complete="off"></el-input>
+		    </el-form-item>
+		    <el-form-item label="邮箱" label-width="120px" style="width:35%">
+		      <el-input v-model="updateform.emailaddress" auto-complete="off"></el-input>
+		    </el-form-item>
+		    <el-form-item label="手机号码" label-width="120px" style="width:35%">
+		      <el-input v-model="updateform.phonenumber" auto-complete="off"></el-input>
 		    </el-form-item>
 		  </el-form>
 		  <div slot="footer" class="dialog-footer">
@@ -143,7 +155,7 @@
     </div>
 	
     <footer align="center">
-        <p>&copy;菜单管理</p>
+        <p>&copy; Quartz 用户管理管理</p>
     </footer>
 
 	<script>
@@ -154,16 +166,16 @@
 		    	tableData: [],
 		        
 		        //请求的URL
-		        url:'http://localhost:8081/univweb-rpym-web/menus/list',
+		        url:'users/list',
 		        
 		        //默认每页数据量
-		        pageSize: 10,		        
+		        pagesize: 10,		        
 		        
 		        //当前页码
-		        pageNum: 1,
+		        currentPage: 1,
 		        
 		        //查询的页码
-		        startPage: 1,
+		        start: 1,
 		        
 		        //默认数据总数
 		        totalCount: 1000,
@@ -176,51 +188,68 @@
 		        
 		        //提交的表单
 		        form: {
-		        	permissionname: '',
-		        	displayname: '',
-		        	remark: '',
+		        	name: '',
+		        	username: '',
+		        	emailaddress: '',
+		        	phonenumber: '',
+		        	idcardnumber: ''
 		          },
 		          
 		        updateform: {
-		        	permissionname: '',
-		        	displayname: '',
-		        	remark: '',
+		        	username: '',
+		        	emailaddress: '',
+		        	phonenumber: ''
 		        },
 		    },
 
 		    methods: {
+		    	
 		        //从服务器读取数据
 				loadData: function(pageNum, pageSize){					
-					this.$http.get('http://localhost:8081/univweb-rpym-web/menus/list?' + 'pageNum=' +  pageNum + '&pageSize=' + pageSize).then(function(res){
+					 this.$http.get('users/list?' + 'pageNum=' +  pageNum + '&pageSize=' + pageSize).then(function(res){
 						console.log(res)
-                		this.tableData = res.body.list;
-                		this.totalCount = res.body.pageSize;
+                		this.tableData = res.body.data.list;
+                		this.totalCount = res.body.total;
                 	},function(){
                   		console.log('failed');
-                	});					
+                	});		
+					/* this.$http.post(
+							'http://127.0.0.1:8081/univweb-rpym-web/users/list',
+							'pageNum':1,
+							'pageSize':10,
+							'username':'',
+							'name':'',
+							{emulateJSON:true}
+							).then(function(res){
+						console.log(res)
+                		this.tableData = res.body.data.list;
+                		this.totalCount = res.body.total;
+                	},function(){
+                  		console.log('failed');
+                	}); */
 				},			    		        
 				      
 		        //单行删除
 			    handleDelete: function(index, row) {
-					this.$http.post('http://localhost:8081/univweb-rpym-web/menus/deletejob',{"jobClassName":row.job_NAME,"jobGroupName":row.job_GROUP},{emulateJSON: true}).then(function(res){
+					this.$http.post('job/deletejob',{"jobClassName":row.job_NAME,"jobGroupName":row.job_GROUP},{emulateJSON: true}).then(function(res){
 						this.loadData( this.currentPage, this.pagesize);
 		            },function(){
 		                console.log('failed');
 		            });
 		        },
 		        
-		        //暂停菜单
+		        //暂停用户管理
 		        handlePause: function(index, row){
-		        	this.$http.post('http://localhost:8081/univweb-rpym-web/menus/pausejob',{"jobClassName":row.job_NAME,"jobGroupName":row.job_GROUP},{emulateJSON: true}).then(function(res){
+		        	this.$http.post('job/pausejob',{"jobClassName":row.job_NAME,"jobGroupName":row.job_GROUP},{emulateJSON: true}).then(function(res){
 						this.loadData( this.currentPage, this.pagesize);
 		            },function(){
 		                console.log('failed');
 		            });
 		        },
 		        
-		        //恢复菜单
+		        //恢复用户管理
 		        handleResume: function(index, row){
-		        	this.$http.post('http://localhost:8081/univweb-rpym-web/menus/resumejob',{"jobClassName":row.job_NAME,"jobGroupName":row.job_GROUP},{emulateJSON: true}).then(function(res){
+		        	this.$http.post('job/resumejob',{"jobClassName":row.job_NAME,"jobGroupName":row.job_GROUP},{emulateJSON: true}).then(function(res){
 						this.loadData( this.currentPage, this.pagesize);
 		            },function(){
 		                console.log('failed');
@@ -239,7 +268,7 @@
 		        
 		        //添加
 		        add: function(){
-		        	this.$http.post('http://localhost:8081/univweb-rpym-web/menus/addjob',{"jobClassName":this.form.jobName,"jobGroupName":this.form.jobGroup,"cronExpression":this.form.cronExpression},{emulateJSON: true}).then(function(res){
+		        	this.$http.post('job/addjob',{"jobClassName":this.form.jobName,"jobGroupName":this.form.jobGroup,"cronExpression":this.form.cronExpression},{emulateJSON: true}).then(function(res){
         				this.loadData(this.currentPage, this.pagesize);
         				this.dialogFormVisible = false;
                     },function(){
@@ -255,10 +284,10 @@
 		        	this.updateform.jobGroup = row.job_GROUP;
 		        },
 		        
-		        //更新菜单
+		        //更新用户管理
 		        update: function(){
 		        	this.$http.post
-		        	('menus/reschedulejob',
+		        	('job/reschedulejob',
 		        			{"jobClassName":this.updateform.jobName,
 		        			 "jobGroupName":this.updateform.jobGroup,
 		        			 "cronExpression":this.updateform.cronExpression
@@ -292,6 +321,4 @@
 		  //载入数据
     	  vue.loadData(vue.currentPage, vue.pagesize);
 	</script>  
-	
-</body>
 </html>

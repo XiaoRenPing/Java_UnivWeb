@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rpym.univweb.dao.ext.SysJobsExtMapper" >
+  <resultMap id="QueryResultMap" type="com.rpym.univweb.entity.SysJobs" >
+    <id column="Id" property="id" jdbcType="BIGINT" />
+    <result column="JobName" property="jobname" jdbcType="VARCHAR" />
+    <result column="JobClass" property="jobclass" jdbcType="VARCHAR" />
+    <result column="JobDesc" property="jobdesc" jdbcType="VARCHAR" />
+    <result column="JobArgs" property="jobargs" jdbcType="VARCHAR" />
+    <result column="JobStatus" property="jobstatus" jdbcType="CHAR" />
+    <result column="JobCron" property="jobcron" jdbcType="VARCHAR" />
+    <result column="NodeStatus" property="nodestatus" jdbcType="CHAR" />
+    <result column="NodeIp" property="nodeip" jdbcType="VARCHAR" />
+    <result column="TryCount" property="trycount" jdbcType="SMALLINT" />
+    <result column="NextTryTime" property="nexttrytime" jdbcType="TIMESTAMP" />
+    <result column="LastTryTime" property="lasttrytime" jdbcType="TIMESTAMP" />
+    <result column="IsAbandoned" property="isabandoned" jdbcType="BIT" />
+    <result column="CreationTime" property="creationtime" jdbcType="TIMESTAMP" />
+    <result column="CreatorUserId" property="creatoruserid" jdbcType="BIGINT" />
+    <result column="ExceptionMessage" property="exceptionmessage" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Query_Column_List" >
+    Id, JobName, JobClass, JobDesc, JobArgs, JobStatus, JobCron, NodeStatus, NodeIp, 
+    TryCount, NextTryTime, LastTryTime, IsAbandoned, CreationTime, CreatorUserId, ExceptionMessage
+  </sql>
+  <select id="findSysJobs" resultMap="QueryResultMap" parameterType="java.util.Map" >
+    select
+    	<include refid="Query_Column_List" />
+    from sys_jobs
+   	<where>
+	    <if test="jobName != null and jobName != ''" >
+	    	AND JobName LIKE CONCAT('%',#{jobName} ,'%')
+	    </if>
+	    <if test="jobClass != null and jobClass != ''" >
+	    	AND JobClass LIKE CONCAT('%',#{jobClass} ,'%')
+	    </if>
+   	</where>
+  </select>
+</mapper>

@@ -1,21 +1,25 @@
 package com.rpym.univweb.web.controller.job;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.github.pagehelper.PageInfo;
+import com.rpym.univweb.constants.CommonConst;
 import com.rpym.univweb.dto.job.SysJobsDto;
 import com.rpym.univweb.dto.job.SysJobsQueryDto;
 import com.rpym.univweb.entity.SysJobs;
 import com.rpym.univweb.service.system.job.ISysJobsService;
 import com.rpym.univweb.utils.ResponseResult;
 
-@Controller
-@RequestMapping("/jobs/*")
+@RestController
+@RequestMapping("/jobs")
 public class JobController {
 
 	@Autowired
@@ -38,26 +42,39 @@ public class JobController {
 	
 	//------------------------------- 定时器管理 -------------------------------------
 	
-	@RequestMapping(method=RequestMethod.GET, value="/list")
-	@ResponseBody
-	public PageInfo<SysJobs> listJob(SysJobsQueryDto jobQueryDto) {
-		return jobsService.findSysJobsInfoPage(jobQueryDto);
+	@RequestMapping(method=RequestMethod.POST, value="/list")
+	public Map<String, Object> listJob(@RequestBody SysJobsQueryDto jobQueryDto) {
+		Map<String, Object> response = new HashMap<String, Object>();
+		PageInfo<SysJobs> jobPageInfo = jobsService.findSysJobsInfoPage(jobQueryDto);
+		response.put("data", jobPageInfo);
+		response.put("message", CommonConst.MSG_SUCCESS);
+		response.put("status", CommonConst.STATUS_SUCCESS);
+		
+		return response;
+	}
+	
+	
+	@RequestMapping(method=RequestMethod.GET, value="/find")
+	public Map<String, Object> findJobs(@RequestParam(value="pageNum")Integer pageNum, @RequestParam(value="pageSize")Integer pageSize) {
+		Map<String, Object> response = new HashMap<String, Object>();
+		PageInfo<SysJobs> jobPageInfo = jobsService.findSysJobs(pageNum, pageSize);
+		response.put("data", jobPageInfo);
+		response.put("message", CommonConst.MSG_SUCCESS);
+		response.put("status", CommonConst.STATUS_SUCCESS);
+		return response;
 	}
 	
 	@RequestMapping(method=RequestMethod.POST, value="/add")
-	@ResponseBody
 	public Integer addJob(SysJobsDto sysJobDto) {
 		return jobsService.saveSysJobs(sysJobDto);
 	}
 	
 	@RequestMapping(method=RequestMethod.POST, value="/edit")
-	@ResponseBody
 	public Integer editJob(SysJobsDto sysJobsDto) {
 		return jobsService.updateSysJobsInfo(sysJobsDto);
 	}
 	
 	@RequestMapping(method=RequestMethod.GET, value="/delete")
-	@ResponseBody
 	public Integer deleteJob(@RequestParam("id") Long id) {
 		return jobsService.deleteSysJobs(id);
 	}
@@ -69,27 +86,29 @@ public class JobController {
 	 * @return
 	 */
 	@RequestMapping(method=RequestMethod.GET, value="/start")
-	@ResponseBody
 	public ResponseResult startJob(@RequestParam("id") Long id) {
-		return jobsService.startSingleSysJob(id);
+		try {
+			jobsService.startSingleSysJob(id);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	
 	
 	@RequestMapping(method=RequestMethod.GET, value="/batchstart")
-	@ResponseBody
 	public Integer startJobs(@RequestParam("ids") String ids) {
 		return jobsService.startSysJob(ids);
 	}
 	
 	@RequestMapping(method=RequestMethod.GET, value="/stop")
-	@ResponseBody
 	public ResponseResult stopJob(@RequestParam("id") Long id) {
 		return jobsService.stopSingleSysJob(id);
 	}
 	
 	@RequestMapping(method=RequestMethod.GET, value="/batchstop")
-	@ResponseBody
 	public Integer stopJobs(@RequestParam("ids") String ids) {
 		return jobsService.stopJobs(ids);
 	}

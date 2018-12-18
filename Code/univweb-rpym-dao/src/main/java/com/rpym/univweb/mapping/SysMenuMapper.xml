@@ -3,7 +3,7 @@
 <mapper namespace="com.rpym.univweb.dao.SysMenuMapper" >
   <resultMap id="BaseResultMap" type="com.rpym.univweb.entity.SysMenu" >
     <id column="Id" property="id" jdbcType="BIGINT" />
-    <result column="Name" property="name" jdbcType="VARCHAR" />
+    <result column="PermissionName" property="permissionname" jdbcType="VARCHAR" />
     <result column="DisplayName" property="displayname" jdbcType="VARCHAR" />
     <result column="MenuUrl" property="menuurl" jdbcType="VARCHAR" />
     <result column="ParentId" property="parentid" jdbcType="BIGINT" />
@@ -13,8 +13,6 @@
     <result column="Target" property="target" jdbcType="VARCHAR" />
     <result column="Remark" property="remark" jdbcType="VARCHAR" />
   </resultMap>
-  
- 	
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -74,8 +72,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    Id, Name, DisplayName, MenuUrl, ParentId, MenuOrder, MenuIcon, MenuType, Target, 
-    Remark
+    Id, PermissionName, DisplayName, MenuUrl, ParentId, MenuOrder, MenuIcon, MenuType, 
+    Target, Remark
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.rpym.univweb.entity.SysMenuExample" >
     select
@@ -112,11 +110,11 @@
     <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into sys_menu (Name, DisplayName, MenuUrl, 
+    insert into sys_menu (PermissionName, DisplayName, MenuUrl, 
       ParentId, MenuOrder, MenuIcon, 
       MenuType, Target, Remark
       )
-    values (#{name,jdbcType=VARCHAR}, #{displayname,jdbcType=VARCHAR}, #{menuurl,jdbcType=VARCHAR}, 
+    values (#{permissionname,jdbcType=VARCHAR}, #{displayname,jdbcType=VARCHAR}, #{menuurl,jdbcType=VARCHAR}, 
       #{parentid,jdbcType=BIGINT}, #{menuorder,jdbcType=INTEGER}, #{menuicon,jdbcType=VARCHAR}, 
       #{menutype,jdbcType=VARCHAR}, #{target,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}
       )
@@ -127,8 +125,8 @@
     </selectKey>
     insert into sys_menu
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="name != null" >
-        Name,
+      <if test="permissionname != null" >
+        PermissionName,
       </if>
       <if test="displayname != null" >
         DisplayName,
@@ -156,8 +154,8 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="name != null" >
-        #{name,jdbcType=VARCHAR},
+      <if test="permissionname != null" >
+        #{permissionname,jdbcType=VARCHAR},
       </if>
       <if test="displayname != null" >
         #{displayname,jdbcType=VARCHAR},
@@ -197,8 +195,8 @@
       <if test="record.id != null" >
         Id = #{record.id,jdbcType=BIGINT},
       </if>
-      <if test="record.name != null" >
-        Name = #{record.name,jdbcType=VARCHAR},
+      <if test="record.permissionname != null" >
+        PermissionName = #{record.permissionname,jdbcType=VARCHAR},
       </if>
       <if test="record.displayname != null" >
         DisplayName = #{record.displayname,jdbcType=VARCHAR},
@@ -232,7 +230,7 @@
   <update id="updateByExample" parameterType="map" >
     update sys_menu
     set Id = #{record.id,jdbcType=BIGINT},
-      Name = #{record.name,jdbcType=VARCHAR},
+      PermissionName = #{record.permissionname,jdbcType=VARCHAR},
       DisplayName = #{record.displayname,jdbcType=VARCHAR},
       MenuUrl = #{record.menuurl,jdbcType=VARCHAR},
       ParentId = #{record.parentid,jdbcType=BIGINT},
@@ -248,8 +246,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.rpym.univweb.entity.SysMenu" >
     update sys_menu
     <set >
-      <if test="name != null" >
-        Name = #{name,jdbcType=VARCHAR},
+      <if test="permissionname != null" >
+        PermissionName = #{permissionname,jdbcType=VARCHAR},
       </if>
       <if test="displayname != null" >
         DisplayName = #{displayname,jdbcType=VARCHAR},
@@ -280,7 +278,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.rpym.univweb.entity.SysMenu" >
     update sys_menu
-    set Name = #{name,jdbcType=VARCHAR},
+    set PermissionName = #{permissionname,jdbcType=VARCHAR},
       DisplayName = #{displayname,jdbcType=VARCHAR},
       MenuUrl = #{menuurl,jdbcType=VARCHAR},
       ParentId = #{parentid,jdbcType=BIGINT},

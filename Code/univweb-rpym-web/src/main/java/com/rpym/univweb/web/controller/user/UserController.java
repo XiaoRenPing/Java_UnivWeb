@@ -1,16 +1,21 @@
 package com.rpym.univweb.web.controller.user;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.github.pagehelper.PageInfo;
+import com.rpym.univweb.constants.CommonConst;
 import com.rpym.univweb.dto.user.UserQueryDto;
 import com.rpym.univweb.dto.user.UserQueryOutDto;
 import com.rpym.univweb.entity.SysUsers;
@@ -25,7 +30,7 @@ import com.rpym.univweb.web.controller.base.BaseController;
  * @author 肖仁枰
  * @date 2018年8月9日
  */
-@Controller
+@RestController
 @RequestMapping("/users/*")
 public class UserController extends BaseController{
 
@@ -121,10 +126,27 @@ public class UserController extends BaseController{
 	 * @author 肖仁枰
 	 * @date 2018年8月9日
 	 */
-	@RequestMapping(method=RequestMethod.GET, value="/list")
+	@RequestMapping(method=RequestMethod.POST, value="/list")
 	@ResponseBody
-	public PageInfo<UserQueryOutDto> pageUserList(@ModelAttribute UserQueryDto userQryDto){
-		return userService.queryUserList(userQryDto);
+	public Map<String, Object> pageUserList(@RequestBody UserQueryDto userQryDto){
+		Map<String, Object> response = new HashMap<String, Object>();
+		PageInfo<UserQueryOutDto> userPageInfo = userService.queryUserList(userQryDto);
+		response.put("status", CommonConst.STATUS_SUCCESS);
+		response.put("message", CommonConst.MSG_SUCCESS);
+		response.put("data", userPageInfo);
+		return response;
+	}
+	
+	
+	@RequestMapping(method=RequestMethod.GET, value="/find")
+	@ResponseBody
+	public Map<String, Object> findUserList(@RequestParam(value="pageNum")Integer pageNum, @RequestParam(value="pageSize")Integer pageSize){
+		Map<String, Object> response = new HashMap<String, Object>();
+		PageInfo<UserQueryOutDto> userPageInfo = userService.findUserList(pageNum, pageSize);
+		response.put("status", CommonConst.STATUS_SUCCESS);
+		response.put("message", CommonConst.MSG_SUCCESS);
+		response.put("data", userPageInfo);
+		return response;
 	}
 	
 	/**
@@ -140,6 +162,8 @@ public class UserController extends BaseController{
 	@RequestMapping(method=RequestMethod.POST, value="/add")
 	@ResponseBody
 	public String saveUserInfo(@ModelAttribute SysUsers user) {
+		user.setIsactive(true);
+		user.setIsdeleted(false);
 		return userService.addUserInfo(user);
 	}
 	

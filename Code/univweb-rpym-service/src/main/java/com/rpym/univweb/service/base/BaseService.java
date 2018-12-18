@@ -27,7 +27,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.rpym.univweb.common.CommonBase;
 import com.rpym.univweb.constants.CommonConst;
-import com.rpym.univweb.dto.common.PageDto;
+import com.rpym.univweb.dto.PageDto;
 
 public class BaseService extends CommonBase{
 	

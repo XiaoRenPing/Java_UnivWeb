@@ -512,4 +512,13 @@ public class CommonConst {
 	 */
 	public static final long MIN_BUY_AMOUNT_LIMIT = 0;
 	
+	
+	public static final String MSG_SUCCESS = "请求成功";
+	public static final String MSG_FAILURE = "请求失败";
+	public static final String MSG_NODATA = "数据不存在";
+	
+	public static final Integer STATUS_SUCCESS = 200;
+	public static final Integer STATUS_FAILURE = 201;
+	public static final Integer STATUS_NODATA = 202;
+	
 }

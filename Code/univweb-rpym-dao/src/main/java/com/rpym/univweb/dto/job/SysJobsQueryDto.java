@@ -1,10 +1,8 @@
 package com.rpym.univweb.dto.job;
 
-import java.io.Serializable;
-
 import com.rpym.univweb.dto.PageDto;
 
-public class SysJobsQueryDto extends PageDto implements Serializable{
+public class SysJobsQueryDto extends PageDto{
 
 	private String jobname;
 

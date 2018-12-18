@@ -75,7 +75,7 @@ public class UserServiceImpl extends BaseService implements IUserService{
 		SysUsersExample userExample = new SysUsersExample();
 		userExample.createCriteria().andIdIsNotNull();
 		//this.initPage(userQryDto);
-		//PageHelper.startPage(userQryDto.getPageNum(), userQryDto.getPageSize()); //设置页面问题
+		PageHelper.startPage(userQryDto.getPageNum(), userQryDto.getPageSize()); //设置页面问题
 		List<SysUsers> userList = userDao.selectByExample(userExample);
 		List<UserQueryOutDto> userQryOutList = convert(userList, UserQueryOutDto.class);
 		PageInfo<UserQueryOutDto> userPageInfo = new PageInfo<UserQueryOutDto>(userQryOutList);
@@ -219,6 +219,18 @@ public class UserServiceImpl extends BaseService implements IUserService{
 	public String deleteUser(Long id) {
 		userDao.deleteByPrimaryKey(id);
 		return "/view/user/list";
+	}
+
+
+	public PageInfo<UserQueryOutDto> findUserList(Integer pageNum, Integer pageSize) {
+		SysUsersExample userExample = new SysUsersExample();
+		userExample.createCriteria().andIdIsNotNull();
+		//this.initPage(userQryDto);
+		PageHelper.startPage(pageNum, pageSize); //设置页面问题
+		List<SysUsers> userList = userDao.selectByExample(userExample);
+		List<UserQueryOutDto> userQryOutList = convert(userList, UserQueryOutDto.class);
+		PageInfo<UserQueryOutDto> userPageInfo = new PageInfo<UserQueryOutDto>(userQryOutList);
+		return userPageInfo;
 	}
 
 	

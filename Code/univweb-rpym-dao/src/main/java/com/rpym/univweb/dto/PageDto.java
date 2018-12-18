@@ -8,6 +8,8 @@ public class PageDto {
 		
 		private String orderBy;
 
+		
+		
 		public int getPageNum() {
 			return pageNum;
 		}
