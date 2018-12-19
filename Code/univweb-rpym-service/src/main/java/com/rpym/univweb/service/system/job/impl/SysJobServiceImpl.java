@@ -51,7 +51,7 @@ public class SysJobServiceImpl extends BaseService implements ISysJobsService{
 	//加入Qulifier注解，通过名称注入bean
 	//@Autowired 
 	//@Qualifier("Scheduler")
-	private Scheduler scheduler;
+	//private Scheduler scheduler;
 	
 	
 	
@@ -63,14 +63,10 @@ public class SysJobServiceImpl extends BaseService implements ISysJobsService{
 	public Integer deleteSysJobs(Long id) {
 		SysJobs sysJobs = sysJobsDao.selectByPrimaryKey(id);
 		sysJobs.setIsabandoned(Boolean.valueOf(true));
-		try {
-			scheduler.pauseTrigger(TriggerKey.triggerKey(sysJobs.getJobname(), null));
-			scheduler.unscheduleJob(TriggerKey.triggerKey(sysJobs.getClass().getName(), null));
-			scheduler.deleteJob(JobKey.jobKey(sysJobs.getClass().getName(), null));				
-			sysJobsDao.updateByPrimaryKeySelective(sysJobs);
-		} catch (SchedulerException e) {
-			e.printStackTrace();
-		}
+		/*scheduler.pauseTrigger(TriggerKey.triggerKey(sysJobs.getJobname(), null));
+		scheduler.unscheduleJob(TriggerKey.triggerKey(sysJobs.getClass().getName(), null));
+		scheduler.deleteJob(JobKey.jobKey(sysJobs.getClass().getName(), null));		*/		
+		sysJobsDao.updateByPrimaryKeySelective(sysJobs);
 		return 1;
 	}
 
@@ -95,22 +91,9 @@ public class SysJobServiceImpl extends BaseService implements ISysJobsService{
 	}
 	public void jobreschedule(String jobClassName, String jobGroupName, String cronExpression) throws Exception
 	{				
-		try {
-			TriggerKey triggerKey = TriggerKey.triggerKey(jobClassName, jobGroupName);
-			// 表达式调度构建器
-			CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule(cronExpression);
-
-			CronTrigger trigger = (CronTrigger) scheduler.getTrigger(triggerKey);
-
-			// 按新的cronExpression表达式重新构建trigger
-			trigger = trigger.getTriggerBuilder().withIdentity(triggerKey).withSchedule(scheduleBuilder).build();
-
-			// 按新的trigger重新设置job执行
-			scheduler.rescheduleJob(triggerKey, trigger);
-		} catch (SchedulerException e) {
-			System.out.println("更新定时任务失败"+e);
-			throw new Exception("更新定时任务失败");
-		}
+		TriggerKey triggerKey = TriggerKey.triggerKey(jobClassName, jobGroupName);
+		// 表达式调度构建器
+		//CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule(cronExpression);
 	}
 	
 	/**
@@ -171,7 +154,7 @@ public class SysJobServiceImpl extends BaseService implements ISysJobsService{
 		SysJobs job = sysJobsDao.selectByPrimaryKey(id);
 		
 		// 启动调度器  
-		scheduler.start(); 
+		//scheduler.start(); 
 				
 		//构建job信息
 		JobDetail jobDetail = JobBuilder.newJob(getClass(job.getJobclass()).getClass()).withIdentity(job.getJobclass(), null).build();
@@ -182,14 +165,7 @@ public class SysJobServiceImpl extends BaseService implements ISysJobsService{
         //按新的cronExpression表达式构建一个新的trigger
         CronTrigger trigger = TriggerBuilder.newTrigger().withIdentity(job.getClass().getName(), null).withSchedule(scheduleBuilder).build();
         
-        try {
-        	scheduler.scheduleJob(jobDetail, trigger);
-            
-        } catch (SchedulerException e) {
-            System.out.println("创建定时任务失败"+e);
-            throw new Exception("创建定时任务失败");
-        }
-		return ResponseResult.ok();
+        return ResponseResult.ok();
 	}
 	
 	public ResponseResult stopSingleSysJob(Long id) {
@@ -206,7 +182,7 @@ public class SysJobServiceImpl extends BaseService implements ISysJobsService{
 	}
 	public void jobPause(String jobClassName, String jobGroupName) throws Exception
 	{	
-		scheduler.pauseJob(JobKey.jobKey(jobClassName, jobGroupName));
+		//scheduler.pauseJob(JobKey.jobKey(jobClassName, jobGroupName));
 	}
 	
 	public Integer stopJobs(String ids) {
