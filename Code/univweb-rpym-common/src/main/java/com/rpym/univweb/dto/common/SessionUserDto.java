@@ -34,4 +34,13 @@ public class SessionUserDto {
 	public void setRoleids(List<Integer> roleids) {
 		this.roleids = roleids;
 	}
+
+	public List<String> getPermissionsCodes() {
+		return permissionsCodes;
+	}
+
+	public void setPermissionsCodes(List<String> permissionsCodes) {
+		this.permissionsCodes = permissionsCodes;
+	}
+	
 }

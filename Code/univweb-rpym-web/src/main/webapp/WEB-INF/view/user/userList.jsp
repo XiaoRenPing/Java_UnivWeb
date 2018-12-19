@@ -67,9 +67,12 @@
 											<td>{{user.phonenumber}}</td>
 											<td>{{user.isactivetext}}</td>
 											<td>
-												<a>查看</a>
-												<a>编辑</a>
-												<a>删除</a>
+												<button class="btn btn-sm btn-primary" type="button" v-on:click="toEdit(user.id)">
+							                        <span class="bold">编辑</span>
+							                    </button>
+							                    <button class="btn btn-sm btn-warning" type="button" v-on:click="del(user.id)">
+							                        <span class="bold">删除</span>
+							                    </button>
 											</td>
 										</tr>
 									</table>
@@ -91,9 +94,7 @@
         	userList: ""    //数据，名称自定
         },
         created: function () { //created方法，页面初始调用   
-        	var page = 1;
-        	var rows = 1;
-            var url = "http://127.0.0.1:8081/univweb-rpym-web/users/list"//?page="+page+"&rows="+rows;
+            var url = "${pageContext.request.contextPath}/users/list"//?page="+page+"&rows="+rows;
             this.$http.get(url).then(function (data) {   //ajax请求封装
                 var json = data.bodyText;
                 var resultData = JSON.parse(json);
@@ -102,8 +103,45 @@
             }, function (response) {     //返回失败方法调用，暂不处理
                 console.info(response);
             })
+        },
+        //定义操作方法
+        methods:{
+	        toEdit: function(id){
+	        	location.href="${pageContext.request.contextPath}/users/toedit?id="+id;
+	        },
+	        del: function(id){
+	        	swal({
+	                title: "您确定要删除吗",
+	                text: "删除后将无法恢复，请谨慎操作！",
+	                type: "warning",
+	                showCancelButton: true,
+	                confirmButtonColor: "#DD6B55",
+	                confirmButtonText: "删除",
+	                cancelButtonText: "考虑一下",
+	                closeOnConfirm: false,
+	                closeOnCancel: false
+	            },
+	            function (isConfirm) {
+	                if (isConfirm) {
+	                	$.get(
+	        	    			"${pageContext.request.contextPath}/users/delete",
+	        	    			{id:id},
+	        	    			function(msg){
+	        	    				swal("删除成功！", "【"+msg.message+"】", "success");
+	        	    				location.href="${pageContext.request.contextPath}/users/index";
+	        	    	});
+	                } else {
+	                    swal("已取消", "您取消了删除操作！", "error");
+	                }
+	            });
+	        }
         }
     });
 </script>
+	<script type="text/javascript">
+		$("#add_btn").click(function(){
+			location.href="${pageContext.request.contextPath}/users/toadd";
+		});
+	</script>
 </body>
 </html>

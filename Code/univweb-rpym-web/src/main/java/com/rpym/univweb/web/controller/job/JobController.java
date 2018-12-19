@@ -4,11 +4,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+//github.com/XiaoRenPing/Java_Univweb.git
 
 import com.github.pagehelper.PageInfo;
 import com.rpym.univweb.constants.CommonConst;
@@ -18,29 +22,40 @@ import com.rpym.univweb.entity.SysJobs;
 import com.rpym.univweb.service.system.job.ISysJobsService;
 import com.rpym.univweb.utils.ResponseResult;
 
-@RestController
-@RequestMapping("/jobs")
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
+@Api("定时任务接口")
+@Controller
+@RequestMapping("/jobs/*")
 public class JobController {
 
 	@Autowired
 	ISysJobsService jobsService;
 	
+	@ApiOperation(value="跳转到添加定时任务界面",httpMethod="GET")
 	@RequestMapping(method=RequestMethod.GET, value="/toadd")
 	public String toAddJob() {
 		return "system/jobs/addJob";
 	}
 	
-	@RequestMapping(method=RequestMethod.GET, value="/toedit")
+/*	@RequestMapping(method=RequestMethod.GET, value="/toedit")
 	public String toEditJob() {
 		return "system/jobs/editJob";
 	}
-	
+*/	
 	@RequestMapping(method=RequestMethod.GET, value="/index")
 	public String pageListJob() {
 		return "system/jobs/jobList";
 	}
 	
-	//------------------------------- 定时器管理 -------------------------------------
+	@RequestMapping(method=RequestMethod.GET, value="/toview")
+	public ModelAndView toViewJob(@RequestParam("id") Long id) {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("system/jobs/viewJob");
+		mv.addObject("job", jobsService.getSysJobsById(id));
+		return mv;
+	}
 	
 	@RequestMapping(method=RequestMethod.POST, value="/list")
 	public Map<String, Object> listJob(@RequestBody SysJobsQueryDto jobQueryDto) {
@@ -64,13 +79,23 @@ public class JobController {
 		return response;
 	}
 	
+	@RequestMapping(method=RequestMethod.GET, value="/toedit")
+	public ModelAndView toEditJob(@RequestParam("id") Long id) {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("system/jobs/editJob");
+		mv.addObject("job", jobsService.getSysJobsById(id));
+		return mv;
+	}
+	
+	//------------------------------- 瀹氭椂鍣ㄧ鐞� -------------------------------------
 	@RequestMapping(method=RequestMethod.POST, value="/add")
 	public Integer addJob(SysJobsDto sysJobDto) {
 		return jobsService.saveSysJobs(sysJobDto);
 	}
 	
 	@RequestMapping(method=RequestMethod.POST, value="/edit")
-	public Integer editJob(SysJobsDto sysJobsDto) {
+	@ResponseBody
+	public Boolean editJob(SysJobsDto sysJobsDto) { //@ModelAttribute
 		return jobsService.updateSysJobsInfo(sysJobsDto);
 	}
 	
@@ -79,10 +104,10 @@ public class JobController {
 		return jobsService.deleteSysJobs(id);
 	}
 	
-	// -------------------------- 启动/停止     -----------------------------
+	// -------------------------- 鍚姩/鍋滄     -----------------------------
 	/**
-	 * 启动任务
-	 * @param ids id字符串数组
+	 * 鍚姩浠诲姟
+	 * @param ids id瀛楃涓叉暟缁�
 	 * @return
 	 */
 	@RequestMapping(method=RequestMethod.GET, value="/start")

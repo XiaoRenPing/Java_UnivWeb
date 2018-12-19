@@ -68,6 +68,44 @@
 												<a>查看</a>
 												<a>编辑</a>
 												<a>删除</a>
+                        	<a href="javascript:void(0)" class="btn btn-primary" id="add_btn" >新增菜单</a> 
+                        	</div>
+                            <div class="pull-right">
+                                <div class="ibox-tools">
+		                            <form role="form" class="form-inline" id="searchForm">
+		                                <div class="form-group">
+		                                    <label>菜单名：</label>
+		                                    <input type="text" name="displayname" placeholder="请输入菜单" class="form-control input-middle">
+		                                </div>
+		                                <a class="btn btn-primary"  role="button" id="searchBtn">查询</a>
+		                                <a href="javascript:void(0)" class="btn btn-primary" id="refresh_btn">重置</a>
+		                            </form>
+                                </div>
+                            </div>
+                             <div class="ibox-content">
+	                            <div id="vue-menuList">
+									<table class="table table-striped table-bordered table-hover">
+										<tr>
+											<td><input type="checkbox" name="ids">全选</td>
+											<td>名称</td>
+											<td>对应授权</td>
+											<td>链接</td>
+											<td>上级菜单</td>
+											<td>菜单排序</td>
+											<td>菜单图标</td>
+											<td>操作</td>
+										</tr>
+										<tr v-for="menu in menuList">
+											<td><input type="checkbox" name="ids"></td>
+											<td><a v-bind:href="'http://127.0.0.1:8081/univweb-rpym-web/menus/toview?id='+menu.id">{{menu.displayname}}</a></td>
+											<td>{{menu.permissionname}}</td>
+											<td>{{menu.menuurl}}</td>
+											<td>{{menu.parents}}</td>
+											<td>{{menu.menuorder}}</td>
+											<td>{{menu.menuicon}}</td>
+											<td>
+												<a v-bind:href="'http://127.0.0.1:8081/univweb-rpym-web/menus/toedit?id='+menu.id">编辑</a>
+												<a onclick="javascript:_delete(menu.id);" href="#">删除</a>
 											</td>
 										</tr>
 									</table>

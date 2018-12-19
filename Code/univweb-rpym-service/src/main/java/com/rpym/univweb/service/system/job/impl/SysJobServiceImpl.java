@@ -49,7 +49,8 @@ public class SysJobServiceImpl extends BaseService implements ISysJobsService{
 	
 	
 	//加入Qulifier注解，通过名称注入bean
-	@Autowired @Qualifier("Scheduler")
+	//@Autowired 
+	//@Qualifier("Scheduler")
 	private Scheduler scheduler;
 	
 	
@@ -78,7 +79,7 @@ public class SysJobServiceImpl extends BaseService implements ISysJobsService{
 	 * @param id
 	 * @return   
 	 */
-	public Integer updateSysJobsInfo(SysJobsDto sysJobsDto) {
+	public Boolean updateSysJobsInfo(SysJobsDto sysJobsDto) {
 		if(sysJobsDto == null || sysJobsDto.getId() == null) {
 			throw new UWException("参数id不能为空");
 		}
@@ -90,7 +91,7 @@ public class SysJobServiceImpl extends BaseService implements ISysJobsService{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return 1;
+		return true;
 	}
 	public void jobreschedule(String jobClassName, String jobGroupName, String cronExpression) throws Exception
 	{				

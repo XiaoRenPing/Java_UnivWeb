@@ -28,6 +28,9 @@ import com.github.pagehelper.PageHelper;
 import com.rpym.univweb.common.CommonBase;
 import com.rpym.univweb.constants.CommonConst;
 import com.rpym.univweb.dto.PageDto;
+import com.rpym.univweb.dto.common.AopStoreDto;
+import com.rpym.univweb.dto.common.SessionUserDto;
+import com.rpym.univweb.filter.TokenFilter;
 
 public class BaseService extends CommonBase{
 	
@@ -311,7 +314,7 @@ public class BaseService extends CommonBase{
 	
 	
 	/**
-	 * 判断是否都待办事项
+	 * 判断是否有待办事项
 	 * @Title: isHavingTask   
 	 * @Description:  
 	 * @param: @param businessKey
@@ -332,6 +335,18 @@ public class BaseService extends CommonBase{
 	public String getSessionUserName() {
 		return "";
 	}
+	
+	
+	public SessionUserDto getSessionUser() {
+		AopStoreDto aopStoreDto = TokenFilter.getAopStore();
+		if(aopStoreDto != null) {
+			String token = aopStoreDto.getToken();
+			SessionUserDto sessionUserDto = (SessionUserDto) aopStoreDto.getRedisCacheManager().get(addPrefixToken(token));
+			return sessionUserDto;
+		}
+		return new SessionUserDto();
+	}
+	
 	
 	/**
 	 * 添加前缀

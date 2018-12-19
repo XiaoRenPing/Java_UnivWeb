@@ -4,10 +4,10 @@ import java.util.Date;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement(name = "sysjobs")
 public class SysJobsDto {
 
 	private Long id;
+	
     private String jobname;
 
     private String jobclass;

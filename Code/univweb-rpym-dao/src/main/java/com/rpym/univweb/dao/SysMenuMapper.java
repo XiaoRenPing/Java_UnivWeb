@@ -1,9 +1,11 @@
 package com.rpym.univweb.dao;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.rpym.univweb.entity.SysMenu;
 import com.rpym.univweb.entity.SysMenuExample;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
 public interface SysMenuMapper {
     int countByExample(SysMenuExample example);
@@ -27,9 +29,10 @@ public interface SysMenuMapper {
     int updateByPrimaryKeySelective(SysMenu record);
 
     int updateByPrimaryKey(SysMenu record);
-    
-  //List<SysMenusExt> selectMenusByUserAndRole(@Param("userId")Long userId, @Param("userRoles")List<SysUserRoles> userRoles);
+
+	//List<SysMenusExt> selectMenusByUserAndRole(@Param("userId")Long userId, @Param("userRoles")List<SysUserRoles> userRoles);
     //List<SysMenu> selectMenusByUserAndRole(@Param("pojo")MenuQryPojo pojo);
 
 	List<SysMenu> selectMenusByUserAndRole(@Param("userId")Long userId, @Param("roleIds")List<Long> roleIdList);
+
 }
